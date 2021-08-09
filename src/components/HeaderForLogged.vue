@@ -1,37 +1,43 @@
 <template>
-
+            <div id="header_for_logged">
                 <div class="header_element">
                     <div id="logo"><a href="">
-                        <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" class="logo_img"></a>
+                        <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" id="logo_img"></a>
                         </div>
                     
-                    <div v-if="nakladka_irss" class="text_header"> 
-                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">WYBORY DO<br></span>
-                        <span id="linijka_2" class="textMontserrat my_magenda">INSTYTUTOWYCH RAD<br></span>
-                        <span id="linijka_3" class="textMontserrat my_orange">SAMORZĄDU STUDENTÓW</span>
-                    </div>
-                    <div v-else class="text_header"> 
-                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">SYSTEM WYBORCZY<br></span>
+                    <div class="text_header"> 
+                        <span id="linijka_1" class="textMontserrat my_blue">SYSTEM WYBORCZY<br></span>
                         <span id="linijka_2" class="textMontserrat my_magenda">SAMORZĄDU STUDENTÓW<br></span>
-                        <span id="linijka_4" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
+                        <span id="linijka_3" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
+                        <span id="linijka_telefon" class="textMontserrat"><span class="my_magenda">SYSTEM</span><br><span class="my_orange">WYBORCZY</span></span>
+
                     </div>
+                    
                    
-                    <ul v-if="nakladka_irss" id="icons_navbar">
-                        <li><a href="#calendar">
+                    <ul id="icons_navbar">
+                        <li><a href="/calendar">
                             <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             </a>
                             </li>
-                        <li><a href="#faq">
+                        <li><a href="/faq">
                             <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
                             </a>
                             </li>
+                        <li><a href="/profile">
+                            <img id="icon_profile" class="icon" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
+                            </a>
+                            </li>
+                        <li><a href="/">
+                            <img id="icon_logout" class="icon" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
+                            </a>
+                            </li>
+
                     </ul>
-
-                            
-                    
-
-                    
                 </div>
+        
+            <div id="header_for_logged_hr"></div>
+                    
+            </div>
 
 </template>
 
@@ -40,226 +46,210 @@ export default {
   name: "HeaderFL",
   components: {
   },
-  props:{
-      nakladka_irss: Boolean,
-   },
 };
 </script>
 <style lang="scss">
-.header_element{
+
+#header_for_logged_hr{
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+    width: 95%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+#header_for_logged .header_element{
     position: relative;
     background-color: white;
     z-index: 10;
-    margin:0;
-    height:22vh;
 }
 
-.wybory_do{
+#header_for_logged .wybory_do{
     margin: 0px;
 }
 
-#logo{
+#header_for_logged #logo{
+    height: 100%;
+    padding-top: 0px;
     padding-right: 20px;
+    position: relative;
+    float: left;
 }
 
-#icons_navbar a{
-    text-decoration: none;
-}
-
-.text_header span, .text_header{
-    line-height: 100%;
-}
-.icon:hover{
+#header_for_logged .icon:hover{
     filter: brightness(60%);
 }
 
-/*
-@media only screen and (min-width: 1320px) {
-    
-      .header_element{
-        display:flex;
-        align-items: center;
-        height: 20vh;
-        margin-bottom: 20px;
-        width: 100%;
-
-    }  
-    #logo{
-        position: absolute;
-    }
-    .text_header {
-        margin-left: calc((100% - 800px)/2);;
-    }
-    .icon{
-        width: 60px;
-        margin-left: 10px;
-    }
+#header_for_logged .icon{
+    width: 50px;
+    margin-left: 20px;
 }
 
-@media only screen and (min-width: 860px) and (max-width: 1319px) {
-   
-    #logo {
-        position: relative;
-        float: left;
-    }
-    .text_header {
-        margin-left: 0;
-    }
-
-    .icon{
-        width: 40px;
-        margin-left: 10px;
-    }
+#header_for_logged .text_header {
+    float:left;
 }
 
-@media only screen and (min-width: 1840px) {
-    .text_header > #linijka_1{
-        font-size: 40px;
-    }
-    .text_header > #linijka_2, .text_header > #linijka_3, .text_header > #linijka_4{
-        font-size: 55px;
-    }
+#header_for_logged .text_header span{
+    line-height: 100%;
 }
 
-@media only screen and (min-width: 860px) and (max-width: 1839px) {
-    .text_header > #linijka_1{
-        font-size: 2vw;
-    }
-    .text_header > #linijka_2, .text_header > #linijka_3, .text_header > #linijka_4{
-        font-size: 3vw;
-    }
+#header_for_logged #icons_navbar a{
+    text-decoration: none;
 }
 
-@media only screen and (min-width: 860px) {
-  
-    .header_element{
-        height: 13vw;
-        margin-bottom: 20px;
-        width: 100%;
-
-    }   
-  #logo {
-        height: 100%;
-        margin-left: 10vw;
-    
-    }
-    
-    .logo_img{
-        margin-top: 2.5vw;
-        width:  8vw;
-    }
-
-    .text_header {
-        padding-top: 3vw;
-        float:left;
-
-    }
-    
-
-    #icons_navbar{
-        list-style-type: none;
-        margin-right: 10vw;
-        margin-top:4vw;
-        padding: 0;
-        float: right;
-    }
-    #icons_navbar li{
-        float:left;
-    }
-    
-    
-}
-    
-    @media only screen and (max-width: 859px) {
-    
-    #logo {
-        padding-left: 20px;
-      float: left;
-    }
-
-    .logo_img{
-                padding-top: 17px;
-
-        width:  55px;
-    }
-    
-    .text_header {
-        float: left;
-        padding-top: 18px;    
-    }
-
-    .text_header > #linijka_1, .text_header > #linijka_2, .text_header > #linijka_3{
-        font-size: 16px;
-        line-height: normal;
-    }
-    
-
-    .header_element{
-        height: 130px;
-    }  
-
-
-
-    #icons_navbar{
-        list-style-type: none;
-        margin-right: 25px;
-        margin-top:30px;
-        padding: 0;
-        float: right;
-    }
-    #icons_navbar li{
-        float:left;
-    }
- 
-    .icon{
-        width: 25px;
-        margin-left: 10px;
-    }
-    
+#header_for_logged #icons_navbar{
+    list-style-type: none;
+    float: right;
 }
 
-@media only screen and (max-width: 439px) {
-    #icon_calendar{
-        display: none;
-    }
+#header_for_logged #icons_navbar li{
+    float:left;
 }
 
-@media only screen and (max-width: 399px){
-    #icon_why{
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 410px){
-    .text_header > #linijka_4{
-        font-size: 12px;
-    }
-}
-
-@media only screen and (max-width: 330px) {
-    .logo_img{
-        padding-top: 23px;
-        width:  35px;
-    }
-    .text_header > #linijka_1, .text_header > #linijka_2, .text_header > #linijka_3{
-        font-size: 12px;
-    }
-
-    .text_header > #linijka_4{
-        font-size: 10px;
-    }
-}
-
-@media only screen and (max-width: 330px) {
-    .logo_img{
-        display:none;
-    }
-    .text_header{
+@media only screen and (min-width: 1500px) {
+    #header_for_logged{
+        width:1500px;
         margin: auto;
-        width: 100%;
-        text-align: center;
+    }
+    #header_for_logged_hr{
+        width:1500px;
+    }
+    #header_for_logged #logo{
+        margin-left:0;
     }
 }
-*/
+
+@media only screen and (min-width: 1050px) {
+  
+    #header_for_logged .header_element{
+        height: 140px;
+        width: 100%;
+    }   
+
+    #header_for_logged #logo {
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+    
+    #header_for_logged #logo_img{
+        height:  90px;
+    }
+
+    #header_for_logged .text_header {
+        padding-top: 25px;
+    }
+
+    #header_for_logged .text_header span{
+        font-size: 30px;
+    }
+    
+    #header_for_logged .icon{
+        width: 50px;
+        margin-left: 20px;
+    }
+
+    #header_for_logged #icons_navbar{
+        margin-right: 20px;
+        margin-top: 40px;
+    }
+
+    
+}
+    
+@media only screen and (min-width:768px) and (max-width: 1049px) {
+
+    #header_for_logged .header_element{
+        height: 100px;
+        width: 100%;
+    }   
+
+    #header_for_logged #logo {
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+    
+    #header_for_logged #logo_img{
+        height:  70px;
+    }
+
+    #header_for_logged .text_header {
+        padding-top: 15px;
+    }
+
+    #header_for_logged .text_header span{
+        font-size: 20px;
+    }
+    
+    #header_for_logged .icon{
+        width: 30px;
+        margin-left: 10px;
+    }
+
+    #header_for_logged #icons_navbar{
+        margin-right: 50px;
+        margin-top: 30px;
+    }
+    
+    
+}
+
+@media only screen and (min-width: 768px) {
+    #header_for_logged #linijka_telefon{
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+
+     #header_for_logged .header_element{
+        height: 50px;
+        width: 100%;
+    }   
+
+    #header_for_logged #logo {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+    
+    #header_for_logged #logo_img{
+        height: 30px;
+    }
+
+    #header_for_logged .text_header {
+        padding-top: 10px;
+    }
+
+    #header_for_logged .text_header span{
+        font-size: 15px;
+    }
+
+    #header_for_logged #linijka_1, #header_for_logged #linijka_2, #header_for_logged #linijka_3{
+        display: none;
+    }
+
+    #header_for_logged #linijka_telefon{
+        display:block;
+    }
+    
+    #header_for_logged .icon{
+        width: 20px;
+        margin-left: 10px;
+    }
+
+    #header_for_logged #icons_navbar{
+        margin-right: 20px;
+        margin-top: 13px;
+    }
+    
+    
+}
+
+@media only screen and (max-width: 315px) {
+    #header_for_logged #linijka_telefon{
+        display: none;
+    }
+}
+
 
 </style>

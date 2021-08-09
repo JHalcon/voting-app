@@ -1,8 +1,11 @@
 <template>
 <div id="main" class="scroll-container">
     <section id="home">
-        <router-link to="/UserPage">User Page</router-link>
-    <Header/>
+        
+            <router-link to="/UserPage">UserPage</router-link>
+
+    <Header nakladka_irss />
+    
     <login-panel/>
     
       <img src="../assets/images/orange.svg" alt="Element dekoracyjny" class="orange_img">
