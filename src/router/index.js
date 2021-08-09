@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import mainPage from "../views/mainPage.vue";
+import UserPage from "../views/UserPage.vue";
 import about from "../views/About.vue";
 
 
@@ -11,6 +12,11 @@ const routes = [
     path: "/",
     name: "mainPage",
     component: mainPage,
+  },
+  {
+    path: "/UserPage",
+    name: "UserPage",
+    component: UserPage,
   },
   {
     path: "/about",

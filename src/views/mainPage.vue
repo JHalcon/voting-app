@@ -1,6 +1,7 @@
 <template>
 <div id="main" class="scroll-container">
     <section id="home">
+        <router-link to="/UserPage">User Page</router-link>
     <Header/>
     <login-panel/>
     
@@ -15,6 +16,7 @@
 </section>
 <calendar/>
 <faq/>
+<Footer/>
     </div>
 
 </template>
@@ -24,6 +26,7 @@ import Header from "@/components/Header.vue";
 import LoginPanel from '../components/loginPanel.vue';
 import calendar from '@/components/calendar.vue';
 import faq from '@/components/faq.vue';
+import Footer from '@/components/Footer.vue';
 //import calendarPart from '@/components/calendarPart.vue';
 import Calendar from '@/components/calendar.vue';
 export default {
@@ -33,6 +36,7 @@ export default {
     LoginPanel,
     calendar,
     faq,
+    Footer,
   //  calendarPart,
     Calendar
   },

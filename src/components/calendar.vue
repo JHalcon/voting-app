@@ -12,7 +12,7 @@
                       <br>
                         <span class="my_orange">Instytut </span>
                            <button v-on:click="hg">click</button>
-                        <select id="instytut_select" v-on:change="ICal()">
+                        <select id="instytut_select" v-on:change="hg">
                             <option hidden selected>(wybierz)</option>
                             <option value="0">Biologii</option>
                             <option value="1">Filologii Angielskiej</option>
@@ -72,22 +72,85 @@ export default {
       console.log(instytut);
     },
     hg(){
-      console.log(this.days);
-      this.days.forEach(element => {
-        console.log(element.month)
-      });
+      
+    
+
+console.log("2 start");
+
+    //console.log(this.days);
+
+    var selected_value = document.getElementById("instytut_select").value;
+   // console.log(selected_value);
+    this.selectInstytut(parseInt(selected_value));
+   // console.log("instytut"+this.Instytut);
+    var element = this.getInstytutById;
+
+      //this.days.forEach(element => {
+        console.log(element.daty[0][0]+" data "+element.daty[0][1])
+        var day_start = element.daty[0][0] - 1 + (element.daty[0][1]-10)*31;
+         var day_end = element.daty[1][0] - 1 + (element.daty[1][1]-10)*31;
+        console.log(day_start+" koniec "+day_end);
+
+       var all = document.getElementsByClassName("calendar_day");
+       console.log("dlugoc tab"+all.length);
+       console.log("poczatek"+ day_start+"koniec "+day_end);
+    for(let i=0; i<=60; i++){
+      console.log("moje i"+i);
+        all[i].classList.remove("active_cal");
+        all[i].classList.remove("active_cal_only");
+        all[i].classList.remove("active_cal_start");
+        all[i].classList.remove("active_cal_end");
+        console.log("1 stop");
+    }
+       var all_days = document.getElementsByClassName("calendar_day");
+       if(day_start == day_end){ // podświetlamy w ten sposób, gdy tylko jeden dzień wybrano
+        if(day_start < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
+            all_days[day_start].classList.add("active_cal");
+            all_days[day_start].classList.add("active_cal_only");
+        }
+    } else{
+        var i = day_start;
+        if(i < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
+            // podświetl pierwszą jako start
+            all_days[i].classList.add("active_cal");
+            all_days[i].classList.add("active_cal_start");
+            i++;
+        }
+        while(i < day_end){  // od 1 do length-1 oznaczamy jako normalne
+            if(i < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
+                all_days[i].classList.add("active_cal");
+            }
+            i++;
+        }
+
+        if(i < all_days.length){
+            //  podświetl ostatnią jako end
+            all_days[i].classList.add("active_cal");
+            all_days[i].classList.add("active_cal_end");
+        }
+    }
+
     },
+ selectInstytut(i){
+    this.Instytut = i;
+  },
+  },
+  data(){
+    return{
+      Instytut : null,
+    }
   },
   computed:{
     days(){
       return this.$store.state.Dates;
-    }
-  },
-  data(){
-    return{
-    }
+    },
+    
+  getInstytutById(){
+    return  this.$store.getters.getInstytutById(this.Instytut);
   }
-};
+  },
+ 
+  };
 </script>
 <style  lang="scss" scoped>
 #calendar{

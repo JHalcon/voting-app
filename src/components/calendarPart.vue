@@ -26,7 +26,7 @@
 <script>
 export default {
       name: "calendarPart",
-      props:['name','numberOfDays','blankDays',"id"],
+      props:['name','numberOfDays','blankDays',"id","givenID"],
   components: {
   },
 
