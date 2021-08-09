@@ -1,28 +1,30 @@
 <template>
 
-                <div class="header_element">
+                <div id="header_default">
                     <div id="logo"><a href="">
                         <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" class="logo_img"></a>
                         </div>
                     
-                    <div class="text_header"> 
-                        <h2 class="textMontserrat my_blue wybory_do">WYBORY DO</h2>
-                        <h1><span class="textMontserrat my_magenda">INSTYTUTOWYCH RAD</span><br>
-                            <span class="textMontserrat my_orange">SAMORZĄDU STUDENTÓW</span></h1>
+                    <div v-if="nakladka_irss" class="text_header"> 
+                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">WYBORY DO<br></span>
+                        <span id="linijka_2" class="textMontserrat my_magenda">INSTYTUTOWYCH RAD<br></span>
+                        <span id="linijka_3" class="textMontserrat my_orange">SAMORZĄDU STUDENTÓW</span>
                     </div>
-                    
+                    <div v-else class="text_header"> 
+                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">SYSTEM WYBORCZY<br></span>
+                        <span id="linijka_2" class="textMontserrat my_magenda">SAMORZĄDU STUDENTÓW<br></span>
+                        <span id="linijka_4" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
+                    </div>
                    
-                    <ul id="icons_navbar">
+                    <ul v-if="nakladka_irss" id="icons_navbar">
                         <li><a href="#calendar">
-                            <img id="icon_calendar" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
+                            <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             </a>
                             </li>
-                        <li>
-                            <a href="#faq">
-                                <h1 id="item_why" class="textMontserrat my_blue" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami">?
-                                    </h1>
-                                    </a>
-                                    </li>
+                        <li><a href="#faq">
+                            <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
+                            </a>
+                            </li>
                     </ul>
 
                             
@@ -38,115 +40,128 @@ export default {
   name: "Header",
   components: {
   },
+  props:{
+      nakladka_irss: Boolean,
+   },
 };
 </script>
 <style lang="scss">
-.header_element{
+#header_default{
     position: relative;
     background-color: white;
     z-index: 10;
+    margin:0;
+    height:22vh;
 }
 
-.wybory_do{
+#header_default .wybory_do{
     margin: 0px;
 }
 
-#logo{
-    padding-top: 20px;
+#header_default #logo{
     padding-right: 20px;
-
 }
 
-#icons_navbar a{
+#header_default #icons_navbar a{
     text-decoration: none;
 }
-#icon_calendar:hover{
+
+#header_default .text_header span, #header_default .text_header{
+    line-height: 100%;
+}
+#header_default .icon:hover{
     filter: brightness(60%);
 }
-#item_why:hover{
-    filter: brightness(60%);
-}
+
 @media only screen and (min-width: 1320px) {
-    #logo{
+    
+    #header_default {
+        //display:flex; //czy to tu jest konieczne?
+        align-items: center;
+        height: 20vh;
+        margin-bottom: 20px;
+        width: 100%;
+
+    }  
+    #header_default #logo{
         position: absolute;
     }
-    .text_header {
+    #header_default .text_header {
         margin-left: calc((100% - 800px)/2);;
+    }
+    #header_default .icon{
+        width: 60px;
+        margin-left: 10px;
     }
 }
 
 @media only screen and (min-width: 860px) and (max-width: 1319px) {
-    #logo {
+   
+    #header_default #logo {
         position: relative;
         float: left;
     }
-    .text_header {
+    #header_default .text_header {
         margin-left: 0;
+    }
+
+    #header_default .icon{
+        width: 40px;
+        margin-left: 10px;
     }
 }
 
 @media only screen and (min-width: 1840px) {
-    .text_header > h1{
+    #header_default .text_header > #linijka_1{
+        font-size: 40px;
+    }
+    #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3, #header_default .text_header > #linijka_4{
         font-size: 55px;
     }
 }
 
 @media only screen and (min-width: 860px) and (max-width: 1839px) {
-    .text_header > h1{
+    #header_default .text_header > #linijka_1{
+        font-size: 2vw;
+    }
+    #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3, #header_default .text_header > #linijka_4{
         font-size: 3vw;
     }
 }
 
 @media only screen and (min-width: 860px) {
   
-    .header_element{
-        height: 15vw;/*250px;*/
+    #header_default {
+        height: 13vw;
         margin-bottom: 20px;
         width: 100%;
 
     }   
-  #logo {
-       _position: absolute;
-       height: 100%;
-      margin-left: 10vw;
-      _float: left;
+    #header_default #logo {
+        height: 100%;
+        margin-left: 10vw;
     
     }
     
-    .logo_img{
-        margin-top: calc(50% - 2vw);
+    #header_default .logo_img{
+        margin-top: 2.5vw;
         width:  8vw;
     }
 
-    .text_header {
+    #header_default .text_header {
         padding-top: 3vw;
-        max-width: 800px;   
         float:left;
 
     }
-
-    .text_header > h2{
-        font-size: 2vw;
-    }
     
-    #item_why{
-        font-size: 5vw;
-    }
- 
-    #icon_calendar{
-        width: 5vw;
-        padding-top: 0.5vw;
-        margin-right: 20px;
-    }
-
-    #icons_navbar{
+    #header_default #icons_navbar{
         list-style-type: none;
         margin-right: 10vw;
         margin-top:4vw;
         padding: 0;
         float: right;
     }
-    #icons_navbar li{
+    #header_default #icons_navbar li{
         float:left;
     }
     
@@ -155,80 +170,92 @@ export default {
     
     @media only screen and (max-width: 859px) {
     
-    #logo {
+    #header_default #logo {
         padding-left: 20px;
       float: left;
     }
 
-    .logo_img{
+    #header_default .logo_img{
+                padding-top: 17px;
+
         width:  55px;
     }
     
-    .text_header {
+    #header_default .text_header {
         float: left;
         padding-top: 18px;    
     }
 
-    .text_header > h2{
+    #header_default .text_header > #linijka_1, #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3{
         font-size: 16px;
+        line-height: normal;
     }
-    .text_header > h1{
-        font-size: 16px;
-    }
+    
 
-    .header_element{
+    #header_default {
         height: 130px;
     }  
 
-    #item_why{
-        font-size: 45px;
-    }
- 
-    #icon_calendar{
-        width: 45px;
-        padding-top: 3px;
-        margin-right: 20px;
-
-
-    }
-
-    #icons_navbar{
+    #header_default #icons_navbar{
         list-style-type: none;
         margin-right: 25px;
-        margin-top:18px;
+        margin-top:30px;
         padding: 0;
         float: right;
     }
-    #icons_navbar li{
+    
+    #header_default #icons_navbar li{
         float:left;
     }
  
+    #header_default .icon{
+        width: 25px;
+        margin-left: 10px;
+    }
     
 }
 
-@media only screen and (max-width: 469px) {
-    #icon_calendar{
+@media only screen and (max-width: 439px) {
+    #header_default #icon_calendar{
         display: none;
     }
 }
 
 @media only screen and (max-width: 399px){
-    #item_why{
+    #header_default #icon_why{
         display: none;
     }
 }
 
-@media only screen and (max-width: 330px) {
-    .logo_img{
-        width:  35px;
-    }
-    .text_header > h2{
-        font-size: 13px;
-    }
-    .text_header > h1{
-        font-size: 13px;
+@media only screen and (max-width: 410px){
+    #header_default .text_header > #linijka_4{
+        font-size: 12px;
     }
 }
 
+@media only screen and (max-width: 330px) {
+    #header_default .logo_img{
+        padding-top: 23px;
+        width:  35px;
+    }
+    #header_default .text_header > #linijka_1, #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3{
+        font-size: 12px;
+    }
+
+    #header_default .text_header > #linijka_4{
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 330px) {
+    #header_default .logo_img{
+        display:none;
+    }
+    #header_default .text_header{
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+}
 
 </style>

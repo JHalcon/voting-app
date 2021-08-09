@@ -1,6 +1,7 @@
 <template>
 <div id="UP">
-    <NavbarLoggedIn/>
+    <HeaderFL/>
+    
     <div class="mainInner">
       <NoVotes v-if="!haveVotes"/>
       </div>
@@ -12,7 +13,7 @@
 
 <script>
 import Footer from '@/components/Footer.vue';
-import NavbarLoggedIn from '@/components/NavbarLoggedIn.vue';
+import HeaderFL from '@/components/HeaderForLogged.vue';
 import NoVotes from '@/components/NoVotes.vue';
 export default {
 
@@ -20,7 +21,7 @@ export default {
   props:["haveVotes"],
   components: {
 Footer,
-NavbarLoggedIn,
+HeaderFL,
 NoVotes,
   },
 };
