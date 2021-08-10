@@ -1,7 +1,7 @@
 <template>
     <div id="noVotes">
         <div class="imgNoVotes">
-            <img src="../assets/images/brakG.png">
+            <img src="../assets/images/no_poll.svg">
 
             </div>
             <div class="komunikat">

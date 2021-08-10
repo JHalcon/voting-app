@@ -27,9 +27,9 @@
                             <img id="icon_profile" class="icon" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
                             </a>
                             </li>
-                        <li><a href="/">
+                        <li><div @click="logout">
                             <img id="icon_logout" class="icon" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
-                            </a>
+                            </div>
                             </li>
 
                     </ul>
@@ -46,6 +46,16 @@ export default {
   name: "HeaderFL",
   components: {
   },
+  methods:{
+      logout(){
+            localStorage.removeItem('JWT_TOKEN');  
+            localStorage.removeItem('REFRESH_TOKEN'); 
+
+            //console.log("aa");
+            this.$store.dispatch('logoutUser');
+
+      },
+  }
 };
 </script>
 <style lang="scss">
@@ -83,6 +93,7 @@ export default {
 #header_for_logged .icon{
     width: 50px;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 #header_for_logged .text_header {
