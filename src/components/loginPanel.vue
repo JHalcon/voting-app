@@ -1,5 +1,5 @@
 <template>
-  <div class="main_frame">
+  <div id="main_frame">
                         <div class="main_frame_text textRoboto login_txt">
                             By się zalogować, <br id="main_text_br1">podaj uczelniany adres email:
                         

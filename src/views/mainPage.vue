@@ -1,6 +1,6 @@
 <template>
 <div id="main" class="scroll-container">
-    <section id="home">
+    <section id="home_section">
         
             <router-link to="/UserPage">UserPage</router-link>
 
@@ -8,14 +8,14 @@
     
     <login-panel/>
     
-      <img src="../assets/images/orange.svg" alt="Element dekoracyjny" class="orange_img">
-                    <img src="../assets/images/orange2.svg"  alt="Element dekoracyjny" class="orange2_img">
-                    <img src="../assets/images/blue.svg" alt="Element dekoracyjny" class="blue_img">
-
-                    <img src="../assets/images/3students_1.svg" alt="Element dekoracyjny" class="students_1_img">
-                    <img src="../assets/images/3students_2.svg" alt="Element dekoracyjny" class="students_2_img">
-                    <img src="../assets/images//studentlaptop.svg" alt="Element dekoracyjny" class="studentlaptop_img">
-                    <img src="../assets/images/studentlaptop2.svg" alt="Element dekoracyjny" class="studentlaptop2_img">
+    <img src="../assets/images/orange.svg" alt="Element dekoracyjny" class="orange_img">
+    <img src="../assets/images/orange2.svg"  alt="Element dekoracyjny" class="orange2_img">
+    <img src="../assets/images/blue.svg" alt="Element dekoracyjny" class="blue_img">
+    <img src="../assets/images/3students_1.svg" alt="Element dekoracyjny" class="students_1_img">
+    <img src="../assets/images/3students_2.svg" alt="Element dekoracyjny" class="students_2_img">
+    <img src="../assets/images//studentlaptop.svg" alt="Element dekoracyjny" class="studentlaptop_img">
+    <img src="../assets/images/studentlaptop2.svg" alt="Element dekoracyjny" class="studentlaptop2_img">
+    
 </section>
 <calendar/>
 <faq/>
@@ -61,7 +61,7 @@ export default {
 	height: 100%;
 }
 
-.main_frame{
+#main_frame{
 
     background-color: white;
     border-style: solid;
@@ -80,7 +80,7 @@ export default {
 
 }
 
-.main_frame input[type="text"]{
+#main_frame input[type="text"]{
 	background: rgba(255,255,255,.1);
 	border: 2px solid lightgrey;
 	border-radius: 10px;
@@ -93,11 +93,11 @@ export default {
     
 }
 
-.main_frame input[type="text"]:focus{
+#main_frame input[type="text"]:focus{
 	background-color: #e8eeef;
 }
 
-.login_btn{
+#main_frame .login_btn{
     width:40%;
     height: 70px;
 
@@ -113,51 +113,51 @@ export default {
     box-shadow: 2px 5px 5px #999;
 }
 
-.login_btn:hover {background-color: var(--my_magenda_dark);}
+#main_frame .login_btn:hover {background-color: var(--my_magenda_dark);}
 
-.login_btn:active {
+#main_frame .login_btn:active {
   background-color: var(--my_magenda_dark);
   box-shadow: 1px 5px 1px #666;
   transform: translateY(4px);
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+#main_frame ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: gray;
     opacity: 0.6; /* Firefox */
   }
 
 @media only screen and (min-width: 860px) {
 
-    .main_frame_text{
+    #main_frame .main_frame_text{
         font-size: 30px;
 
     }
 
-    .main_frame{
+    #main_frame{
         border-width: 6px;
         padding:60px;
         margin: auto;
         width: 800px;
     }
 
-    .main_frame input[type="text"]{
+    #main_frame input[type="text"]{
         font-size: 20px;    
         width: 500px;
     
     }
     
-    .login_btn{
+    #main_frame .login_btn{
         font-size: 24px;
         margin: 20px 30px 0px;
 
     }
 
-    #home{
+    #home_section{
         position: relative;
         min-height: 900px;
     }
 
-    #main_text_br1{
+    #main_frame #main_text_br1{
         display:none;
     }
 
@@ -205,7 +205,7 @@ export default {
 
 }
 @media only screen and (max-width: 859px) {
-    .main_frame{
+    #main_frame{
         border-width: 3px;
         padding:3vw;
         padding-top:8vw;
@@ -215,18 +215,18 @@ export default {
 
     }
 
-    #home{
+    #home_section{
         position: relative;
         min-height: 700px;
     }
 
-    .main_frame input[type="text"]{
+    #main_frame input[type="text"]{
         font-size: 16px;  
         width: 100%;
       
     }
 
-    .login_btn{
+    #main_frame .login_btn{
         margin: 10px 30px 30px;
 
     }
@@ -244,7 +244,6 @@ export default {
     .studentlaptop_img{
         display: none;
     }
-
     .orange2_img{
         position: absolute;
         width: 105%;
@@ -252,10 +251,7 @@ export default {
         left: 0px;
         bottom: 0px;
         z-index: 1;
-  
-
     }
-
     .students_2_img{
         position: absolute;
         width: 55%;
@@ -278,7 +274,7 @@ export default {
 }
 
 @media only screen and (max-width: 330px) {
-    .login_btn{
+    #main_frame .login_btn{
         padding: 5px 5px;
     }
     #logo{

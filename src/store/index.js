@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -47,7 +48,8 @@ export default new Vuex.Store({
        "id":9,
        "daty":[[7,10],  [8,10]],
      },
-    ]
+    ],
+  currentUser: {},
 
 /*
 
@@ -80,14 +82,47 @@ var sztuki_mediow                       = [[29,11], [30,11]];
 
     ]*/
   },
-  mutations: {},
+  mutations: {
+
+    LOGOUT_USER(state){
+      state.currentUser = {}
+    },
+    SET_CURRENT_USER(state, username){
+
+      //console.log("a: "+username.username);
+      //console.log(username.username);
+
+      state.currentUser = username;
+
+      //console.log("b: "+state.currentUser.username);
+      //console.log(state.currentUser.username);
+
+    },
+
+  },
   getters:{
     getInstytutById: (state) => (id) => {
-    return state.Dates.find(date => date.id === id)
-  }
+      return state.Dates.find(date => date.id === id)
+    },
+
+    isLoggedIn: (state) => {
+  
+      //console.log(state.currentUser.username != undefined);
+      //console.log(state.currentUser.username);
+
+        return (state.currentUser.username != undefined);
+    }
 
   },
 
-  actions: {},
+  actions: {
+    logoutUser({commit}){
+      commit('LOGOUT_USER');
+    },
+    loginUser({commit}, username){
+      commit('SET_CURRENT_USER', username);
+    }
+  },
   modules: {},
+  plugins: [createPersistedState()]
 });

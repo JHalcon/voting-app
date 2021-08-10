@@ -193,7 +193,7 @@ export default {
     
 
     #header_default {
-        height: 130px;
+        height: 90px;
     }  
 
     #header_default #icons_navbar{
