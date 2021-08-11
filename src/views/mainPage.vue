@@ -20,22 +20,22 @@
 <calendar/>
 <faq/>
 <Footer/>
-    </div>
+</div>
 
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
-import LoginPanel from '../components/loginPanel.vue';
-import calendar from '@/components/calendar.vue';
-import faq from '@/components/faq.vue';
-import Footer from '@/components/Footer.vue';
+import LoginPanel from "../components/loginPanel.vue";
+import calendar from "@/components/calendar.vue";
+import faq from "@/components/faq.vue";
+import Footer from "@/components/Footer.vue";
 //import calendarPart from '@/components/calendarPart.vue';
 //import Calendar from '@/components/calendar.vue';
 export default {
   name: "mainPage",
   components: {
-      Header,
+    Header,
     LoginPanel,
     calendar,
     faq,
@@ -51,19 +51,17 @@ export default {
 };
 </script>
 <style lang="scss">
-
-
 .scroll-container {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	margin: 0;
-	padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .scroll-container section {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 #main_frame{
@@ -78,11 +76,10 @@ export default {
 
 }
 
-.login_txt{
-    margin-bottom:30px;
-    font-weight:bold;
-    color: gray;
-
+.login_txt {
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: gray;
 }
 
 #main_frame input[type="text"]{
@@ -132,6 +129,35 @@ export default {
   }
 
 @media only screen and (min-width: 860px) {
+  .main_frame_text {
+    font-size: 30px;
+  }
+
+  .main_frame {
+    border-width: 6px;
+    padding: 60px;
+    margin: auto;
+    width: 800px;
+  }
+
+  .main_frame input[type="text"] {
+    font-size: 20px;
+    width: 500px;
+  }
+
+  .login_btn {
+    font-size: 24px;
+    margin: 20px 30px 0px;
+  }
+
+  #home_section {
+    position: relative;
+    min-height: 900px;
+  }
+
+  #main_text_br1 {
+    display: none;
+  }
 
     #main_frame .main_frame_text{
         font-size: 30px;
@@ -208,6 +234,35 @@ export default {
 
     
 
+  .blue_img {
+    position: absolute;
+    width: 45%;
+    bottom: 0px;
+    z-index: 2;
+  }
+  .orange_img {
+    position: absolute;
+    width: 60%;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+  }
+  .students_1_img {
+    position: absolute;
+    width: 30%;
+    bottom: 0px;
+    z-index: 2;
+  }
+  .studentlaptop_img {
+    position: absolute;
+    width: 25%;
+    right: 0px;
+    //bottom: -2px;
+    bottom: 1px;
+    transform: scaleX(-1);
+
+    z-index: 1;
+  }
 }
 @media only screen and (max-width: 859px) {
     #main_frame{
@@ -275,8 +330,14 @@ export default {
         z-index: 1;
     }
 
+    margin: 3%;
+    width: 94%;
+  }
 
-}
+  #home {
+    position: relative;
+    min-height: 700px;
+  }
 
 @media only screen and (max-width: 330px) {
     #main_frame .login_btn{
@@ -288,11 +349,4 @@ export default {
     
     }
 }
-
-
-
-
-
-
-
 </style>

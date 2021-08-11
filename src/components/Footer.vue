@@ -27,7 +27,6 @@ export default {
   //min-height: 60px;
   //position: absolute;
   //bottom: 0;
-
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -45,7 +44,6 @@ footer {
   font-weight: bold;
   color: gray;
 }
-
 footer a {
   color: gray;
   font-weight: bold;
@@ -94,7 +92,6 @@ footer a:hover {
     font-size: 14px;
   }
 }
-
 @media only screen and (min-width: 315px) and (max-width: 767px) {
   footer {
     font-size: 13px;

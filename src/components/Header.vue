@@ -1,4 +1,13 @@
 <template>
+  <div id="header_default">
+    <div id="logo">
+      <a href="">
+        <img
+          src="../assets/images/logo_samorzad.png"
+          alt="Logo Samorządu Studentów"
+          class="logo_img"
+      /></a>
+    </div>
 
                 <div id="header_default">
 
@@ -34,12 +43,37 @@
                     
                 </div>
 
+    <ul v-if="nakladka_irss" id="icons_navbar">
+      <li>
+        <a href="#calendar">
+          <img
+            id="icon_calendar"
+            class="icon"
+            src="../assets/images/date_range_icon.svg"
+            alt="Przycisk przejścia do terminarza głosowań"
+          />
+        </a>
+      </li>
+      <li>
+        <a href="#faq">
+          <img
+            id="icon_why"
+            class="icon"
+            src="../assets/images/questionmark.svg"
+            alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami"
+          />
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Header",
-  components: {
+  components: {},
+  props: {
+    nakladka_irss: Boolean,
   },
   props: {'only_irss': Boolean},
   
@@ -94,7 +128,6 @@ export default {
         margin-left: 10px;
     }
 }
-
 @media only screen and (min-width: 860px) and (max-width: 1319px) {
    
     #header_default #logo {
@@ -110,25 +143,26 @@ export default {
         margin-left: 10px;
     }
 }
-
 @media only screen and (min-width: 1840px) {
-    #header_default .text_header > #linijka_1{
-        font-size: 40px;
-    }
-    #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3, #header_default .text_header > #linijka_4{
-        font-size: 55px;
-    }
+  #header_default .text_header > #linijka_1 {
+    font-size: 40px;
+  }
+  #header_default .text_header > #linijka_2,
+  #header_default .text_header > #linijka_3,
+  #header_default .text_header > #linijka_4 {
+    font-size: 55px;
+  }
 }
-
 @media only screen and (min-width: 860px) and (max-width: 1839px) {
-    #header_default .text_header > #linijka_1{
-        font-size: 2vw;
-    }
-    #header_default .text_header > #linijka_2, #header_default .text_header > #linijka_3, #header_default .text_header > #linijka_4{
-        font-size: 3vw;
-    }
+  #header_default .text_header > #linijka_1 {
+    font-size: 2vw;
+  }
+  #header_default .text_header > #linijka_2,
+  #header_default .text_header > #linijka_3,
+  #header_default .text_header > #linijka_4 {
+    font-size: 3vw;
+  }
 }
-
 @media only screen and (min-width: 860px) {
   
     #header_default {

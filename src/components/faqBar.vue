@@ -1,23 +1,23 @@
 <template>
-<div > 
+  <div>
     <!--class="collapsible c1 my_magenda"-->
-    <div  v-bind="$attrs" v-on:click="showAnswer" :class="class2" >{{question}}</div>
-    <div class="content"><p >{{answer}}</p>
+    <div v-bind="$attrs" v-on:click="showAnswer" :class="class2">
+      {{ question }}
     </div>
-    <br>
+    <div class="content">
+      <p>{{ answer }}</p>
     </div>
-   <!-- <br>
-    </div>-->
-    <!--<br>-->
+    <br />
+  </div>
 </template>
 <script>
 export default {
-    name:"faqBar",    
-    props:{
-    "question":String,
-    "answer":String,
-    "class1":String,
-    },
+  name: "faqBar",
+  props: {
+    question: String,
+    answer: String,
+    class1: String,
+  },
     inheritAttrs:false,
     data(){
         return{
@@ -36,14 +36,12 @@ export default {
 
                 c.style.maxHeight = null;
                 
-                //to miejsce poprawić
                 this.class2 = this.class1;
 
 
             } else {
                 // wyświetlanie odpowiedzi
 
-                //to miejsce porpawić
                 this.class2 += " active";
                 c.style.maxHeight = c.scrollHeight + "px";
             } 

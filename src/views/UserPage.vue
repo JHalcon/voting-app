@@ -4,6 +4,7 @@
     
     <div class="mainInner">
       <NoVotes v-if="!haveVotes"/>
+      <Votes v-if="haveVotes"/>
       </div>
     
     <Footer/>
@@ -15,14 +16,20 @@
 import Footer from '@/components/Footer.vue';
 import HeaderFL from '@/components/HeaderForLogged.vue';
 import NoVotes from '@/components/NoVotes.vue';
+import Votes from '@/components/Votes.vue';
 export default {
 
   name: "UserPage",
-  props:["haveVotes"],
+  data(){
+    return{
+      haveVotes:true,
+    }
+  },
   components: {
 Footer,
 HeaderFL,
 NoVotes,
+Votes,
   },
   created: function () {
     if(!this.$store.getters.isLoggedIn){

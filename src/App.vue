@@ -58,13 +58,12 @@ body, html {
     --my_magenda: #D03372;
     --my_blue: #2700B6;
     --my_orange: #F7B252;
-
     --my_magenda_light: #faeaf1;
     --my_magenda_dark: #a62659;
     --my_orange_light: #fef4e7;
     --my_blue_light: #ebe6ff; 
     --my_blue_light2: #5f33ff; 
-    _--my_blue_dark: #160066;
+    --my_blue_dark: #160066;
 
 }
 .my_blue{

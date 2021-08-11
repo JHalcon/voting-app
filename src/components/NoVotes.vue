@@ -35,9 +35,6 @@ export default {
     width:70%;
     margin: auto;
 }
-.imgNoVotes{
-//height:100%;
-}
 .imgNoVotes img{
     //height:300px;
     //max-width:100%;
@@ -58,9 +55,6 @@ export default {
     font-weight: bold;
     line-height:1,5;
     margin:none;
-}
-h3{
-    //color:white;
 }
 
 @media only screen and (max-width: 767px){

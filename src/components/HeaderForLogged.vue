@@ -48,11 +48,11 @@ import axios from 'axios';
 
 export default {
   name: "HeaderFL",
-  components: {
+  components: {},
+  props: {
+    nakladka_irss: Boolean,
   },
   methods:{
-
-
 
       logout(){
 
