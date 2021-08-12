@@ -3,13 +3,12 @@
     <HeaderFL/>
     
     <div class="mainInner">
-      <NoVotes v-if="!haveVotes"/>
-      <Votes v-if="haveVotes"/>
-      </div>
-    
-    <Footer/>
+      <NoVotes v-if="!haveVotes" />
+      <Votes v-if="haveVotes" />
     </div>
 
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -18,18 +17,17 @@ import HeaderFL from '@/components/HeaderForLogged.vue';
 import NoVotes from '@/components/NoVotes.vue';
 import Votes from '@/components/Votes.vue';
 export default {
-
   name: "UserPage",
-  data(){
-    return{
-      haveVotes:true,
-    }
+  data() {
+    return {
+      haveVotes: true,
+    };
   },
   components: {
-Footer,
-HeaderFL,
-NoVotes,
-Votes,
+    Footer,
+    HeaderFL,
+    NoVotes,
+    Votes,
   },
   created: function () {
     if(!this.$store.getters.isLoggedIn){
@@ -43,17 +41,28 @@ Votes,
 };
 </script>
 <style lang="scss">
-#UP{
-  overflow: hidden;
+#UP {
+  overflow-y: hidden;
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
 }
-.mainInner{
-  min-height:70vh;
+.mainInner {
+  min-height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
-@media only screen and (max-width: 767px){
-.mainInner{
-  min-height:80vh;
+@media only screen and (max-width: 767px) {
+  .mainInner {
+    //min-height: 80vh;
+  }
 }
+@media only screen and (max-width: 992px) and (orientation: landscape) {
+  .mainInner {
+    //overflow: auto;
+    margin-bottom: 50px;
+  }
 }
-
-
 </style>

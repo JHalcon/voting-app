@@ -1,27 +1,51 @@
 <template>
-<div id="main" class="scroll-container">
+  <div id="main" class="scroll-container">
     <section id="home_section">
-        
-            <router-link to="/UserPage">UserPage</router-link>
+      <!--<router-link to="/UserPage">User Page</router-link>-->
+      <Header only_irss />
+      <login-panel />
 
-    <Header only_irss />
-    
-    <login-panel/>
-    
-    <img src="../assets/images/orange.svg" alt="Element dekoracyjny" class="orange_img">
-    <img src="../assets/images/orange2.svg"  alt="Element dekoracyjny" class="orange2_img">
-    <img src="../assets/images/blue.svg" alt="Element dekoracyjny" class="blue_img">
-    <img src="../assets/images/3students_1.svg" alt="Element dekoracyjny" class="students_1_img">
-    <img src="../assets/images/3students_2.svg" alt="Element dekoracyjny" class="students_2_img">
-    <img src="../assets/images//studentlaptop.svg" alt="Element dekoracyjny" class="studentlaptop_img">
-    <img src="../assets/images/studentlaptop2.svg" alt="Element dekoracyjny" class="studentlaptop2_img">
-    
-</section>
-<calendar/>
-<faq/>
-<Footer/>
-</div>
+      <img
+        src="../assets/images/orange.svg"
+        alt="Element dekoracyjny"
+        class="orange_img"
+      />
+      <img
+        src="../assets/images/orange2.svg"
+        alt="Element dekoracyjny"
+        class="orange2_img"
+      />
+      <img
+        src="../assets/images/blue.svg"
+        alt="Element dekoracyjny"
+        class="blue_img"
+      />
 
+      <img
+        src="../assets/images/3students_1.svg"
+        alt="Element dekoracyjny"
+        class="students_1_img"
+      />
+      <img
+        src="../assets/images/3students_2.svg"
+        alt="Element dekoracyjny"
+        class="students_2_img"
+      />
+      <img
+        src="../assets/images//studentlaptop.svg"
+        alt="Element dekoracyjny"
+        class="studentlaptop_img"
+      />
+      <img
+        src="../assets/images/studentlaptop2.svg"
+        alt="Element dekoracyjny"
+        class="studentlaptop2_img"
+      />
+    </section>
+    <calendar />
+    <faq />
+    <FooterForMain />
+  </div>
 </template>
 
 <script>
@@ -29,9 +53,7 @@ import Header from "@/components/Header.vue";
 import LoginPanel from "../components/loginPanel.vue";
 import calendar from "@/components/calendar.vue";
 import faq from "@/components/faq.vue";
-import Footer from "@/components/Footer.vue";
-//import calendarPart from '@/components/calendarPart.vue';
-//import Calendar from '@/components/calendar.vue';
+import FooterForMain from "@/components/FooterForMain.vue";
 export default {
   name: "mainPage",
   components: {
@@ -39,9 +61,7 @@ export default {
     LoginPanel,
     calendar,
     faq,
-    Footer,
-  //  calendarPart,
-    //Calendar
+    FooterForMain,
   },
   created: function () {
     if(this.$store.getters.isLoggedIn){
@@ -51,6 +71,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.main {
+  min-height: 100%;
+}
 .scroll-container {
   width: 100%;
   height: 100%;

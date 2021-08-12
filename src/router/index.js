@@ -6,7 +6,6 @@ import Home from "../views/Home.vue";
 import faqPage from "../views/faqPage.vue";
 import calendarPage from "../views/calendarPage.vue";
 
-
 Vue.use(VueRouter);
 
 const routes = [

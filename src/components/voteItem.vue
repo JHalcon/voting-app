@@ -1,5 +1,5 @@
 <template>
-  <div :class="color">
+  <div class="Vitem">
     <p class="textMontserrat voteTxt">{{ voteText }}</p>
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "voteItem",
-  props: ["voteText", "color"],
+  props: ["voteText"],
   data() {
     return {};
   },
@@ -15,7 +15,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-div {
+div .Vitem {
   cursor: pointer;
   padding: 13px;
   width: 100%;
@@ -36,6 +36,8 @@ div:before {
   float: right;
   margin-left: 5px;
   color: white;
+  display: flex;
+  align-items: center;
 }
 
 .voteItemGreen {
@@ -53,14 +55,22 @@ p.voteTxt {
     font-size: 1.5rem;
   }
   div:before {
-    font-size: 30px;
+    font-size: 1.2rem;
   }
 }
-@media only screen and (max-width: 767px) and (orientation: landscape) {
+@media only screen and (max-width: 992px) and (orientation: landscape) {
   #Votes {
-    height: 50vh;
+    //height: 50vh;
     flex-wrap: nowrap;
-    width: 80%;
+    width: 100%;
+  }
+  div {
+    width: 100%;
+    height: 50px;
+    margin: 10px;
+  }
+  p.textMontserrat.voteTxt {
+    font-size: 1.2rem;
   }
 }
 
@@ -72,7 +82,7 @@ p.voteTxt {
 @media only screen and (min-width: 1350px) {
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 640px) {
   div {
     cursor: pointer;
     padding: 5px;
@@ -82,7 +92,7 @@ p.voteTxt {
     margin-bottom: 10px;
   }
   p.textMontserrat.voteTxt {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   div:before {
     font-size: 20px;

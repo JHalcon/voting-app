@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import calendarPart from '@/components/calendarPart.vue';
-import {store} from "@/store/index";
+import calendarPart from "@/components/calendarPart.vue";
+import { store } from "@/store/index";
 
 export default {
   name: "calendar",
-  store:store,
+  store: store,
   components: {
     calendarPart,
   },
@@ -70,89 +70,89 @@ export default {
   methods:{
     ICal(){
       console.log("polhg");
-      let instytut =  document.getElementById("instytut_select").value;
+      let instytut = document.getElementById("instytut_select").value;
       console.log(instytut);
     },
-    hg(){
-      
-    
+    hg() {
+      console.log("2 start");
 
-console.log("2 start");
+      //console.log(this.days);
 
-    //console.log(this.days);
-
-    var selected_value = document.getElementById("instytut_select").value;
-   // console.log(selected_value);
-    this.selectInstytut(parseInt(selected_value));
-   // console.log("instytut"+this.Instytut);
-    var element = this.getInstytutById;
+      var selected_value = document.getElementById("instytut_select").value;
+      // console.log(selected_value);
+      this.selectInstytut(parseInt(selected_value));
+      // console.log("instytut"+this.Instytut);
+      var element = this.getInstytutById;
 
       //this.days.forEach(element => {
-        console.log(element.daty[0][0]+" data "+element.daty[0][1])
-        var day_start = element.daty[0][0] - 1 + (element.daty[0][1]-10)*31;
-         var day_end = element.daty[1][0] - 1 + (element.daty[1][1]-10)*31;
-        console.log(day_start+" koniec "+day_end);
+      console.log(element.daty[0][0] + " data " + element.daty[0][1]);
+      var day_start = element.daty[0][0] - 1 + (element.daty[0][1] - 10) * 31;
+      var day_end = element.daty[1][0] - 1 + (element.daty[1][1] - 10) * 31;
+      console.log(day_start + " koniec " + day_end);
 
-       var all = document.getElementsByClassName("calendar_day");
-       console.log("dlugoc tab"+all.length);
-       console.log("poczatek"+ day_start+"koniec "+day_end);
-    for(let i=0; i<=60; i++){
-      console.log("moje i"+i);
+      var all = document.getElementsByClassName("calendar_day");
+      console.log("dlugoc tab" + all.length);
+      console.log("poczatek" + day_start + "koniec " + day_end);
+      for (let i = 0; i <= 60; i++) {
+        console.log("moje i" + i);
         all[i].classList.remove("active_cal");
         all[i].classList.remove("active_cal_only");
         all[i].classList.remove("active_cal_start");
         all[i].classList.remove("active_cal_end");
         console.log("1 stop");
-    }
-       var all_days = document.getElementsByClassName("calendar_day");
-       if(day_start == day_end){ // podświetlamy w ten sposób, gdy tylko jeden dzień wybrano
-        if(day_start < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
-            all_days[day_start].classList.add("active_cal");
-            all_days[day_start].classList.add("active_cal_only");
+      }
+      var all_days = document.getElementsByClassName("calendar_day");
+      if (day_start == day_end) {
+        // podświetlamy w ten sposób, gdy tylko jeden dzień wybrano
+        if (day_start < all_days.length) {
+          // zakładamy, że ten dzień mieści się w naszym kalendarzu
+          all_days[day_start].classList.add("active_cal");
+          all_days[day_start].classList.add("active_cal_only");
         }
-    } else{
+      } else {
         var i = day_start;
-        if(i < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
-            // podświetl pierwszą jako start
-            all_days[i].classList.add("active_cal");
-            all_days[i].classList.add("active_cal_start");
-            i++;
+        if (i < all_days.length) {
+          // zakładamy, że ten dzień mieści się w naszym kalendarzu
+          // podświetl pierwszą jako start
+          all_days[i].classList.add("active_cal");
+          all_days[i].classList.add("active_cal_start");
+          i++;
         }
-        while(i < day_end){  // od 1 do length-1 oznaczamy jako normalne
-            if(i < all_days.length){ // zakładamy, że ten dzień mieści się w naszym kalendarzu
-                all_days[i].classList.add("active_cal");
-            }
-            i++;
+        while (i < day_end) {
+          // od 1 do length-1 oznaczamy jako normalne
+          if (i < all_days.length) {
+            // zakładamy, że ten dzień mieści się w naszym kalendarzu
+            all_days[i].classList.add("active_cal");
+          }
+          i++;
         }
 
-        if(i < all_days.length){
-            //  podświetl ostatnią jako end
-            all_days[i].classList.add("active_cal");
-            all_days[i].classList.add("active_cal_end");
+        if (i < all_days.length) {
+          //  podświetl ostatnią jako end
+          all_days[i].classList.add("active_cal");
+          all_days[i].classList.add("active_cal_end");
         }
-    }
-
+      }
     },
- selectInstytut(i){
-    this.Instytut = i;
+    selectInstytut(i) {
+      this.Instytut = i;
+    },
   },
+  data() {
+    return {
+      Instytut: null,
+    };
   },
-  data(){
-    return{
-      Instytut : null,
-    }
-  },
-  computed:{
-    days(){
+  computed: {
+    days() {
       return this.$store.state.Dates;
     },
-    
-  getInstytutById(){
-    return  this.$store.getters.getInstytutById(this.Instytut);
-  }
+
+    getInstytutById() {
+      return this.$store.getters.getInstytutById(this.Instytut);
+    },
   },
- 
-  };
+};
 </script>
 <style  lang="scss" scoped>
 #calendar{
@@ -177,47 +177,42 @@ console.log("2 start");
 }
 
 .weekdays {
-    margin: 0;
-    padding: 10px 0;
-    font-size: 0;
-    border-bottom: 2px solid lightgrey;
-  }
-  
-  .weekdays li {
-    display: inline-block;
-    width: 14.28%;
-    color: var(--my_magenda);
-    text-align: center;
-  }
-  
-  .days {
-    padding: 10px 0;
-    margin: 0;
-    font-size: 0;
-  }
-  
-  .days li {
-    list-style-type: none;
-    display: inline-block;
-    width: calc(100%/7);
-    text-align: center;
-    margin-bottom: 5px;
-    font-size:20px;
-    color: gray;
-    font-weight: bold;
-    transition: color 0.2s, background-color 0.5s, border-radius 1.5s;
+  margin: 0;
+  padding: 10px 0;
+  font-size: 0;
+  border-bottom: 2px solid lightgrey;
+}
 
-    
-  }
-  
-  .days .active_cal {
-    background-color: var(--my_magenda);
-    color: white;
-    transition: color 0.2s, background-color 0.5s, border-radius 0.2s;
+.weekdays li {
+  display: inline-block;
+  width: 14.28%;
+  color: var(--my_magenda);
+  text-align: center;
+}
 
-  }
-  
+.days {
+  padding: 10px 0;
+  margin: 0;
+  font-size: 0;
+}
 
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: calc(100% / 7);
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: gray;
+  font-weight: bold;
+  transition: color 0.2s, background-color 0.5s, border-radius 1.5s;
+}
+
+.days .active_cal {
+  background-color: var(--my_magenda);
+  color: white;
+  transition: color 0.2s, background-color 0.5s, border-radius 0.2s;
+}
 
   .page_terminarz{
     margin-top: 0px;
@@ -226,7 +221,6 @@ console.log("2 start");
     height: 100%;
     padding-left: 0;//30px;
     padding-right: 0;//30px;
-
 }
 
   .calendar_container{
@@ -234,125 +228,117 @@ console.log("2 start");
     padding-right: 30px;
   }
 
-  .calendar_column {
-    float: left;
-    
-  }
-  .calendar_one{
-    box-shadow: 0px 0px 7px;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  .calendar_text{
-    padding: 10px;
-    text-align: center;
-  }
-  .calendar_miesiac{
-    background-color: var(--my_magenda); 
-    color: white;
-    border-radius: 4px;
-  }
-
-  #instytut_select{
-      border-radius: 20px;
-      //border-color: var(--my_orange);
-      //border-width: medium;
-      border: 2px solid var(--my_orange);
-      padding: 10px;
-      font-style: italic;
-      font-weight:medium;
-      color: #555;
-      font-size:1em;
-      font-weight:600;
-
-  }
-
-
-
-@media only screen and (min-width: 1050px) {
-    .calendar_column {
-        padding: 50px;
-      }
+.calendar_column {
+  float: left;
+}
+.calendar_one {
+  box-shadow: 0px 0px 7px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.calendar_text {
+  padding: 10px;
+  text-align: center;
+}
+.calendar_miesiac {
+  background-color: var(--my_magenda);
+  color: white;
+  border-radius: 4px;
 }
 
+#instytut_select {
+  border-radius: 20px;
+  //border-color: var(--my_orange);
+  //border-width: medium;
+  border: 2px solid var(--my_orange);
+  padding: 10px;
+  font-style: italic;
+  font-weight: medium;
+  color: #555;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 1050px) {
+  .calendar_column {
+    padding: 50px;
+  }
+}
 
 @media only screen and (max-width: 1049px) {
-    .calendar_column {
-        padding: 5px;
-      }
+  .calendar_column {
+    padding: 5px;
+  }
 }
 
 @media only screen and (min-width: 660px) {
-    .background_bar_calendar{
-        font-size: 4vw;
-    }
+  .background_bar_calendar {
+    font-size: 4vw;
+  }
 
-    .calendar_column {
-        width: 50%;
-        padding-top: 50px;
-      }
+  .calendar_column {
+    width: 50%;
+    padding-top: 50px;
+  }
 
-    .calendar_column li{
-        font-size: 2.5vw;
-    }
-    .calendar_text{
-        font-size: 2vw;
-    }
+  .calendar_column li {
+    font-size: 2.5vw;
+  }
+  .calendar_text {
+    font-size: 2vw;
+  }
 
-    #instytut_select{
-        width: 45vw;
-    }
+  #instytut_select {
+    width: 45vw;
+  }
 
-    .days .active_cal_only {
-        border-radius: 40%;
-      }
-    
-      .days .active_cal_start {
-        border-radius: 40% 0px 0px 40%;
-      }
-    
-      .days .active_cal_end {
-        border-radius: 0 40% 40% 0;
-    
-      }
+  .days .active_cal_only {
+    border-radius: 40%;
+  }
+
+  .days .active_cal_start {
+    border-radius: 40% 0px 0px 40%;
+  }
+
+  .days .active_cal_end {
+    border-radius: 0 40% 40% 0;
+  }
 }
 
 @media only screen and (max-width: 659px) {
-    .background_bar_calendar{
-        font-size: 25px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .background_bar_calendar {
+    font-size: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-    .calendar_column {
-        width: 100%;
-        padding-top: 10px;
-      }
+  .calendar_column {
+    width: 100%;
+    padding-top: 10px;
+  }
 
-    .calendar_column li{
-        font-size: 2.5vw;
-    }
+  .calendar_column li {
+    font-size: 2.5vw;
+  }
 
-    .calendar_text{
-        font-size: 18px;
-    }
+  .calendar_text {
+    font-size: 18px;
+  }
 
-    #instytut_select{
-        width: 200px;
-    }
+  #instytut_select {
+    width: 200px;
+  }
 
-    .days .active_cal_only {
-        border-radius: 10px;
-      }
-    
-      .days .active_cal_start {
-        border-radius: 10px 0px 0px 10px;
-      }
-    
-      .days .active_cal_end {
-        border-radius: 0 10px 10px 0;
-    
-      }
+  .days .active_cal_only {
+    border-radius: 10px;
+  }
+
+  .days .active_cal_start {
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .days .active_cal_end {
+    border-radius: 0 10px 10px 0;
+  }
 }
-
 </style>
