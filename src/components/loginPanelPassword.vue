@@ -30,7 +30,7 @@
 
         </form>
         
-        <div id="new_pwd"><router-link to="" class="new_pwd_link">ustaw nowe hasło</router-link> </div>
+        <div id="new_pwd"><router-link to="" class="new_pwd_link textRoboto">ustaw nowe hasło</router-link> </div>
    </div>
 </template>
 
@@ -66,19 +66,12 @@ export default {
       })
       .then(resp => {
         this.token = resp.data.token;
-        localStorage.setItem('JWT_TOKEN', resp.data.token);
-        localStorage.setItem('REFRESH_TOKEN', resp.data.token);
-
-        this.$store.dispatch('loginUser', {username: this.username});
-
+        this.$store.dispatch('loginUser', {'username': this.username, 'token': resp.data.token});
+        this.$router.push('/UserPage');
 
       })
       .catch(() => {
-        localStorage.removeItem('JWT_TOKEN');  
-        localStorage.removeItem('REFRESH_TOKEN');  
-
         this.error=true;
-
       })
       .then(() =>{
         this.loading = false;
@@ -181,6 +174,11 @@ button div{
 
 .new_pwd_link {
   font-style: italic;
+  font-weight: bold;
+  color: gray;
+}
+
+.new_pwd_link:hover{
   color: black;
 }
 

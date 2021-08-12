@@ -4,7 +4,7 @@
         
             <router-link to="/UserPage">UserPage</router-link>
 
-    <Header nakladka_irss />
+    <Header only_irss />
     
     <login-panel/>
     
@@ -31,7 +31,7 @@ import calendar from '@/components/calendar.vue';
 import faq from '@/components/faq.vue';
 import Footer from '@/components/Footer.vue';
 //import calendarPart from '@/components/calendarPart.vue';
-import Calendar from '@/components/calendar.vue';
+//import Calendar from '@/components/calendar.vue';
 export default {
   name: "mainPage",
   components: {
@@ -41,8 +41,13 @@ export default {
     faq,
     Footer,
   //  calendarPart,
-    Calendar
+    //Calendar
   },
+  created: function () {
+    if(this.$store.getters.isLoggedIn){
+        this.$router.push('/UserPage');
+    }
+  }
 };
 </script>
 <style lang="scss">

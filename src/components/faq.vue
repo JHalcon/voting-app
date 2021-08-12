@@ -29,7 +29,8 @@
                     </div>
                     
                     <img src="../assets/images/faq.svg" alt="Element dekoracyjny" class="faq_img">
-                    <a href="#home"><img src="../assets/images/arrow.svg" alt="Przycisk powrotu na stronę startową" class="arrow_img"></a>
+
+                    <a v-show="$route.name !== 'faq'" href="#home_section"><img src="../assets/images/arrow.svg" alt="Przycisk powrotu na stronę startową" class="arrow_img"></a>
 
                 </div>
             
@@ -45,15 +46,8 @@ export default {
     }
 }
 </script>
-<style lang="scss" >
-*{
-font-weight: 400;
-line-height: 1.5;
-}
-///////////////
-.c1 div.collapsible{
-    // background-color:red;
-}
+<style lang="scss" scoped>
+
 .background_bar{
     background-color: var(--my_blue); /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
@@ -64,13 +58,9 @@ line-height: 1.5;
     padding-bottom: 10px;
 
 }
-p{
 
-margin-top: 0;
-margin-bottom: 1rem;
-}
 .page{
-    margin-top:20px;
+    //margin-top:20px;
     position: relative; 
     width: 100%; 
     height: 100%;
@@ -94,59 +84,11 @@ margin-bottom: 1rem;
 
 }
 
-.collapsible {
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    border-radius: 15px;
 
-}
 
-.collapsible:before {
-    content: '\25BC';
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-  }
-  
-  .active:before {
-    content: "\25B2";
 
-  }
 
-  .content {
-    padding: 0 28px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-  //  background-color: #f1f1f1;
-    margin: 0px 10px 0px;
-    border-radius: 0 0 10px 10px;
-  }
 
-  .content > p {
-      padding: 20px;
-  }
-
-   .collapsible.active {
-    color: white;
-}
-
-  .c1.active {
-    background-color: var(--my_magenda);}
-  .c1 div.content{
-   background-color: var(--my_magenda_light);}
-   //var(--my_magenda_light);}
-  .c2.active {
-    background-color: var(--my_orange);}
-  .c2 div.content{
-   background-color: var(--my_orange_light);}
-  .c3.active {
-    background-color: var(--my_blue); }
-  .c3 div.content{
-  background-color: var(--my_blue_light);}
 
     
 @media only screen and (min-width: 860px) {
@@ -172,28 +114,7 @@ margin-bottom: 1rem;
         z-index: 1;
     }
 
-    .faq .collapsible {
-        font-size: 2.3vw;
-    }
-  .faq .content{
-        font-size: 1.5vw;
-    }
 
-    .collapsible:hover {
-        color: white;
-    }
-     .collapsible.c1:hover {
-        background-color: var(--my_magenda);}
-      .c1.content{
-       background-color: var(--my_magenda_light);}
-    .collapsible.c2:hover {
-        background-color: var(--my_orange);}
-      .c2.content{
-       background-color: var(--my_orange_light);}
-      .collapsible.c3:hover {
-        background-color: var(--my_blue); }
-      .c3.content{
-      background-color: var(--my_blue_light);}
       
 }
 
@@ -222,9 +143,7 @@ margin-bottom: 1rem;
         z-index: 1;
     }
 
-    .faq .collapsible{
-        font-size: 18px;
-    }
+
   /*  .faq .content{
         font-size: 16px;
     }*/

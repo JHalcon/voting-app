@@ -1,6 +1,7 @@
 <template>
 <div id="home">
-        
+
+     <!--   
     <div v-if="this.$store.getters.isLoggedIn">
         <HeaderFL/>
             
@@ -9,7 +10,7 @@
         </div>
     </div>
     
-    <div v-else>
+    <div v-else> -->
         <Header />
         <LoginPanelPassword/>
         <img src="../assets/images/orange.svg" alt="Element dekoracyjny" class="orange_img">
@@ -19,6 +20,7 @@
         <img src="../assets/images/3students_2.svg" alt="Element dekoracyjny" class="students_2_img">
         <img src="../assets/images//studentlaptop.svg" alt="Element dekoracyjny" class="studentlaptop_img">
         <img src="../assets/images/studentlaptop2.svg" alt="Element dekoracyjny" class="studentlaptop2_img">
+    <div>
     </div>
     
     <Footer/>
@@ -28,10 +30,10 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import HeaderFL from "@/components/HeaderForLogged.vue";
+//import HeaderFL from "@/components/HeaderForLogged.vue";
 import LoginPanelPassword from '../components/loginPanelPassword.vue';
 import Footer from '@/components/Footer.vue';
-import NoVotes from '@/components/NoVotes.vue';
+//import NoVotes from '@/components/NoVotes.vue';
 
 
 export default {
@@ -39,11 +41,16 @@ export default {
   props:["haveVotes"],
   components: {
     Header,
-    HeaderFL,
+    //HeaderFL,
     LoginPanelPassword,
-    NoVotes,
+    //NoVotes,
     Footer,
   },
+  created: function () {
+    if(this.$store.getters.isLoggedIn){
+        this.$router.push('/UserPage');
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -55,6 +62,7 @@ export default {
 	position: relative;
 	margin: 0;
 	padding: 0;
+    
 }
 
 #home section {

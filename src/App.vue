@@ -15,10 +15,15 @@
     box-sizing: border-box;
 }
 *{
-  	margin: 0;
+  margin: 0;
 	padding: 0;
   border: none;
   box-sizing: border-box;
+  
+
+  font-weight: 400;
+  line-height: 1.5;
+
 }
   
 body, html {
@@ -33,7 +38,7 @@ body, html {
 
 #app{
   width:100%;
-  height:100%;
+  height:100%; //ej rozjeżdza mi się main jak tu dam min-height
 }
 .scroll-container {
 	width: 100%;

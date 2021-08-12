@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+//import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -50,7 +50,8 @@ export default new Vuex.Store({
      },
     ],
   currentUser: {},
-
+  is_irss: false, //problem powoduje plugin, ktory zapamietuje ustawienie tego state
+  login_route_history: '/',
 /*
 
     var geografii                           = ;
@@ -86,16 +87,17 @@ var sztuki_mediow                       = [[29,11], [30,11]];
 
     LOGOUT_USER(state){
       state.currentUser = {}
+      
+      localStorage.removeItem('JWT_TOKEN');  
+      localStorage.removeItem('REFRESH_TOKEN'); 
+
     },
-    SET_CURRENT_USER(state, username){
+    SET_CURRENT_USER(state, payload){
+      state.currentUser = payload.username;
 
-      //console.log("a: "+username.username);
-      //console.log(username.username);
+      localStorage.setItem('JWT_TOKEN', payload.token);
+      localStorage.setItem('REFRESH_TOKEN', payload.token);
 
-      state.currentUser = username;
-
-      //console.log("b: "+state.currentUser.username);
-      //console.log(state.currentUser.username);
 
     },
 
@@ -106,23 +108,35 @@ var sztuki_mediow                       = [[29,11], [30,11]];
     },
 
     isLoggedIn: (state) => {
-  
-      //console.log(state.currentUser.username != undefined);
-      //console.log(state.currentUser.username);
 
-        return (state.currentUser.username != undefined);
+      //getter isLoggedIn nie wykonuje się ponownie, jeśli nie zmieni się state (jak rozumiem), dlatego muszę zachowywać również state.currentUser.username,
+      //a nie tylko localStorage, aby funkcja isLoggedIn wykonała się ponownie i poprawnie wylogowała użytkownika
+
+      
+
+        if(state.currentUser.username != undefined){
+          return true;
+        }
+        if(localStorage.getItem("JWT_TOKEN")){
+          return true;
+        }
+        return true;//false; ***********************************************************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+    },
+
+    is_IRSS: (state) => {
+      return state.is_irss;
     }
-
   },
 
   actions: {
     logoutUser({commit}){
       commit('LOGOUT_USER');
     },
-    loginUser({commit}, username){
-      commit('SET_CURRENT_USER', username);
+    loginUser({commit}, payload){
+      commit('SET_CURRENT_USER', payload);
     }
   },
   modules: {},
-  plugins: [createPersistedState()]
+  //plugins: [createPersistedState()] //todo del
 });

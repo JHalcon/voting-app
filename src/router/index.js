@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import mainPage from "../views/mainPage.vue";
 import UserPage from "../views/UserPage.vue";
 import Home from "../views/Home.vue";
-import about from "../views/About.vue";
+import faqPage from "../views/faqPage.vue";
+import calendarPage from "../views/calendarPage.vue";
 
 
 Vue.use(VueRouter);
@@ -25,11 +26,16 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "about",
-    component: about,
+    path: "/faq",
+    name: "faq",
+    component: faqPage,
   },
-  
+  {
+    path: "/calendar",
+    name: "calendar",
+    component: calendarPage,
+  },
+
 ];
 
 const router = new VueRouter({
