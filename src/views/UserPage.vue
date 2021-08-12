@@ -24,6 +24,15 @@ Footer,
 HeaderFL,
 NoVotes,
   },
+  created: function () {
+    if(!this.$store.getters.isLoggedIn){
+
+      if(this.$store.state.is_irss)
+        this.$router.push('/');
+      else
+        this.$router.push('/Home');
+    }
+  }
 };
 </script>
 <style lang="scss">

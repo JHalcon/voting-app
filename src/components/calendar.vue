@@ -2,11 +2,12 @@
  <section id="calendar">
                 <div class="page_terminarz textMontserrat" >
 
-                    <div class="background_bar_calendar ">
+                    <div class="background_bar_calendar " :class="{ 'bar_fullsite' : fullsite, 'bar_component' : !fullsite }">
                         <span>TERMINARZ GŁOSOWAŃ</span>
                     </div>
                     <hr class="solid">
 
+                    <div class="calendar_container">
                     <div class="calendar_text">
                       <span class="my_orange">Sprawdź, kiedy odbywają się wybory w Twoim instytucie!</span>
                       <br>
@@ -49,7 +50,7 @@
                      <div class="calendar_column">
                         <calendarPart name="Listopad" v-bind:id="11" v-bind:numberOfDays="30" v-bind:blankDays="0"/>
                        </div>
-                       
+                       </div>
                 </div>
             </section>
 
@@ -65,6 +66,7 @@ export default {
   components: {
     calendarPart,
   },
+  props: {fullsite: Boolean},
   methods:{
     ICal(){
       console.log("polhg");
@@ -157,16 +159,21 @@ console.log("2 start");
     box-sizing: border-box;
     margin-bottom: 100px;
     min-height: 700px;
-
 }
 
 .background_bar_calendar{
-    _background-color: var(--my_blue); /* For browsers that do not support gradients */
-    _background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light));
-    _color: white;
-    color: var(--my_blue);
     text-align: center;
     padding-top: 10px;
+}
+
+.bar_fullsite{
+  background-color: var(--my_blue); /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
+  color: white;
+} 
+
+.bar_component{
+  color: var(--my_blue);
 }
 
 .weekdays {
@@ -213,14 +220,19 @@ console.log("2 start");
 
 
   .page_terminarz{
-    margin-top:20px;
-    position: relative; 
+    margin-top: 0px;
+    position: absolute; //relative; 
     width: 100%; 
     height: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 0;//30px;
+    padding-right: 0;//30px;
 
 }
+
+  .calendar_container{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 
   .calendar_column {
     float: left;

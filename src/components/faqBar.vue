@@ -1,7 +1,7 @@
 <template>
 <div > 
     <!--class="collapsible c1 my_magenda"-->
-    <div  v-bind="$attrs" v-on:click="showAnswer" :class="class1" >{{question}}</div>
+    <div  v-bind="$attrs" v-on:click="showAnswer" :class="class2" >{{question}}</div>
     <div class="content"><p >{{answer}}</p>
     </div>
     <br>
@@ -22,30 +22,145 @@ export default {
     data(){
         return{
             isActive:false,
-            class2 : "",
+            class2 : this.class1,
         }
     },
     methods:{
         showAnswer(){
             
-            console.log(this.class2);
             let c = event.target.nextElementSibling;
-            console.log(c);
             c.style.height = "100px";
+
             if (c.style.maxHeight){
-                console.log("jest aktywne")
-            c.style.maxHeight = null;
-            this.class1 = this.class2;
-        } else {
-            this.class2 = this.class1;
-             this.class1 += " active";
-            c.style.maxHeight = c.scrollHeight + "px";
-        } 
+                // zwijanie odpowiedzi
+
+                c.style.maxHeight = null;
+                
+                //to miejsce poprawić
+                this.class2 = this.class1;
+
+
+            } else {
+                // wyświetlanie odpowiedzi
+
+                //to miejsce porpawić
+                this.class2 += " active";
+                c.style.maxHeight = c.scrollHeight + "px";
+            } 
         }
     }
 }
 </script>
 <style lang="scss" scoped>
 
+p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    border-radius: 15px;
+
+    backdrop-filter: brightness(265%);
+
+    border: 1px solid;
+
+}
+
+
+.collapsible:before {
+    content: '\25BC';
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:before {
+    content: "\25B2";
+
+  }
+
+  .content {
+    padding: 0 28px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  //  background-color: #f1f1f1;
+    margin: 0px 10px 0px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .content > p {
+      padding: 20px;
+  }
+
+   .collapsible.active {
+        color: white;
+    }
+
+  .c1.active {
+    background-color: var(--my_magenda);
+    border-color: var(--my_magenda); }
+  .c1 div.content{
+    background-color: var(--my_magenda_light);}
+  .c2.active {
+    background-color: var(--my_orange);
+    border-color: var(--my_orange); }
+  .c2 div.content{
+    background-color: var(--my_orange_light);}
+  .c3.active {
+    background-color: var(--my_blue);
+    border-color: var(--my_blue); }
+  .c3 div.content{
+    background-color: var(--my_blue_light);}
+
+    
+@media only screen and (min-width: 860px) {
+  
+
+    .faq .collapsible {
+        font-size: 2.3vw;
+    }
+  .faq .content{
+        font-size: 1.5vw;
+    }
+
+    .collapsible:hover {
+        color: white;
+    }
+
+    .collapsible.c1:hover {
+        background-color: var(--my_magenda);
+        border-color: var(--my_magenda); }
+    .c1.content{
+        background-color: var(--my_magenda_light);}
+    .collapsible.c2:hover {
+        background-color: var(--my_orange);
+        border-color: var(--my_orange); }
+    .c2.content{
+        background-color: var(--my_orange_light);}
+    .collapsible.c3:hover {
+        background-color: var(--my_blue); 
+        border-color: var(--my_blue); }
+    .c3.content{
+        background-color: var(--my_blue_light);}
+      
+}
+
+@media only screen and (max-width: 859px) {
+
+    .faq .collapsible{
+        font-size: 18px;
+    }
+  /*  .faq .content{
+        font-size: 16px;
+    }*/
+
+}
 
 </style>

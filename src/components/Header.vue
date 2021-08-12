@@ -1,11 +1,12 @@
 <template>
 
                 <div id="header_default">
+
                     <div id="logo"><a href="">
                         <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" class="logo_img"></a>
                         </div>
                     
-                    <div v-if="nakladka_irss" class="text_header"> 
+                    <div v-if="this.only_irss" class="text_header"> 
                         <span id="linijka_1" class="textMontserrat my_blue wybory_do">WYBORY DO<br></span>
                         <span id="linijka_2" class="textMontserrat my_magenda">INSTYTUTOWYCH RAD<br></span>
                         <span id="linijka_3" class="textMontserrat my_orange">SAMORZĄDU STUDENTÓW</span>
@@ -16,7 +17,7 @@
                         <span id="linijka_4" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
                     </div>
                    
-                    <ul v-if="nakladka_irss" id="icons_navbar">
+                    <ul v-if="this.only_irss" id="icons_navbar">
                         <li><a href="#calendar">
                             <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             </a>
@@ -40,9 +41,8 @@ export default {
   name: "Header",
   components: {
   },
-  props:{
-      nakladka_irss: Boolean,
-   },
+  props: {'only_irss': Boolean},
+  
 };
 </script>
 <style lang="scss">
