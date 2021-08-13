@@ -172,6 +172,7 @@ export default {
 .background_bar_calendar{
     text-align: center;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .bar_fullsite{
