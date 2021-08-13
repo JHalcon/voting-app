@@ -120,7 +120,7 @@ var sztuki_mediow                       = [[29,11], [30,11]];
         if(localStorage.getItem("JWT_TOKEN")){
           return true;
         }
-        return true;//false; ***********************************************************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return false;
         
     },
 

@@ -60,8 +60,8 @@ export default {
       this.loading = true;
       this.error = false;
 
-      axios.post('https://dev.api.up.kornel.dev/api/account/login/', {
-        username: this.username,
+      axios.post('https://dev.api.up.kornel.dev/auth/login/login/', {
+        email: this.username,
         password: this.password,
       })
       .then(resp => {
