@@ -23,9 +23,9 @@
                             <img id="icon_why" class="icon cursor_pointer" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
                             </a>
                             </li>
-                        <li><a href="/profile">
+                        <li><div >
                             <img id="icon_profile" class="icon cursor_pointer" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
-                            </a>
+                            </div>
                             </li>
                         <li><div @click="logout">
                             <img id="icon_logout" class="icon cursor_pointer" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
@@ -42,18 +42,43 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
+
 export default {
   name: "HeaderFL",
   components: {
   },
   methods:{
-      logout(){
-            this.$store.dispatch('logoutUser');
 
-            if(this.$store.getters.is_IRSS)
-                this.$router.push('/');
-            else
-                this.$router.push('/Home');
+
+
+      logout(){
+
+          const token = localStorage.getItem('JWT_TOKEN');
+          console.log(token);
+
+                axios.post('https://dev.api.up.kornel.dev/auth/logout/logout/',{
+                    email: this.username,
+                    password: this.password,
+                }, {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
+                })
+  
+                .then(() => {
+                        
+                    this.$store.dispatch('logoutUser');
+
+                    if(this.$store.getters.is_IRSS)
+                        this.$router.push('/');
+                    else
+                        this.$router.push('/Home');
+
+                })
+            
       },
       
       click_logo(){
