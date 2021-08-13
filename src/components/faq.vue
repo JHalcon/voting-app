@@ -39,7 +39,7 @@
         alt="Element dekoracyjny"
         class="faq_img"
       />
-      <a href="#home" v-show="$route.name !== 'faq'"
+      <a href="#home_section" v-show="$route.name !== 'faq'"
         ><img
           src="../assets/images/arrow.svg"
           alt="Przycisk powrotu na stronę startową"
@@ -67,6 +67,7 @@ export default {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 .page{
     //margin-top:20px;

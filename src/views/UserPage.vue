@@ -7,12 +7,10 @@
       <Votes v-if="haveVotes" />
     </div>
 
-    <Footer />
   </div>
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue';
 import HeaderFL from '@/components/HeaderForLogged.vue';
 import NoVotes from '@/components/NoVotes.vue';
 import Votes from '@/components/Votes.vue';
@@ -24,7 +22,6 @@ export default {
     };
   },
   components: {
-    Footer,
     HeaderFL,
     NoVotes,
     Votes,
@@ -43,9 +40,9 @@ export default {
 <style lang="scss">
 #UP {
   overflow-y: hidden;
-  position: absolute;
-  min-height: 100%;
-  width: 100%;
+  //position: absolute; //wyrzuciłem to wszystko, ponieważ w app.vue jest content-wrap
+  //min-height: 100%;
+  //width: 100%;
 }
 .mainInner {
   min-height: 300px;

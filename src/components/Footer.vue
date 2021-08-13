@@ -22,7 +22,7 @@ export default {
   components: {},
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #footer {
   //min-height: 60px;
   //position: absolute;
@@ -30,8 +30,14 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+
+  z-index: 3;
+    background-color:white;
+
   //////////
   padding: 15px;
+  //margin-top: 15px;
+  //padding: 0px 15px 15px;
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
@@ -43,6 +49,7 @@ footer {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   color: gray;
+
 }
 footer a {
   color: gray;

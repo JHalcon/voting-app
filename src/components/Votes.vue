@@ -22,6 +22,13 @@ export default {
         { voteText: "GŁOSOWANIE 2" },
         { voteText: "GŁOSOWANIE 2" },
         { voteText: "GŁOSOWANIE 2" },
+        { voteText: "GŁOSOWANIE GŁOSOWANIE LOL HAHA 1" },
+        { voteText: "GŁOSOWANIE 2" },
+        { voteText: "GŁOSOWANIE 2" },
+        { voteText: "GŁOSOWANIE 2" },
+        { voteText: "GŁOSOWANIE 2" },
+        { voteText: "GŁOSOWANIE 2" },
+
       ],
     };
   },
@@ -34,20 +41,23 @@ export default {
 li {
   list-style-type: none;
 }
-li.votingListItem:nth-child(3n) > div {
+li.votingListItem:nth-child(3n+3) > div { //zamiast 3n, to 3n+3
   background-color: var(--my_magenda);
 }
-li.votingListItem:nth-child(2n) > div {
+li.votingListItem:nth-child(3n+2) > div { //zamiast 2n, to 3n+2
   background-color: var(--my_blue);
 }
-li.votingListItem:nth-child(3n + 1) > div {
+li.votingListItem:nth-child(3n + 1) > div { //3n+1 zostawiłem xd
   background-color: var(--my_orange);
 }
-li.votingListItem:nth-child(3n) > div:hover {
+li.votingListItem:nth-child(3n+3) > div:hover { //zamiast 3n, to 3n+3
   background-color: var(--my_magenda_dark);
 }
-li.votingListItem:nth-child(2n) > div:hover {
+li.votingListItem:nth-child(3n+2) > div:hover { //zamiast 2n, to 3n+2
   background-color: var(--my_blue_dark);
+}
+li.votingListItem:nth-child(3n+1) > div:hover { //to 3n+1 dodałem, bo nie było
+  background-color: var(--my_orange_dark);
 }
 li::marker {
   display: none;

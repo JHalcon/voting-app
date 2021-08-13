@@ -1,13 +1,5 @@
 <template>
-  <div id="header_default">
-    <div id="logo">
-      <a href="">
-        <img
-          src="../assets/images/logo_samorzad.png"
-          alt="Logo Samorządu Studentów"
-          class="logo_img"
-      /></a>
-    </div>
+
 
                 <div id="header_default">
 
@@ -42,44 +34,18 @@
 
                     
                 </div>
-
-    <ul v-if="nakladka_irss" id="icons_navbar">
-      <li>
-        <a href="#calendar">
-          <img
-            id="icon_calendar"
-            class="icon"
-            src="../assets/images/date_range_icon.svg"
-            alt="Przycisk przejścia do terminarza głosowań"
-          />
-        </a>
-      </li>
-      <li>
-        <a href="#faq">
-          <img
-            id="icon_why"
-            class="icon"
-            src="../assets/images/questionmark.svg"
-            alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami"
-          />
-        </a>
-      </li>
-    </ul>
-  </div>
 </template>
 
 <script>
 export default {
   name: "Header",
   components: {},
-  props: {
-    nakladka_irss: Boolean,
-  },
+
   props: {'only_irss': Boolean},
   
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #header_default{
     position: relative;
     background-color: white;

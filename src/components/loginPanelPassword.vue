@@ -90,7 +90,7 @@ export default {
     border-radius: 40px;
     text-align: center;
     position: relative; 
-    z-index: 3;
+    z-index: 4;
 }
 
 #main_frame_password .login_txt{
@@ -192,6 +192,7 @@ button div{
       border-width: 6px;
       padding:60px;
       margin: auto;
+      margin-top: 50px;
       width: 800px;
     }
 
