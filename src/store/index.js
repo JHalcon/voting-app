@@ -72,7 +72,7 @@ export default new Vuex.Store({
      },
     ],
   currentUser: {},
-  is_irss: false, //problem powoduje plugin, ktory zapamietuje ustawienie tego state
+  is_irss: true, 
   login_route_history: '/',
 /*
 
@@ -120,8 +120,18 @@ var sztuki_mediow                       = [[29,11], [30,11]];
       localStorage.setItem('JWT_TOKEN', payload.token);
       localStorage.setItem('REFRESH_TOKEN', payload.token);
 
-
     },
+    /*
+    SET_CURRENT_USER_NAME(state, payload){
+      state.first_name = payload.first_name;
+      state.last_name = payload.last_name;
+
+      console.log("a:");
+      console.log(payload.first_name);
+      console.log("b:");
+      console.log(state.first_name);
+    },
+    */
 
   },
   getters:{
@@ -132,7 +142,7 @@ var sztuki_mediow                       = [[29,11], [30,11]];
     isLoggedIn: (state) => {
 
       //getter isLoggedIn nie wykonuje się ponownie, jeśli nie zmieni się state (jak rozumiem), dlatego muszę zachowywać również state.currentUser.username,
-      //a nie tylko localStorage, aby funkcja isLoggedIn wykonała się ponownie i poprawnie wylogowała użytkownika
+      //a nie tylko localStorage, aby funkcja isLoggedIn wykonała się ponownie i poprawnie wylogowała użytkownika. Oraz aby po zalogowaniu od razu poprawnie przekierowala stronę
 
       
 
@@ -148,7 +158,24 @@ var sztuki_mediow                       = [[29,11], [30,11]];
 
     is_IRSS: (state) => {
       return state.is_irss;
-    }
+    },
+
+    getMainPageLink: (state) => {
+      if(state.is_irss)
+        return '/';
+      else
+        return '/Home';
+    },
+    /*
+    getUserName: (state) =>{
+      console.log(state.first_name);
+
+      if(state.first_name != null && state.last_name != null){        
+        return state.first_name +" " + state.last_name;
+      }
+        return "Nie udało się pobrać imienia i nazwiska";
+    },
+    */
   },
 
   actions: {
@@ -157,7 +184,10 @@ var sztuki_mediow                       = [[29,11], [30,11]];
     },
     loginUser({commit}, payload){
       commit('SET_CURRENT_USER', payload);
-    }
+    },
+    //setUserName({commit}, payload){
+    //  commit('SET_CURRENT_USER_NAME', payload);
+    //},
   },
   modules: {},
   //plugins: [createPersistedState()] //todo del

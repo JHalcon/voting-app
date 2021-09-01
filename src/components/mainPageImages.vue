@@ -25,8 +25,14 @@ export default {
     bottom: 0rem;
 }
 
-@media only screen and (min-width: 860px) {
+.main_page_images{
+    display: none;
+}
 
+@media only screen and (orientation: landscape) and (min-height: 600px) and (max-aspect-ratio: 23/9){ //(min-width: 860px) and (orientation: landscape) {
+    .main_page_images{
+        display: block;
+    }
 
     .orange2_img{
         display: none;
@@ -46,6 +52,7 @@ export default {
     .orange_img{
         position: absolute;
         width: 60%;
+        _height: 50%;
         right: 0px;
         z-index: 1;
     }
@@ -57,6 +64,10 @@ export default {
     .studentlaptop_img{
         position: absolute;
         width: 25%;
+        //max-height: 48%;
+
+
+
         right: 0px;
         //bottom: -2px;
         transform: scaleX(-1);
@@ -64,11 +75,17 @@ export default {
         z-index: 1;
     }
 
+    img{
+        _max-height: 60vh;
+    }
+
     
 
 }
-@media only screen and (max-width: 859px) {
-
+@media only screen and (orientation: portrait){//(max-width: 859px) {
+    .main_page_images{
+        display: block;
+    }
     .blue_img{
         display: none;
     }

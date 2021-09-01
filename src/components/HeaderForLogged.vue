@@ -1,9 +1,9 @@
 <template>
             <div id="header_for_logged">
                 <div class="header_element">
-                    <div id="logo" @click="click_logo" class="cursor_pointer">
+                    <a href="/userpage" id="logo" class="cursor_pointer">
                         <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" id="logo_img">
-                        </div>
+                        </a>
                     
                     <div class="text_header"> 
                         <span id="linijka_1" class="textMontserrat my_blue">SYSTEM WYBORCZY<br></span>
@@ -15,21 +15,40 @@
                     
                    
                     <ul id="icons_navbar">
-                        <li><a href="/calendar">
+                        <li class="tooltip">
+                            <a href="/userpage">
+                            <img id="icon_home" class="icon cursor_pointer" src="../assets/images/icon_home.svg" alt="Przycisk strony głównej" >
+                                <div v-if="this.onlyOneVote">
+                                    <div v-if="this.$route.name == 'voteCard'" class="icon_underline"></div>
+                                </div>
+                                <div v-else>
+                                    <div v-if="this.$route.name == 'UserPage'" class="icon_underline"></div>
+                                </div>
+                            </a>
+                            <span class="tooltiptext textRoboto">Strona główna</span>
+                            </li>
+                        <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/calendar">
                             <img id="icon_calendar" class="icon cursor_pointer" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
+                            <div v-if="this.$route.name == 'calendar'" class="icon_underline"></div>
                             </a>
+                            <span class="tooltiptext textRoboto">Terminarz głosowań</span>
                             </li>
-                        <li><a href="/faq">
+                        <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/faq">
                             <img id="icon_why" class="icon cursor_pointer" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
+                            <div v-if="this.$route.name == 'faq'" class="icon_underline"></div>
                             </a>
+                            <span class="tooltiptext textRoboto">Najczęściej zadawane pytania</span>
                             </li>
-                        <li><div >
+                        <li class="tooltip"><a href="/usercard">
                             <img id="icon_profile" class="icon cursor_pointer" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
-                            </div>
+                            <div v-if="this.$route.name == 'userCard'" class="icon_underline"></div>
+                            </a>
+                            <span class="tooltiptext textRoboto">Profil</span>
                             </li>
-                        <li><div @click="logout">
+                        <li class="tooltip"><div @click="logout">
                             <img id="icon_logout" class="icon cursor_pointer" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
                             </div>
+                            <span class="tooltiptext textRoboto">Wyloguj</span>
                             </li>
 
                     </ul>
@@ -51,6 +70,7 @@ export default {
   components: {},
   props: {
     nakladka_irss: Boolean,
+    onlyOneVote: Boolean,
   },
   methods:{
 
@@ -68,24 +88,32 @@ export default {
                     }
                 })
   
-                .then(() => {
+                
                         
-                    this.$store.dispatch('logoutUser');
+                this.$store.dispatch('logoutUser');
 
-                    if(this.$store.getters.is_IRSS)
-                        this.$router.push('/');
-                    else
-                        this.$router.push('/Home');
+                if(this.$store.getters.is_IRSS)
+                    this.$router.push('/');
+                else
+                    this.$router.push('/Home');
 
-                })
-            
       },
-      
+
+        refreshWithPropsButton(){
+            console.log(this.$route.params.voteIdProps);
+
+this.$router.go(this.$router.currentRoute)
+//            this.$router.push({name: 'voteCard', params: {voteIdProps: this.$route.params.voteIdProps, onlyOneVote: this.onlyOneVote }});
+
+        }
+
+      /*
       click_logo(){
           if(this.$route.name !== 'UserPage')
             this.$router.push('/UserPage');
             
       },
+      */
       
   }
 };
@@ -112,19 +140,59 @@ export default {
 
 #header_for_logged #logo{
     padding-top: 0px;
-    padding-right: 20px;
     position: relative;
     float: left;
+}
+
+.icon{
+    transition: filter 0.1s;
 }
 
 #header_for_logged .icon:hover{
     filter: brightness(60%);
 }
 
-#header_for_logged .icon{
-    width: 50px;
-    margin-left: 20px;
+.tooltip{
+    position: relative;
+    display: inline-block;
 }
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 130%;
+  left: 50%;
+  margin-left: -50px;
+  
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity:0.7;
+}
+
+
+
 
 #header_for_logged .cursor_pointer{
     cursor: pointer;
@@ -132,6 +200,8 @@ export default {
 
 #header_for_logged .text_header {
     float:left;
+    margin-left: 20px;
+
 }
 
 #header_for_logged .text_header span{
@@ -151,6 +221,12 @@ export default {
     float:left;
 }
 
+.icon_underline{
+    background-color: var(--my_blue);
+    border-radius: 10px;    
+}
+
+
 @media only screen and (min-width: 1500px) {
     #header_for_logged{
         width:1500px;
@@ -164,7 +240,7 @@ export default {
     }
 }
 
-@media only screen and (min-width: 1050px) {
+@media only screen and (min-width: 1090px) {
   
     #header_for_logged .header_element{
         height: 140px;
@@ -192,6 +268,11 @@ export default {
         width: 50px;
         margin-left: 20px;
     }
+    
+    .icon_underline{
+        height: 6px;
+        margin-left: 20px;
+    }
 
     #header_for_logged #icons_navbar{
         margin-right: 20px;
@@ -201,7 +282,7 @@ export default {
     
 }
     
-@media only screen and (min-width:768px) and (max-width: 1049px) {
+@media only screen and (min-width:768px) and (max-width: 1089px) {
 
     #header_for_logged .header_element{
         height: 100px;
@@ -230,6 +311,11 @@ export default {
         margin-left: 10px;
     }
 
+    .icon_underline{
+        height: 5px;
+        margin-left: 10px;
+    }
+
     #header_for_logged #icons_navbar{
         margin-right: 50px;
         margin-top: 30px;
@@ -254,24 +340,20 @@ export default {
     #header_for_logged .header_element{
         height: 50px;
         width: 100%;
+        margin-top: 5px;
     }   
 
     #header_for_logged #logo {
         margin-left: 20px;
-        margin-top: 10px;
     }
     
-    #header_for_logged #logo_img{
-        height: 30px;
-    }
+
 
     #header_for_logged .text_header {
         padding-top: 10px;
     }
 
-    #header_for_logged .text_header span{
-        font-size: 15px;
-    }
+
 
     #header_for_logged #linijka_1, #header_for_logged #linijka_2, #header_for_logged #linijka_3{
         display: none;
@@ -286,6 +368,12 @@ export default {
         margin-left: 10px;
     }
 
+     .icon_underline{
+        height: 3px;
+        margin-left: 10px;
+        
+    }
+
     #header_for_logged #icons_navbar{
         margin-right: 20px;
         margin-top: 13px;
@@ -294,7 +382,38 @@ export default {
     
 }
 
-@media only screen and (max-width: 315px) {
+@media only screen and (min-width: 350px) and (max-width: 767px){
+    #header_for_logged #logo_img{
+        height: 30px;
+    }
+    #header_for_logged #logo {
+        margin-top: 10px;
+    }
+    
+    #header_for_logged .text_header span{
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 349px) {
+    #header_for_logged #linijka_telefon{
+        _display: none;
+        margin-top: 4px;
+        font-size: 12px;
+    }
+    #logo{
+        display:none;
+    }
+
+    #header_for_logged #logo_img{
+        height: 25px;
+    }
+     #header_for_logged #logo {
+        margin-top: 11px;
+    }
+}
+
+@media only screen and (max-width: 266px) {
     #header_for_logged #linijka_telefon{
         display: none;
     }

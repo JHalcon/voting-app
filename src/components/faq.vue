@@ -3,8 +3,8 @@
     <!---- STRONA FAQ ---->
 
     <div class="page textMontserrat">
-      <div class="background_bar">
-        <span>NAJCZĘŚCIEJ ZADAWANE PYTANIA</span>
+      <div :class="{ 'background_bar_fullsite' : fullsite, 'background_bar' : !fullsite }">
+        <span>NAJCZĘŚCIEJ ZADAWANE PYTANIA<span v-if="fullsite">:</span></span>
       </div>
       <br />
       <div class="faq">
@@ -13,24 +13,28 @@
           class="c1"
           question="Do kiedy można oddać swój głos?"
           answer="Głos można oddać od___ do____"
+          v-bind:fullsite=fullsite
         />
         <faqBar
           class1="collapsible c2 my_orange"
           class="c2"
           question="Do kiedy można oddać swój głos?"
           answer="Głos można oddać od___ do____"
+          v-bind:fullsite=fullsite
         />
         <faqBar
           class1="collapsible c3 my_blue"
           class="c3"
           question="Do kiedy można oddać swój głos?"
           answer="Głos można oddać od___ do____"
+          v-bind:fullsite=fullsite
         />
         <faqBar
           class1="collapsible c1 my_magenda"
           class="c1"
           question="Do kiedy można oddać swój głos?"
           answer="Głos można oddać od___ do____"
+          v-bind:fullsite=fullsite
         />
       </div>
 
@@ -55,6 +59,7 @@ export default {
   components: {
     faqBar,
   },
+  props: {fullsite: Boolean},
 };
 </script>
 
@@ -69,6 +74,17 @@ export default {
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+
+.background_bar_fullsite{
+    _background-color: var(--my_blue); /* For browsers that do not support gradients */
+    _background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
+    _color: white;
+    color: var(--my_blue);
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
 .page{
     //margin-top:20px;
     position: relative; 
@@ -91,6 +107,10 @@ export default {
 }
     
 @media only screen and (min-width: 860px) {
+    .background_bar_fullsite{
+        font-size: 2.1vw;
+    }
+
     .background_bar{
         font-size: 4vw;
     }
@@ -102,7 +122,7 @@ export default {
         padding: 40px;
         transform: rotate(5deg);
         z-index: 0;
-        opacity: 80%;
+        opacity: 20%;
     }
     .faq{
         position: relative;
@@ -115,6 +135,12 @@ export default {
 @media only screen and (max-width: 859px) {
     .background_bar{
         font-size: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .background_bar_fullsite{
+        font-size: 18px;
         padding-left: 20px;
         padding-right: 20px;
     }

@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: "voteItem",
   props: ["voteText"],
@@ -12,7 +14,12 @@ export default {
     return {};
   },
   components: {},
+  methods:{
+  }
+
+
 };
+
 </script>
 <style lang="scss" scoped>
 div .Vitem {
@@ -25,6 +32,9 @@ div .Vitem {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+
+  min-height: 100px;
+  border-radius: 10px;
 }
 .voteItemPink {
   background-color: pink;
@@ -45,6 +55,7 @@ div:before {
 }
 p.voteTxt {
   margin: none !important;
+  cursor: pointer;
   font-weight: bold;
   color: white;
   display: flex;

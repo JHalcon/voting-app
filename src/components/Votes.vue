@@ -1,10 +1,10 @@
 <template>
   <div id="Votes">
-    <h3 class="textMontserrat my_blue headerVotes">DOSTĘPNE GŁOSOWANIA</h3>
+    <h3 class="textMontserrat my_blue headerVotes">DOSTĘPNE GŁOSOWANIA:</h3>
     <div class="voteList">
       <ul>
-        <li v-for="v in voteTab" :key="v.id" class="votingListItem">
-          <voteItem :voteText="v.voteText"></voteItem>
+        <li v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" class="votingListItem">
+          <voteItem :voteText="v.name"></voteItem>
         </li>
       </ul>
     </div>
@@ -15,48 +15,51 @@
 import voteItem from "@/components/voteItem.vue";
 export default {
   name: "NoVotes",
+  /*
   data() {
     return {
       voteTab: [
-        { voteText: "GŁOSOWANIE GŁOSOWANIE LOL HAHA 1" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE GŁOSOWANIE LOL HAHA 1" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
-        { voteText: "GŁOSOWANIE 2" },
+        { voteText: "WYBORY DO RADY INSTYTUTU BIOLOGII" },
+        { voteText: "WYBORY DO RADY INSTYTUTU INFORMATYKI" },
+
 
       ],
     };
   },
+  */
+  methods:{
+    goToDeails(voteId){
+      this.$router.push({name: 'voteCard', params: {voteIdProps: voteId }});
+    }
+  },
   components: {
     voteItem,
   },
+  props: {
+    voteList: Array,
+  }
 };
 </script>
 <style lang="scss" scoped>
 li {
   list-style-type: none;
 }
-li.votingListItem:nth-child(3n+3) > div { //zamiast 3n, to 3n+3
+li.votingListItem:nth-child(3n+1) > div { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda);
 }
-li.votingListItem:nth-child(3n+2) > div { //zamiast 2n, to 3n+2
+li.votingListItem:nth-child(3n) > div { //zamiast 2n, to 3n
   background-color: var(--my_blue);
 }
-li.votingListItem:nth-child(3n + 1) > div { //3n+1 zostawiłem xd
+li.votingListItem:nth-child(3n - 1) > div { //3n-1
   background-color: var(--my_orange);
 }
-li.votingListItem:nth-child(3n+3) > div:hover { //zamiast 3n, to 3n+3
+li.votingListItem:nth-child(3n+1) > div:hover { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda_dark);
 }
-li.votingListItem:nth-child(3n+2) > div:hover { //zamiast 2n, to 3n+2
+li.votingListItem:nth-child(3n) > div:hover { //zamiast 2n, to 3n
   background-color: var(--my_blue_dark);
 }
-li.votingListItem:nth-child(3n+1) > div:hover { //to 3n+1 dodałem, bo nie było
+li.votingListItem:nth-child(3n-1) > div:hover { //to 3n-1 dodałem, bo nie było
   background-color: var(--my_orange_dark);
 }
 li::marker {
@@ -69,7 +72,7 @@ li::marker {
   padding: 10px;
   font-family: Roboto;
   font-size: 2rem;
-  width: 70%;
+  width: 83%;
   margin: auto;
   min-height: 300px;
 }
@@ -78,12 +81,14 @@ li::marker {
   justify-content: center;
   width: 100%;
 }
+
 ul {
   width: 90%;
 }
 h3.textMontserrat.my_blue.headerVotes {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 @media only screen and (max-width: 767px) {
@@ -122,6 +127,25 @@ h3.textMontserrat.my_blue.headerVotes {
   }
 }
 @media only screen and (min-width: 1350px) {
+   h3.textMontserrat.my_blue.headerVotes {
+    font-size: 2.7rem;
+  }
+
+
+
+ .votingListItem{
+    padding-left: 20px;
+    padding-right: 20px;
+          transition: padding 0.2s;
+
+  }
+
+  .votingListItem:hover {
+    padding-left: 0px;
+    padding-right: 0px;
+      transition: padding 0.2s;
+
+  }
 }
 
 @media only screen and (max-width: 469px) {

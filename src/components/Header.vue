@@ -3,7 +3,7 @@
 
                 <div id="header_default">
 
-                    <div id="logo"><a href="">
+                    <div id="logo"><a href="/">
                         <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" class="logo_img"></a>
                         </div>
                     
@@ -19,13 +19,15 @@
                     </div>
                    
                     <ul v-if="this.only_irss" id="icons_navbar">
-                        <li><a href="#calendar">
+                        <li class="tooltip"><a href="#calendar">
                             <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             </a>
+                            <span class="tooltiptext textRoboto">Terminarz głosowań</span>
                             </li>
-                        <li><a href="#faq">
+                        <li class="tooltip"><a href="#faq">
                             <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
                             </a>
+                            <span class="tooltiptext textRoboto">Najczęściej zadawane pytania</span>
                             </li>
                     </ul>
 
@@ -48,7 +50,7 @@ export default {
 <style lang="scss" scoped>
 #header_default{
     position: relative;
-    background-color: white;
+    _background-color: white;
     z-index: 10;
     margin:0;
     height:22vh;
@@ -71,6 +73,46 @@ export default {
 }
 #header_default .icon:hover{
     filter: brightness(60%);
+}
+
+
+.tooltip{
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 130%;
+  left: 50%;
+  margin-left: -50px;
+  
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity:0.7;
 }
 
 @media only screen and (min-width: 1320px) {

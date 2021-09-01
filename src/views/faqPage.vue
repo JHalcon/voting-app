@@ -2,7 +2,7 @@
 <div id="faqPage">
 
     <HeaderFL />   
-    <faq/>
+    <faq fullsite/>
 
 </div>
 </template>
@@ -16,6 +16,10 @@ export default {
     HeaderFL,
     faq,
   },
+  created: function () {
+    if(!this.$store.state.is_irss)
+      this.$router.push('/userPage');
+  }
 };
 </script>
 <style lang="scss" scoped>

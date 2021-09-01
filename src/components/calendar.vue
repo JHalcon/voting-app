@@ -2,19 +2,21 @@
  <section id="calendar">
                 <div class="page_terminarz textMontserrat" >
 
-                    <div class="background_bar_calendar " :class="{ 'bar_fullsite' : fullsite, 'bar_component' : !fullsite }">
+                    <div v-if="!fullsite" class="background_bar_calendar " :class="{ 'bar_fullsite' : fullsite, 'bar_component' : !fullsite }">
                         <span>TERMINARZ GŁOSOWAŃ</span>
+                        <hr class="solid">
                     </div>
-                    <hr class="solid">
+                    <div v-if="fullsite" id="margin_under_bar"></div>
 
                     <div class="calendar_container">
                       
                           <div class="calendar_text">
-                            <span class="my_orange">Sprawdź, kiedy odbywają się wybory w Twoim instytucie!</span>
-                            <br>
-                              <span class="my_orange">Instytut </span>
+                            <!--<span id="page_describtion" :class="{ 'my_magenda' : fullsite, 'my_orange' : !fullsite }">Sprawdź, kiedy odbywają się wybory w&nbsp;Twoim instytucie!</span>-->
+                            <span id="page_describtion" :class="{ 'my_magenda' : fullsite, 'my_orange' : !fullsite }">SPRAWDŹ, KIEDY ODBYWAJĄ SIĘ WYBORY W&nbsp;TWOIM INSTYTUCIE!</span>
 
-                              <select id="instytut_select" v-on:change="hg">
+                              <span id="instytut_word" class="my_orange">Instytut </span>
+
+                              <select class="textMontserrat" id="instytut_select" v-on:change="hg">
                                   <option hidden selected>(wybierz)</option>
                                   <option value="0">Biologii</option>
                                   <option value="1">Filologii Angielskiej</option>
@@ -44,15 +46,17 @@
                           </div>
                   
                           <div class="calendar_columns">
-                            <div class="calendar_column">
+                            <div class="calendar_column left_column">
                               
                               <calendarPart name="Październik" v-bind:id="10" v-bind:numberOfDays="31" v-bind:blankDays="4"/>
                             </div>
-                            <div class="calendar_column">
+                            <div class="calendar_column right_column">
                             <calendarPart name="Listopad" v-bind:id="11" v-bind:numberOfDays="30" v-bind:blankDays="0"/>
                             </div>
                           </div>
                       </div>
+                      <div v-if="!fullsite" id="margin_under_bar"></div>
+
                 </div>
             </section>
 
@@ -71,12 +75,12 @@ export default {
   props: {fullsite: Boolean},
   methods:{
     ICal(){
-      console.log("polhg");
-      let instytut = document.getElementById("instytut_select").value;
-      console.log(instytut);
+      //console.log("polhg");
+      //let instytut = document.getElementById("instytut_select").value;
+      //console.log(instytut);
     },
     hg() {
-      console.log("2 start");
+      //console.log("2 start");
 
       //console.log(this.days);
 
@@ -87,21 +91,21 @@ export default {
       var element = this.getInstytutById;
 
       //this.days.forEach(element => {
-      console.log(element.daty[0][0] + " data " + element.daty[0][1]);
+      //console.log(element.daty[0][0] + " data " + element.daty[0][1]);
       var day_start = element.daty[0][0] - 1 + (element.daty[0][1] - 10) * 31;
       var day_end = element.daty[1][0] - 1 + (element.daty[1][1] - 10) * 31;
-      console.log(day_start + " koniec " + day_end);
+      //console.log(day_start + " koniec " + day_end);
 
       var all = document.getElementsByClassName("calendar_day");
-      console.log("dlugoc tab" + all.length);
-      console.log("poczatek" + day_start + "koniec " + day_end);
+      //console.log("dlugoc tab" + all.length);
+      //console.log("poczatek" + day_start + "koniec " + day_end);
       for (let i = 0; i <= 60; i++) {
-        console.log("moje i" + i);
+        //console.log("moje i" + i);
         all[i].classList.remove("active_cal");
         all[i].classList.remove("active_cal_only");
         all[i].classList.remove("active_cal_start");
         all[i].classList.remove("active_cal_end");
-        console.log("1 stop");
+       // console.log("1 stop");
       }
       var all_days = document.getElementsByClassName("calendar_day");
       if (day_start == day_end) {
@@ -159,12 +163,7 @@ export default {
 <style  lang="scss" scoped>
 #calendar{
     box-sizing: border-box;
-    //margin-bottom: 100px;
-    
-    //min-height: 100%;
 
-    //margin-top: 0px;
-    //min-height: 100%;
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -185,31 +184,24 @@ export default {
   color: var(--my_blue);
 }
 
+#margin_under_bar{
+  margin: 20px;
 
-
-  .page_terminarz{
-
-
-
-/*
-    margin-top: 0px;
-    position: absolute; //relative; 
-    width: 100%; 
-    height: 100%;
-    padding-left: 0;//30px;
-    padding-right: 0;//30px;
-
-    */
 }
+  #page_describtion{
+    display: block;
+      margin-bottom: 10px;
+
+  }
+
 
   .calendar_container{
 
-    height: 100%; // TU JEST PROBLEM, CALENDAR_CONTAINER NIE MA WYSOKOSCI CALENDARÓW
-    //albo jednak w calendar column
+    height: 100%; 
 
     padding-left: 30px;
     padding-right: 30px;
-        padding-bottom: 50px;
+    //padding-bottom: 50px;
 
   }
 
@@ -222,28 +214,35 @@ export default {
   text-align: center;
 }
 
-#instytut_select {
-  border-radius: 20px;
-  //border-color: var(--my_orange);
-  //border-width: medium;
-  border: 2px solid var(--my_orange);
-  padding: 10px;
-  font-style: italic;
-  font-weight: medium;
-  color: #555;
-  font-size: 1em;
-  font-weight: 600;
+#instytut_select{
+    cursor: pointer;
+    background-color: white;
+    text-decoration: underline;
+
 }
 
 @media only screen and (min-width: 1050px) {
   .calendar_column {
-    padding: 50px;
+    padding: 25px;
+    padding-top: 50px;
+  }
+  .left_column{
+    padding-left: 50px;
+  }
+  .right_column{
+    padding-right: 50px;
   }
 }
 
 @media only screen and (max-width: 1049px) {
   .calendar_column {
     padding: 5px;
+  }
+}
+
+@media only screen and (min-width: 660px) and (max-width: 1049px){
+  .calendar_column{
+    padding-top: 20px;
   }
 }
 
@@ -258,7 +257,7 @@ export default {
 
   .calendar_column {
     width: 50%;
-    padding-top: 50px;
+    padding-bottom: 40px;
   }
 
  
@@ -280,9 +279,15 @@ export default {
     padding-right: 20px;
   }
 
+  .calendar_columns{
+        padding-bottom: 20px;
+
+  }
+
   .calendar_column {
     width: 100%;
     padding-top: 10px;
+
   }
 
 
@@ -293,7 +298,60 @@ export default {
   #instytut_select {
     width: 200px;
   }
+}
 
+@media only screen and (min-width: 420px){
+
+  
+  #instytut_word{
+
+    border: 2px solid var(--my_orange);
+    padding: 15px 0px 15px 15px;
+    color: #555;
+    font-size: 1em;
+    
+      border-radius: 20px 0 0 20px;
+        border-right-style: none;
+
+    }
+
+  #instytut_select {
+
+    border: 2px solid var(--my_orange);
+    padding: 14px 14px 14px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 1em;
+    
+    border-radius: 0px 20px 20px 0;
+    border-left-style: none;
+
+
+  }
 
 }
+
+@media only screen and (max-width: 419px){
+
+  #instytut_word{
+
+    margin: 25px;
+    color: #555;
+    font-size: 1em;
+  }
+
+  #instytut_select {
+
+    border: 2px solid var(--my_orange);
+    padding: 10px 2px 10px;
+    font-style: italic;
+    color: #555;
+    font-size: 1em;
+    width: 100%;
+    border-radius: 15px;
+
+  }
+
+}
+
 </style>

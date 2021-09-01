@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--class="collapsible c1 my_magenda"-->
-    <div v-bind="$attrs" v-on:click="showAnswer" :class="class2">
+    <div v-bind="$attrs" v-on:click="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
       {{ question }}
     </div>
     <div class="content">
@@ -17,6 +17,7 @@ export default {
     question: String,
     answer: String,
     class1: String,
+    fullsite: Boolean,
   },
     inheritAttrs:false,
     data(){
@@ -64,12 +65,15 @@ p{
     text-align: left;
     border-radius: 15px;
 
-    backdrop-filter: brightness(265%);
+    backdrop-filter: brightness(115%);
 
-    border: 1px solid;
+    border: 0px;//1px solid;
 
 }
 
+.collapsible_fullsite{
+  text-decoration: underline;
+}
 
 .collapsible:before {
     content: '\25BC';
@@ -95,6 +99,7 @@ p{
 
   .content > p {
       padding: 20px;
+      color: #345;
   }
 
    .collapsible.active {

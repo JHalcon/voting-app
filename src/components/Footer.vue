@@ -3,15 +3,19 @@
     <div id="footer_hr"></div>
     <footer>
       <a href="https://samorzad.up.krakow.pl">Samorząd Studentów</a>
-      ·
+      <br id="breakline1">
+      <span id="dot1"> · </span>
+
       <a href="https://skni.up.krakow.pl"
         >Studenckie Koło Naukowe Informatyków</a
-      >
-      ·
+      ><br id="breakline2">
+      <span id="dot2"> · </span>
+      
       <a href="https://www.up.krakow.pl"
-        >Uniwersytet Pedagogiczny im. KEN w Krakowie</a
+        >Uniwersytet Pedagogiczny im.&nbsp;KEN w&nbsp;Krakowie</a
       >
-      · 2021
+      <br id="breakline3">
+      <span id="dot3"> · </span> 2021
     </footer>
   </div>
 </template>
@@ -23,19 +27,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
+#breakline1, #breakline2, #breakline3{
+  display: none;
+}
 #footer {
-  //min-height: 60px;
-  //position: absolute;
-  //bottom: 0;
+
   position: absolute;
   bottom: 0;
   width: 100%;
 
   z-index: 3;
-    background-color:white;
+  background-color:white;
 
   //////////
-  padding: 15px;
+  //padding: 15px;
   //margin-top: 15px;
   //padding: 0px 15px 15px;
   text-align: center;
@@ -43,13 +49,14 @@ export default {
   font-weight: bold;
   color: gray;
 }
-footer {
-  padding: 10px;
+footer{
+    padding: 10px;
+}
+footer, footer span {
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   color: gray;
-
 }
 footer a {
   color: gray;
@@ -64,58 +71,97 @@ footer a:hover {
   height: 1px;
   background-color: #ccc;
   border: none;
-  width: 100%;
+  width: 95%;
   margin: auto;
 }
+
+// height of footer and width of screen:
+//          width <= 315px   ===>   height: 85px;
+// 316px <= width <= 449px   ===>   height: 105px; 
+// 450px <= width <= 767px   ===>   height: 65px;
+// 768px <= width <= 949px   ===>   height: 45px;
+// 950px <= width <= 1549px  ===>   height: 50px;
+// 1550px<= width            ===>   height: 55px;
+
 @media only screen and (min-width: 1550px) {
   footer,
   footer a {
     font-size: 20px;
-    //color: blue;
+  }
+  #footer{
+    height: var(--footer_1550_max);
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1549px) {
-  #footer {
-    min-height: 60px;
-  }
-  footer {
-    font-size: 16px;
-    //color: red;
-  }
+@media only screen and (min-width: 950px) and (max-width: 1549px) {
+  footer,
   footer a {
     font-size: 16px;
-    // color: red;
+  }
+  #footer{
+    height: var(--footer_950_1549);
   }
 }
-@media only screen and (max-width: 992px) and (orientation: landscape) {
-  #footer {
-    height: 50px;
-  }
-  footer {
-    padding: none;
-    font-size: 14px;
-  }
+
+@media only screen and (min-width: 768px) and (max-width: 949px) {
+  footer,
   footer a {
     font-size: 14px;
   }
-}
-@media only screen and (min-width: 315px) and (max-width: 767px) {
-  footer {
-    font-size: 13px;
+  #footer{
+    height: var(--footer_768_949);
   }
 }
-@media only screen and (min-width: 315px) and (max-width: 767px) and (orientation: landscape) {
-  #footer {
-    min-height: 90px;
+
+@media only screen and (min-width: 450px) and (max-width: 767px) {
+  #footer{
+    height: var(--footer_450_767);
   }
 }
+
+@media only screen and (min-width: 316px) and (max-width: 449px) {
+  #footer{
+    height: var(--footer_316_449);
+  }
+}
+
+@media only screen and (min-width: 316px) and (max-width: 767px) {
+  footer,
+  footer a {
+    font-size: 14px;
+  }
+}
+
 @media only screen and (max-width: 315px) {
-  footer {
+  #footer{
+    height: var(--footer_0_315);
+  }
+  footer, footer a {
     font-size: 10px;
   }
-  footer a {
-    font-size: 10px;
-    //color: pink;
+
+}
+
+@media only screen and (max-width: 767px) {
+  #dot2{
+    display: none;
   }
+  #breakline2{
+    display: block;
+  }
+}
+@media only screen and (max-width:449px) {
+  #dot1{
+    display: none;
+  }
+  #breakline1{
+    display: block;
+  }
+  #dot3{
+    display: none;
+  }
+  #breakline3{
+    display: block;
+  }
+
 }
 </style>

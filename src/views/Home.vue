@@ -39,21 +39,20 @@ export default {
 
 @media only screen and (min-width: 1150px){
 
-    .student_img{
+    .student_img, .student2_img{
         display: block;
         position: absolute;
         width: 20%;
+        max-height: 445px;
         bottom:2rem;
-        left: -30px;
         z-index: 1;
     }
+
+    .student_img{
+        left: -30px;
+    }
     .student2_img{
-        display: block;
-        position: absolute;
-        width: 20%;
-        bottom:2rem;
         right: -30px;
-        z-index: 1;
     }
 }
 

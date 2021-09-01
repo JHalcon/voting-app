@@ -17,6 +17,10 @@ export default {
     HeaderFL,
     calendar,
   },
+  created: function () {
+    if(!this.$store.state.is_irss)
+      this.$router.push('/userPage');
+  }
 };
 </script>
 <style lang="scss" scoped>

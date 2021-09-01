@@ -13,7 +13,7 @@
 
 
 
-            <button  class="login_btn login_btn">
+            <button  class="login_btn textRoboto">
               <div v-if="loading == true" class="sk-chase">
               <div class="sk-chase-dot"></div>
               <div class="sk-chase-dot"></div>
@@ -67,15 +67,32 @@ export default {
       .then(resp => {
         this.token = resp.data.token;
         this.$store.dispatch('loginUser', {'username': this.username, 'token': resp.data.token});
-        this.$router.push('/UserPage');
+
+
+        // Pobieranie imienia i nazwiska zalogowanego uzytkownika
+        axios.get('https://dev.api.up.kornel.dev/auth/me/me/', {
+          headers: {
+            'Authorization': `Token ${resp.data.token}`
+          }
+        })
+        .then(resp => {
+          localStorage.setItem('first_name',resp.data.first_name);
+          localStorage.setItem('last_name',resp.data.last_name);
+
+          this.firstname = resp.data.first_name;
+          this.lastname = resp.data.last_name;
+        })
+        .catch()
+        .then(() =>{
+          this.$router.push('/UserPage');
+        })
 
       })
       .catch(() => {
         this.error=true;
-      })
-      .then(() =>{
         this.loading = false;
-        })
+      })
+
     }
   }
 };
@@ -100,7 +117,6 @@ export default {
 }
 
 #main_frame_password .login_btn{
-    height: 70px;
     display: inline-block;
     padding: 15px 25px;
     cursor: pointer;
@@ -110,7 +126,6 @@ export default {
     border: none;
     border-radius: 15px;
     box-shadow: 2px 5px 5px #999;
-    font-size: 18px;  
 
 }
 
@@ -182,17 +197,53 @@ button div{
   color: black;
 }
 
-@media only screen and (min-width: 860px) {
-
-    #main_frame_password .main_frame_text{
+@media only screen and (min-width: 1300px) {
+  .login_btn {
+    width:40%;
+    height: 70px;
+  }
+  .login_btn div {
+    font-size: 24px;
+  }
+  #main_frame_password .main_frame_text{
       font-size: 30px;
     }
+
+  // loading-logging animation
+    .sk-chase {
+      width: 40px;
+      height: 40px;
+    }
+}
+
+@media only screen and (min-width: 860px) and (max-width: 1299px) {
+  .login_btn {
+    width:200px;
+    height: 60px;
+  }
+
+  .login_btn div {
+    font-size: 20px;
+  }
+  #main_frame_password .main_frame_text{
+      font-size: 24px;
+    }
+
+  // loading-logging animation
+    .sk-chase {
+      width: 30px;
+      height: 30px;
+    }
+}
+
+@media only screen and (min-width: 860px) {
 
     #main_frame_password {
       border-width: 6px;
       padding:60px;
       margin: auto;
       margin-top: 50px;
+      margin-bottom: 50px;
       width: 800px;
     }
 
@@ -206,9 +257,7 @@ button div{
     }
     
     #main_frame_password .login_btn{
-      font-size: 24px;
       margin: 20px 30px 0px;
-      width:250px;
     }
 
     #new_pwd{
@@ -217,6 +266,8 @@ button div{
       bottom: 80px;
       margin:15px 15px 0px;
     }
+
+    
 
 }
 
@@ -243,11 +294,17 @@ button div{
 
     #main_frame_password .login_btn{
       margin: 10px 0px 0px;
-      width:200px;
-
+      width: 160px;
+      height: 55px;
     }
     #new_pwd{
       margin:30px 15px 20px;
+    }
+
+    // loading-logging animation
+    .sk-chase {
+      width: 25px;
+      height: 25px;
     }
 
 }
@@ -255,14 +312,13 @@ button div{
 @media only screen and (max-width: 330px) {
     #main_frame_password .login_btn{
       padding: 5px 5px;
-      width:100%;
+      width: 100%;
+      max-width: 160px;
     }
   }
 
 
 .sk-chase {
-  width: 40px;
-  height: 40px;
   position: relative;
   animation: sk-chase 2.5s infinite linear both;
   margin:auto;

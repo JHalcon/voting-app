@@ -17,7 +17,6 @@
       <li
         v-for="n in this.numberOfDays"
         :key="n"
-        v-on:click="makeA"
         class="calendar_day"
       >
         {{ n }}
@@ -38,10 +37,16 @@ export default {
     };
   },
   methods: {
+    /*
+
+    v-on:click="makeA"
+
     makeA() {
       console.log("hfh");
       event.target.classList.toggle("activeLi");
     },
+    */
+
     showDays() {
       // let mounth =
     },
@@ -49,6 +54,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
+*{
+  cursor: default;
+}
 
 .activeLi {
   background-color: red;
@@ -116,9 +125,12 @@ export default {
 
   .calendar_column li {
     font-size: 2.5vw;
+    line-height: 1.3;
+
   }
   .calendar_text {
     font-size: 2vw;
+
   }
 
   .days .active_cal_only {

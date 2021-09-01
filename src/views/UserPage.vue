@@ -2,15 +2,21 @@
 <div id="UP">
     <HeaderFL/>
     
-    <div class="mainInner">
+    <div v-if="loaded" class="mainInner">
       <NoVotes v-if="!haveVotes" />
-      <Votes v-if="haveVotes" />
+      <Votes v-bind:voteList="this.results" v-if="haveVotes" />
+    </div>
+    <div v-else>
+    <loadingItem />
     </div>
 
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
+import LoadingItem from '@/components/loadingItem.vue';
 import HeaderFL from '@/components/HeaderForLogged.vue';
 import NoVotes from '@/components/NoVotes.vue';
 import Votes from '@/components/Votes.vue';
@@ -18,21 +24,63 @@ export default {
   name: "UserPage",
   data() {
     return {
-      haveVotes: true,
+      haveVotes: false,
+      loaded: false,
+      results: null,
     };
   },
   components: {
     HeaderFL,
     NoVotes,
     Votes,
+    LoadingItem,
   },
   created: function () {
     if(!this.$store.getters.isLoggedIn){
+      this.$router.push(this.$store.getters.getMainPageLink);
+    } else{
 
-      if(this.$store.state.is_irss)
-        this.$router.push('/');
-      else
-        this.$router.push('/Home');
+        // pobieranie tokena
+        const token = localStorage.getItem('JWT_TOKEN');
+
+        // pobieranie listy głosowań
+        axios.get('https://dev.api.up.kornel.dev/api/v1/public/vote/vote/', { 
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        })
+        .then(resp => {
+          console.log(resp.data);
+
+            if(resp.data.count>1){
+              // jest dostępnych więcej niż 1 głosowanie, wyświetlamy listę i zapisujemy ją do zmiennej
+
+              this.haveVotes = true;
+              this.results = resp.data.results;
+
+
+
+            } else if(resp.data.count == 1){
+              // jest dostępne jedno głosowanie, routujemy od razu na voteCard
+
+              // TODO TUTAJ OD RAZU ROUTUJEMY NA VOTEDETAILS Z TYMI ELEMENTAMI =========================================================
+              this.$router.push({name: 'voteCard', params: {voteIdProps: resp.data.results[0].id}, query: {onlyOneVote: "true" }});
+
+            } 
+
+            
+        })
+        .catch(err => {
+          console.error(err);
+          
+          // TODO UTWORZYĆ KOMPONENT "WYSTĄPIŁ PROBLEM"
+
+        })
+        .then(() => {
+          // wyświetlenie odpowiedniej strony
+          this.loaded = true;
+        })
+        
     }
   }
 };
@@ -47,6 +95,10 @@ export default {
 .mainInner {
   min-height: 300px;
   width: 100%;
+  
+  max-width: 1500px;
+  margin: auto;
+
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
