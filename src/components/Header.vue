@@ -7,27 +7,29 @@
                         <img src="../assets/images/logo_samorzad.png" alt="Logo Samorządu Studentów" class="logo_img"></a>
                         </div>
                     
-                    <div v-if="this.only_irss" class="text_header"> 
-                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">WYBORY DO<br></span>
-                        <span id="linijka_2" class="textMontserrat my_magenda">INSTYTUTOWYCH RAD<br></span>
-                        <span id="linijka_3" class="textMontserrat my_orange">SAMORZĄDU STUDENTÓW</span>
-                    </div>
-                    <div v-else class="text_header"> 
-                        <span id="linijka_1" class="textMontserrat my_blue wybory_do">SYSTEM WYBORCZY<br></span>
-                        <span id="linijka_2" class="textMontserrat my_magenda">SAMORZĄDU STUDENTÓW<br></span>
-                        <span id="linijka_4" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
-                    </div>
-                   
+                  
+                        <div v-if="this.only_irss" class="text_header"> 
+                            <span id="linijka_1" class="textMontserrat my_blue wybory_do">{{this.$store.state.msg.header.irss_1}}<br></span>
+                            <span id="linijka_2" class="textMontserrat my_magenda">{{this.$store.state.msg.header.irss_2}}<br></span>
+                            <span id="linijka_3" class="textMontserrat my_orange">{{this.$store.state.msg.header.irss_3}}</span>
+                        </div>
+                        <div v-else class="text_header"> 
+                            <span id="linijka_1" class="textMontserrat my_blue wybory_do">{{this.$store.state.msg.header.default_1}}<br></span>
+                            <span id="linijka_2" class="textMontserrat my_magenda">{{this.$store.state.msg.header.default_2}}<br></span>
+                            <span id="linijka_4" class="textMontserrat my_orange">{{this.$store.state.msg.header.default_3}}</span>
+                        </div>
+                  
+
                     <ul v-if="this.only_irss" id="icons_navbar">
                         <li class="tooltip"><a href="#calendar">
                             <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             </a>
-                            <span class="tooltiptext textRoboto">Terminarz głosowań</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
                             </li>
                         <li class="tooltip"><a href="#faq">
                             <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
                             </a>
-                            <span class="tooltiptext textRoboto">Najczęściej zadawane pytania</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
                             </li>
                     </ul>
 

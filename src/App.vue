@@ -1,9 +1,14 @@
 <template>
   <div id="app">
+
     <div id="content-wrap">
+
       <router-view />
-    </div>
-    
+
+    </div>                      
+    <!-- <modal-direction v-model="modalOpen"></modal-direction> -->
+
+
     <Footer />
 
   </div>
@@ -11,17 +16,51 @@
 
 <script>
 import Footer from '@/components/Footer.vue';
+//import ModalDirection from '@/components/ModalSendEmail.vue';
+
 export default {
   components: {
     Footer,
+    //ModalDirection,
   },
+  created() {
+    console.log("App.vue, created " + this.$store.getters.localStorageSupport)
+    //this.$store.localStorageSupport();
+  }
+  /*
+  data(){
+    return {
+        modalOpen: false,
+    }
+  },
+  methods: {
+    openModal() {
+      console.log("aa")
+      this.modalOpen = !this.modalOpen;
+    },   
+  }
+  */
 };
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 900;
+  src: local("Montserrat"),
+   url(./assets/fonts/Roboto/Montserrat-Black.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Roboto";
+  font-weight: 100;
+  src: local("Roboto"),
+   url(./assets/fonts/Roboto/Roboto-Thin.ttf) format("truetype");
+}
 ////
+
 
 ::after,
 ::before {
@@ -32,7 +71,7 @@ export default {
   padding: 0;
   border: none;
   box-sizing: border-box;
-  font-weight: 400;
+  _font-weight: 400;
 }
 
 body,
@@ -57,6 +96,7 @@ span,p, h3{
   //width: 100%;
   min-height: 100%;
   position: relative;
+  background-color: white;
 }
 
 .scroll-container {
@@ -84,6 +124,7 @@ span,p, h3{
   --my_blue_light: #ebe6ff;
   --my_blue_light2: #5f33ff;
   --my_blue_dark: #160066;
+  --my_blue_dark2: #11004d;
 
 // height of footer and width of screen:
 //          width <= 315px   ===>   height: 85px;
@@ -92,8 +133,8 @@ span,p, h3{
 // 768px <= width <= 949px   ===>   height: 45px;
 // 950px <= width <= 1549px  ===>   height: 50px;
 // 1550px<= width            ===>   height: 55px;
-  --footer_0_315: 85px;
-  --footer_316_449: 105px;
+  --footer_0_315: 105px;
+  --footer_316_449: 120px;
   --footer_450_767: 65px;
   --footer_768_949: 45px;
   --footer_950_1549: 50px;
@@ -122,6 +163,67 @@ hr.solid {
   border-top: 2px solid lightgrey;
 }
 
+// Buttony na kilka komponentów
+.button_click{
+    border-radius: 10px;
+    transition: transform 0.05s;
+}
+.button_click:hover{
+  box-shadow: 2px 2px 2px gray;
+}
+.button_click:active {
+  box-shadow: 2px 2px 0px #666;
+  transform: translateY(4px); 
+  transition: transform 0.05s;
+}
+.blueBTN{
+    background-color: var(--my_blue);
+}
+.blueBTN:hover{
+    background-color: var(--my_blue_dark);
+}
+.orangeBTN{
+  background-color: var(--my_orange);
+}
+.orangeBTN:hover{
+  background-color: var(--my_orange_dark);
+}
+.magendaBTN{
+  background-color: var(--my_magenda);
+}
+.magendaBTN:hover{
+  background-color: var(--my_magenda_dark);
+}
+
+
+
+
+// Scroll bar
+@media only screen and(min-width: 600px){
+  /* width */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 7px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--my_blue_dark); 
+    border-radius: 1px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--my_blue_dark2); 
+  }
+}
+
+
 
 // footer height
 @media only screen and (min-width: 1550px) {
@@ -134,22 +236,22 @@ hr.solid {
     padding-bottom: var(--footer_950_1549);
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 949px) {
+@media only screen and (min-width: 868px) and (max-width: 949px) {
   #content-wrap{
     padding-bottom: var(--footer_768_949);
   }
 }
-@media only screen and (min-width: 450px) and (max-width: 767px) {
+@media only screen and (min-width: 500px) and (max-width: 867px) {
   #content-wrap{
     padding-bottom: var(--footer_450_767);
   }
 }
-@media only screen and (min-width: 316px) and (max-width: 449px) {
+@media only screen and (min-width: 327px) and (max-width: 499px) {
   #content-wrap{
     padding-bottom: var(--footer_316_449);
   }
 }
-@media only screen and (max-width: 315px) {
+@media only screen and (max-width: 326px) {
   #content-wrap{
     padding-bottom: var(--footer_0_315);
   }

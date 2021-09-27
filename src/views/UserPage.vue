@@ -7,7 +7,7 @@
       <Votes v-bind:voteList="this.results" v-if="haveVotes" />
     </div>
     <div v-else>
-    <loadingItem />
+    <loadingItem medium />
     </div>
 
   </div>
@@ -36,20 +36,26 @@ export default {
     LoadingItem,
   },
   created: function () {
-    if(!this.$store.getters.isLoggedIn){
+    const token = this.$func.getLoggedToken();
+
+    if(!token){ //!this.$store.getters.isLoggedIn
       this.$router.push(this.$store.getters.getMainPageLink);
     } else{
 
         // pobieranie tokena
-        const token = localStorage.getItem('JWT_TOKEN');
+        //const token = this.$func.getLoggedToken() // this.$store.getters.getLoggedToken; //localStorage.getItem('JWT_TOKEN');
 
         // pobieranie listy głosowań
-        axios.get('https://dev.api.up.kornel.dev/api/v1/public/vote/vote/', { 
-          headers: {
+        axios.get(process.env.VUE_APP_PUBLIC_VOTES,{
+            headers: {
             'Authorization': `Token ${token}`
-          }
+            },
+            params: {
+              page_size: 100,
+            }
         })
         .then(resp => {
+          console.log("UserPage")
           console.log(resp.data);
 
             if(resp.data.count>1){
@@ -63,7 +69,6 @@ export default {
             } else if(resp.data.count == 1){
               // jest dostępne jedno głosowanie, routujemy od razu na voteCard
 
-              // TODO TUTAJ OD RAZU ROUTUJEMY NA VOTEDETAILS Z TYMI ELEMENTAMI =========================================================
               this.$router.push({name: 'voteCard', params: {voteIdProps: resp.data.results[0].id}, query: {onlyOneVote: "true" }});
 
             } 
@@ -73,7 +78,13 @@ export default {
         .catch(err => {
           console.error(err);
           
-          // TODO UTWORZYĆ KOMPONENT "WYSTĄPIŁ PROBLEM"
+            // wylogowywanie
+            this.$func.logoutUser();
+
+            if(this.$store.getters.is_IRSS)
+              this.$router.push('/');
+            else
+              this.$router.push('/Home');
 
         })
         .then(() => {
@@ -87,10 +98,7 @@ export default {
 </script>
 <style lang="scss">
 #UP {
-  overflow-y: hidden;
-  //position: absolute; //wyrzuciłem to wszystko, ponieważ w app.vue jest content-wrap
-  //min-height: 100%;
-  //width: 100%;
+  overflow: hidden;
 }
 .mainInner {
   min-height: 300px;

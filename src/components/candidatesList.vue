@@ -3,53 +3,113 @@
     <!---- STRONA FAQ ---->
 
     <div class="page textMontserrat">
-      <div :class="{ 'background_bar_fullsite' : fullsite, 'background_bar' : !fullsite }">
-        <span>{{this.$store.state.msg.faqComponent.tytul}}<span v-if="fullsite">:</span></span>
+      <div class="background_bar_fullsite">
+        <span>{{this.$store.state.msg.candidatesList.tytul}}</span>
       </div>
+      
+      <button @click="download_answers" :disabled="isDisabledButton" :class="{button_click: !isDisabledButton}" class="orangeBTN BTN ">{{this.$store.state.msg.candidatesList.download}}</button> 
+
       <br />
       <div class="faq">
 
+        <h2 class="komunikat" v-if="isDisabledButton">{{this.$store.state.msg.candidatesList.brak}}</h2>
+
         <faqBar v-for="(f, index) in this.faqList" :key="index" 
           :index=index
-          :question=f.q
-          :answer=f.a
-          v-bind:fullsite=fullsite
+          :question='f.imie+" "+f.nazwisko+" - "+f.kierunek+" - "+f.rok'
+          :answers=f.poparcie
         />
-        
-        
+                
       </div>
 
-      <img
-        src="../assets/images/faq.svg"
-        alt="Element dekoracyjny"
-        class="faq_img"
-      />
-      <a href="#home_section" v-show="$route.name !== 'faq'"
-        ><img
-          src="../assets/images/arrow.svg"
-          alt="Przycisk powrotu na stronę startową"
-          class="arrow_img"
-      /></a>
     </div>
   </section>
 </template>
 <script>
 import faqBar from "@/components/faqBar.vue";
+import qs from 'qs';
+import axios from 'axios';
+
+
 export default {
   name: "faq",
   components: {
     faqBar,
   },
-  props: {fullsite: Boolean},
-  data(){
-    return{
-      faqList: this.$store.state.msg.faq,
-    }
+  props: {
+      faqList: Array,
+  },
+  methods: {
+
+        download_answers(){
+
+            // pobieranie tokena
+            const token = this.$func.getLoggedToken(); //localStorage.getItem('JWT_TOKEN');
+            const data = { 'Authorization': `Token ${token}`};
+
+            axios({
+                method: 'post',
+                url: 'https://bp98.smallhost.pl/api/post/download.php',
+                headers: { 'content-type': 'application/x-www-form-urlencoded'},
+                data: qs.stringify(data),
+                responseType: 'blob',
+            })
+            .then(({ data }) => {
+  
+                var filename_bracket;
+                if(this.faqList.length>0)
+                    filename_bracket="1-"+this.faqList.length; 
+                else
+                    filename_bracket="0";
+
+
+                const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.setAttribute('download', 'zgloszenia_irrs('+filename_bracket+').csv');
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+
+            })
+            .catch(err => {
+                console.error("err "+err);
+            })
+
+      }
+
+  },
+  computed:{
+      isDisabledButton(){
+          return this.faqList.length == 0;
+      }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.komunikat{
+    text-align: center;
+    color: #345;
+}
+
+button.BTN {
+  margin: 10px;
+  padding: 10px;
+  font-family: "Montserrat";
+  color: white;
+  font-size: 1.3rem;
+
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin: auto;*/
+}
+
+button.BTN:disabled{
+    background-color: lightgray;
+}
+
 .background_bar{
     background-color: var(--my_blue); /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
@@ -67,6 +127,7 @@ export default {
     _color: white;
     color: var(--my_blue);
     text-align: center;
+
     margin-top: 30px;
     margin-bottom: 10px;
 }
@@ -124,7 +185,6 @@ export default {
         padding-left: 20px;
         padding-right: 20px;
     }
-
     .background_bar_fullsite{
         font-size: 18px;
         padding-left: 20px;
@@ -146,8 +206,5 @@ export default {
         margin:auto;
         z-index: 1;
     }
-  /*  .faq .content{
-        font-size: 16px;
-    }*/
 }
 </style>

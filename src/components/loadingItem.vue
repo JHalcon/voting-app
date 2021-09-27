@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container"
+  :class="{ 'medium' : medium && !small, 'small' : small && !medium, 'big': !medium && !small }"
+  >
     <div class="sk-chase">
       <div class="sk-chase-dot"></div>
       <div class="sk-chase-dot"></div>
@@ -18,6 +20,10 @@ export default {
   name: "LoadingItem",
   components: {
   },
+  props:{
+    medium: Boolean,
+    small: Boolean,
+  }
 };
 </script>
 <style  lang="scss" scoped>
@@ -52,22 +58,45 @@ export default {
 */
 
 .container{
-  width: 250px;
-  height: 250px;
   margin: auto;
-  margin-top: 50px;
+  //margin-top: 50px;
 }
 
-.sk-chase {
-      width: 80%;
-      height: 80%;
-    }
+.big{
+  width: 250px;
+  height: 250px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.medium{
+  width: 130px;
+  height: 130px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 860px) {
+  .small{
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 859px) {
+  .small{
+    width: 25px;
+    height: 25px;
+  }
+}
 
 
 .sk-chase {
   position: relative;
   animation: sk-chase 2.5s infinite linear both;
   margin:auto;
+  width: 100%;
+  height: 100%;
 }
 
 .sk-chase-dot {
@@ -84,9 +113,15 @@ export default {
   display: block;
   width: 25%;
   height: 25%;
-  background-color: var(--my_magenda);
   border-radius: 100%;
   animation: sk-chase-dot-before 2.0s infinite ease-in-out both; 
+}
+
+:not(.small) .sk-chase-dot:before{
+  background-color: var(--my_magenda);
+}
+.small .sk-chase-dot:before{
+  background-color: #fff;
 }
 
 .sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }

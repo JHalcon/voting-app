@@ -25,7 +25,7 @@ export default {
     LoginPanelPassword,
   },
   created: function () {
-    if(this.$store.getters.isLoggedIn){
+    if(this.$func.getLoggedToken()){
         this.$router.push('/UserPage');
     }
   }

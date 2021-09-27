@@ -2,11 +2,11 @@
   <div id="main_frame_password">
     <form @submit.prevent="login" class="form-inline">
             
-            <label for="email" class="main_frame_text textRoboto login_txt">Email:</label>
-            <input v-model="username" size="sm" type="text" required placeholder="np. bartlomiej.pietras1@student.up.krakow.pl" 
+            <label for="email" class="main_frame_text textRoboto login_txt">{{this.$store.state.msg.home.email}}</label>
+            <input v-model="username" size="sm" type="text" required :placeholder=this.$store.state.msg.mainPage.login_frame_1_placeholder_1
                     :class="{ 'errorClass' : error == true, 'loggingNoError' : error == false }" class="textRoboto logging" id="email"
               > <!-- pattern="[a-z,A-Z]+[.][a-z,A-Z]+[0-9]*@student.up.krakow.pl" -->
-            <label for="pwd" class="main_frame_text textRoboto login_txt">Hasło:</label>
+            <label for="pwd" class="main_frame_text textRoboto login_txt">{{this.$store.state.msg.home.haslo}}</label>
             <input v-model="password" type="password" required placeholder="np. *******" 
                     :class="{ 'errorClass' : error == true, 'loggingNoError' : error == false }" class="textRoboto logging" id="pwd">
 
@@ -23,14 +23,14 @@
               <div class="sk-chase-dot"></div>
               </div>
               <div v-else>
-              Zaloguj się
+              {{this.$store.state.msg.home.login_button}}
               </div>
             </button>
 
 
         </form>
         
-        <div id="new_pwd"><router-link to="" class="new_pwd_link textRoboto">ustaw nowe hasło</router-link> </div>
+        <!-- <div id="new_pwd"><router-link to="" class="new_pwd_link textRoboto">ustaw nowe hasło</router-link> </div> -->
    </div>
 </template>
 
@@ -46,9 +46,9 @@ export default {
     return {
       username: '',
       password: '',
-      token: localStorage.getItem('JWT_TOKEN') || null,
-      first_name: '',
-      last_name: '',
+      token: this.$func.getLoggedToken || null, //localStorage.getItem('JWT_TOKEN') || null,
+      //first_name: '',
+      //last_name: '',
 
       loading: false,
       error: false,
@@ -59,42 +59,39 @@ export default {
 
       this.loading = true;
       this.error = false;
+      //var that = this;
 
-      axios.post('https://dev.api.up.kornel.dev/auth/login/login/', {
+      axios.post(process.env.VUE_APP_LOGIN, {
         email: this.username,
         password: this.password,
       })
       .then(resp => {
         this.token = resp.data.token;
-        this.$store.dispatch('loginUser', {'username': this.username, 'token': resp.data.token});
 
+        this.$func.loginUser({'username': this.username, 'token': resp.data.token, 'user_id': resp.data.user_id})
 
-        // Pobieranie imienia i nazwiska zalogowanego uzytkownika
-        axios.get('https://dev.api.up.kornel.dev/auth/me/me/', {
-          headers: {
-            'Authorization': `Token ${resp.data.token}`
-          }
-        })
-        .then(resp => {
-          localStorage.setItem('first_name',resp.data.first_name);
-          localStorage.setItem('last_name',resp.data.last_name);
-
-          this.firstname = resp.data.first_name;
-          this.lastname = resp.data.last_name;
-        })
-        .catch()
-        .then(() =>{
-          this.$router.push('/UserPage');
-        })
+        this.$router.push('/UserPage');
 
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
+
         this.error=true;
         this.loading = false;
       })
 
     }
-  }
+  },
+  watch: {
+    username(){
+      if(this.error)
+        this.error = false;
+    },
+    password(){
+      if(this.error)
+        this.error = false;
+    },
+  },
 };
 </script>
 <style  lang="scss" scoped>
@@ -190,6 +187,7 @@ button div{
 .new_pwd_link {
   font-style: italic;
   font-weight: bold;
+  text-decoration: underline;
   color: gray;
 }
 
@@ -197,54 +195,20 @@ button div{
   color: black;
 }
 
-@media only screen and (min-width: 1300px) {
-  .login_btn {
-    width:40%;
-    height: 70px;
-  }
-  .login_btn div {
-    font-size: 24px;
-  }
-  #main_frame_password .main_frame_text{
-      font-size: 30px;
-    }
 
-  // loading-logging animation
-    .sk-chase {
-      width: 40px;
-      height: 40px;
-    }
-}
-
-@media only screen and (min-width: 860px) and (max-width: 1299px) {
+@media only screen and (min-width: 860px) {
   .login_btn {
     width:200px;
     height: 60px;
   }
 
-  .login_btn div {
-    font-size: 20px;
-  }
-  #main_frame_password .main_frame_text{
-      font-size: 24px;
-    }
-
-  // loading-logging animation
-    .sk-chase {
-      width: 30px;
-      height: 30px;
-    }
-}
-
-@media only screen and (min-width: 860px) {
-
     #main_frame_password {
       border-width: 6px;
-      padding:60px;
+      padding: 50px;
       margin: auto;
-      margin-top: 50px;
+      _margin-top: 40px;
       margin-bottom: 50px;
-      width: 800px;
+      width: 750px;
     }
 
     #main_frame_password label{
@@ -260,6 +224,13 @@ button div{
       margin: 20px 30px 0px;
     }
 
+    .login_btn div {
+      font-size: 20px;
+    }
+    #main_frame_password .main_frame_text{
+      font-size: 24px;
+    }
+
     #new_pwd{
       position: absolute;
       right: 40px;
@@ -268,7 +239,11 @@ button div{
     }
 
     
-
+  // loading-logging animation
+    .sk-chase {
+      width: 30px;
+      height: 30px;
+    }
 }
 
 @media only screen and (max-width: 859px) {
@@ -276,7 +251,8 @@ button div{
       border-width: 3px;
       padding:3vw;
       padding-top:8vw;
-        
+      padding-bottom: 6vw;
+      
       margin: 3%;
       width: 94%;
     }
@@ -297,6 +273,11 @@ button div{
       width: 160px;
       height: 55px;
     }
+
+    #main_frame_password .main_frame_text{
+      font-size: 20px;
+    }
+
     #new_pwd{
       margin:30px 15px 20px;
     }

@@ -6,10 +6,10 @@
                         </a>
                     
                     <div class="text_header"> 
-                        <span id="linijka_1" class="textMontserrat my_blue">SYSTEM WYBORCZY<br></span>
-                        <span id="linijka_2" class="textMontserrat my_magenda">SAMORZĄDU STUDENTÓW<br></span>
-                        <span id="linijka_3" class="textMontserrat my_orange">UNIWERSYTETU PEDAGOGICZNEGO</span>
-                        <span id="linijka_telefon" class="textMontserrat"><span class="my_magenda">SYSTEM</span><br><span class="my_orange">WYBORCZY</span></span>
+                        <span id="linijka_1" class="textMontserrat my_blue">{{this.$store.state.msg.header.default_1}}<br></span>
+                        <span id="linijka_2" class="textMontserrat my_magenda">{{this.$store.state.msg.header.default_2}}<br></span>
+                        <span id="linijka_3" class="textMontserrat my_orange">{{this.$store.state.msg.header.default_3}}</span>
+                        <span id="linijka_telefon" class="textMontserrat"><span class="my_magenda">{{this.$store.state.msg.header.default_4}}</span><br><span class="my_orange">{{this.$store.state.msg.header.default_5}}</span></span>
 
                     </div>
                     
@@ -25,30 +25,30 @@
                                     <div v-if="this.$route.name == 'UserPage'" class="icon_underline"></div>
                                 </div>
                             </a>
-                            <span class="tooltiptext textRoboto">Strona główna</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.home}}</span>
                             </li>
                         <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/calendar">
                             <img id="icon_calendar" class="icon cursor_pointer" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
                             <div v-if="this.$route.name == 'calendar'" class="icon_underline"></div>
                             </a>
-                            <span class="tooltiptext textRoboto">Terminarz głosowań</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
                             </li>
                         <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/faq">
                             <img id="icon_why" class="icon cursor_pointer" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
                             <div v-if="this.$route.name == 'faq'" class="icon_underline"></div>
                             </a>
-                            <span class="tooltiptext textRoboto">Najczęściej zadawane pytania</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
                             </li>
-                        <li class="tooltip"><a href="/usercard">
+                        <li class="tooltip"><a href="/profile">
                             <img id="icon_profile" class="icon cursor_pointer" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
-                            <div v-if="this.$route.name == 'userCard'" class="icon_underline"></div>
+                            <div v-if="this.$route.name == 'profile'" class="icon_underline"></div>
                             </a>
-                            <span class="tooltiptext textRoboto">Profil</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.profil}}</span>
                             </li>
-                        <li class="tooltip"><div @click="logout">
+                        <li class="tooltip"><div tabindex=0 @click="logout" @keyup.enter="logout">
                             <img id="icon_logout" class="icon cursor_pointer" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
                             </div>
-                            <span class="tooltiptext textRoboto">Wyloguj</span>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.wyloguj}}</span>
                             </li>
 
                     </ul>
@@ -76,10 +76,10 @@ export default {
 
       logout(){
 
-          const token = localStorage.getItem('JWT_TOKEN');
+          const token = this.$func.getLoggedToken();
           console.log(token);
 
-                axios.post('https://dev.api.up.kornel.dev/auth/logout/logout/',{
+                axios.post(process.env.VUE_APP_LOGOUT,{
                     email: this.username,
                     password: this.password,
                 }, {
@@ -89,8 +89,7 @@ export default {
                 })
   
                 
-                        
-                this.$store.dispatch('logoutUser');
+                this.$func.logoutUser();
 
                 if(this.$store.getters.is_IRSS)
                     this.$router.push('/');
@@ -102,7 +101,7 @@ export default {
         refreshWithPropsButton(){
             console.log(this.$route.params.voteIdProps);
 
-this.$router.go(this.$router.currentRoute)
+            this.$router.go(this.$router.currentRoute)
 //            this.$router.push({name: 'voteCard', params: {voteIdProps: this.$route.params.voteIdProps, onlyOneVote: this.onlyOneVote }});
 
         }

@@ -4,6 +4,12 @@
       <!--<router-link to="/UserPage">User Page</router-link>-->
       <Header only_irss />
       <login-panel />
+      <a href="#faq" class="arrow_link"
+        ><img
+          src="../assets/images/arrow.svg"
+          alt="Przycisk służący do przewinięcia strony w dół"
+          class="arrow_img"
+      /></a>
 
     <MainPageImages/>
 
@@ -32,10 +38,10 @@ export default {
 
   },
   created: function () {
-    if(this.$store.getters.isLoggedIn){
+    if(this.$func.getLoggedToken()){ //this.$store.getters.isLoggedIn
         this.$router.push('/UserPage');
     } else{
-      if(!this.$store.getters.is_IRSS){
+      if(!this.$store.getters.is_IRSS){ 
         this.$router.push('/Home');
       }
     }
@@ -62,5 +68,24 @@ export default {
   min-height: 100vh;
 }
 
+.arrow_img{
+    position: relative;
+    bottom: 0px;
+    right: 0; 
+    transform: rotate(180deg) translateX(50%);
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top:30px;
+    margin-bottom: 30px;
+    width: 60px; 
+    left: 50%;
+    z-index: 3;
+}
+
+@media only screen and (min-width: 450px){
+  .arrow_img{
+    display: none;
+  }
+}
 
 </style>

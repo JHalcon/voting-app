@@ -1,9 +1,9 @@
 <template>
   <div id="Votes">
-    <h3 class="textMontserrat my_blue headerVotes">DOSTĘPNE GŁOSOWANIA:</h3>
+    <h3 class="textMontserrat my_blue headerVotes">{{this.$store.state.msg.userPage.title}}</h3>
     <div class="voteList">
       <ul>
-        <li v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" class="votingListItem">
+        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem">
           <voteItem :voteText="v.name"></voteItem>
         </li>
       </ul>
@@ -18,12 +18,7 @@ export default {
   /*
   data() {
     return {
-      voteTab: [
-        { voteText: "WYBORY DO RADY INSTYTUTU BIOLOGII" },
-        { voteText: "WYBORY DO RADY INSTYTUTU INFORMATYKI" },
-
-
-      ],
+      a: process.env.VUE_APP_TITLE;
     };
   },
   */
@@ -71,8 +66,8 @@ li::marker {
   flex-direction: column;
   padding: 10px;
   font-family: Roboto;
-  font-size: 2rem;
-  width: 83%;
+  font-size: 1.7rem;
+  width: 75%;
   margin: auto;
   min-height: 300px;
 }
@@ -89,6 +84,8 @@ h3.textMontserrat.my_blue.headerVotes {
   display: flex;
   justify-content: center;
   text-align: center;
+    padding: 20px;
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -98,7 +95,7 @@ h3.textMontserrat.my_blue.headerVotes {
     width: 100%;
   }
   h3.textMontserrat.my_blue.headerVotes {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
   }
 }
 @media only screen and (max-width: 992px) and (orientation: landscape) {
@@ -128,7 +125,7 @@ h3.textMontserrat.my_blue.headerVotes {
 }
 @media only screen and (min-width: 1350px) {
    h3.textMontserrat.my_blue.headerVotes {
-    font-size: 2.7rem;
+    font-size: 2.1rem;
   }
 
 

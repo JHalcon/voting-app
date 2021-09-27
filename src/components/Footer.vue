@@ -2,17 +2,21 @@
   <div id="footer">
     <div id="footer_hr"></div>
     <footer>
-      <a href="https://samorzad.up.krakow.pl">Samorząd Studentów</a>
+      <a href="/contact">{{this.$store.state.msg.footer.kontakt}}</a>
+      <br id="breakline0">
+      <span id="dot0"> · </span>
+
+      <a target="_blank" rel="noopener noreferrer" href="https://samorzad.up.krakow.pl">{{this.$store.state.msg.footer.samorzad}}</a>
       <br id="breakline1">
       <span id="dot1"> · </span>
 
-      <a href="https://skni.up.krakow.pl"
-        >Studenckie Koło Naukowe Informatyków</a
+      <a target="_blank" rel="noopener noreferrer" href="https://skni.up.krakow.pl"
+        >{{this.$store.state.msg.footer.kolo}}</a
       ><br id="breakline2">
       <span id="dot2"> · </span>
       
-      <a href="https://www.up.krakow.pl"
-        >Uniwersytet Pedagogiczny im.&nbsp;KEN w&nbsp;Krakowie</a
+      <a target="_blank" rel="noopener noreferrer" href="https://www.up.krakow.pl"
+        >{{this.$store.state.msg.footer.up}}</a
       >
       <br id="breakline3">
       <span id="dot3"> · </span> 2021
@@ -28,7 +32,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-#breakline1, #breakline2, #breakline3{
+#breakline0, #breakline1, #breakline2, #breakline3{
   display: none;
 }
 #footer {
@@ -102,7 +106,7 @@ footer a:hover {
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 949px) {
+@media only screen and (min-width: 868px) and (max-width: 949px) {
   footer,
   footer a {
     font-size: 14px;
@@ -112,26 +116,26 @@ footer a:hover {
   }
 }
 
-@media only screen and (min-width: 450px) and (max-width: 767px) {
+@media only screen and (min-width: 500px) and (max-width: 867px) {
   #footer{
     height: var(--footer_450_767);
   }
 }
 
-@media only screen and (min-width: 316px) and (max-width: 449px) {
+@media only screen and (min-width: 327px) and (max-width: 499px) {
   #footer{
     height: var(--footer_316_449);
   }
 }
 
-@media only screen and (min-width: 316px) and (max-width: 767px) {
+@media only screen and (min-width: 327px) and (max-width: 867px) {
   footer,
   footer a {
     font-size: 14px;
   }
 }
 
-@media only screen and (max-width: 315px) {
+@media only screen and (max-width: 326px) {
   #footer{
     height: var(--footer_0_315);
   }
@@ -141,7 +145,7 @@ footer a:hover {
 
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 867px) {
   #dot2{
     display: none;
   }
@@ -149,7 +153,12 @@ footer a:hover {
     display: block;
   }
 }
-@media only screen and (max-width:449px) {
+@media only screen and (max-width:499px) {
+  a {
+    display: inline-block;
+    padding: 5px;
+  }
+
   #dot1{
     display: none;
   }

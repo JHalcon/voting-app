@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <!--class="collapsible c1 my_magenda"-->
-    <div v-bind="$attrs" v-on:click="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
+  <div :class="class3">
+    <div tabindex=0 v-bind="$attrs" v-on:click="showAnswer" @keyup.enter="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
       {{ question }}
     </div>
     <div class="content">
-      <p>{{ answer }}</p>
+      <ul v-if="answers" id="answers_list" style="font-weight: bold" class="textRoboto">
+        {{this.$store.state.msg.faqBar.lista}}
+        <li style="font-weight: bold" v-for="(person) in this.answers" :key="person.id">
+          {{person.imie}} {{person.nazwisko}} {{person.nr_albumu}} {{person.rok}}
+        </li>
+      </ul>
+      <p v-else>{{ answer }}</p>
     </div>
     <br />
   </div>
@@ -16,21 +21,39 @@ export default {
   props: {
     question: String,
     answer: String,
-    class1: String,
+    answers: Array,
     fullsite: Boolean,
+    index: Number,
   },
     inheritAttrs:false,
     data(){
         return{
             isActive:false,
-            class2 : this.class1,
+            class2: String,
+            class3: String,
         }
+    },
+    created(){
+      if(this.index % 3 == 0){
+        this.class1 = "collapsible c1 my_magenda"
+        this.class3 = "c1"
+      }  else 
+      if (this.index % 3 == 1){
+        this.class1 = "collapsible c2 my_orange"
+        this.class3 = "c2"
+      } else 
+      if( this.index % 3 == 2){
+        this.class1 = "collapsible c3 my_blue"
+        this.class3 = "c3"
+      }
+
+      this.class2 = this.class1
     },
     methods:{
         showAnswer(){
             
             let c = event.target.nextElementSibling;
-            c.style.height = "100px";
+            //c.style.height = "100px";
 
             if (c.style.maxHeight){
                 // zwijanie odpowiedzi
@@ -55,6 +78,16 @@ export default {
 p{
     margin-top: 0;
     margin-bottom: 1rem;
+}
+
+#answers_list{
+  color: #345;
+  padding: 10px;
+
+
+}
+#answers_list li{
+  padding-top: 10px;
 }
 
 .collapsible {
@@ -123,13 +156,13 @@ p{
     background-color: var(--my_blue_light);}
 
     
-@media only screen and (min-width: 860px) {
+@media only screen and (min-width: 768px) {
   
 
     .faq .collapsible {
         font-size: 2.3vw;
     }
-  .faq .content{
+    .faq .content{
         font-size: 1.5vw;
     }
 
@@ -140,18 +173,18 @@ p{
     .collapsible.c1:hover {
         background-color: var(--my_magenda);
         border-color: var(--my_magenda); }
-    .c1.content{
-        background-color: var(--my_magenda_light);}
+    //.c1.content{
+    //    background-color: var(--my_magenda_light);}
     .collapsible.c2:hover {
         background-color: var(--my_orange);
         border-color: var(--my_orange); }
-    .c2.content{
-        background-color: var(--my_orange_light);}
+    //.c2.content{
+    //    background-color: var(--my_orange_light);}
     .collapsible.c3:hover {
         background-color: var(--my_blue); 
         border-color: var(--my_blue); }
-    .c3.content{
-        background-color: var(--my_blue_light);}
+    //.c3.content{
+    //    background-color: var(--my_blue_light);}
       
 }
 

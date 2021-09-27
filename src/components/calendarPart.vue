@@ -96,11 +96,30 @@ export default {
   transition: color 0.2s, background-color 0.5s, border-radius 1.5s;
 }
 
+.days .today{
+  color: var(--my_magenda);
+  _font-family: "Montserrat";
+    _text-decoration: underline ;
+  _border: 1px solid var(--my_magenda_dark);
+    _background-color: var(--my_blue_light);
+  _border-radius: 15px;
+  text-shadow: 1px 1px 1px var(--my_magenda_dark);
+
+
+}
+
 .days .active_cal {
   background-color: var(--my_magenda);
+  border: 3px solid var(--my_magenda_dark);
+
   color: white;
   transition: color 0.2s, background-color 0.5s, border-radius 0.2s;
+
+  font-family: "Montserrat";
+  _text-decoration: underline ;
 }
+
+
 
 
 .calendar_one {
@@ -134,7 +153,7 @@ export default {
   }
 
   .days .active_cal_only {
-    border-radius: 40%;
+    border-radius: 15px;
   }
 
   .days .active_cal_start {
@@ -151,7 +170,7 @@ export default {
  
 
   .calendar_column li {
-    font-size: 2.5vw;
+    font-size: 4vw;
   }
 
   .calendar_text {

@@ -2,15 +2,14 @@
   <div>
 <HeaderForLogged v-bind:onlyOneVote="this.onlyOneVote" />
     <div v-if="loaded">
+
       <voteDetails 
         v-bind:vote="this.vote"
         v-bind:onlyOneVote="this.onlyOneVote"
-        type="Głosowanie tajne"
-        description="Głosowanie dopuszcza wybranie kilku opcji"
-      /> <!-- type oraz description myślę że trzeba będzie stąd wywalić, i w voteDetails je pobierać z propsa "vote" -->
+      />  
     </div>
     <div v-else>
-      <LoadingItem />
+      <LoadingItem medium /> 
     </div>
   </div>
 </template>
@@ -39,25 +38,43 @@ export default {
 
 
   created: function () {
+    const token = this.$func.getLoggedToken(); //localStorage.getItem('JWT_TOKEN');
 
-    if(!this.$store.getters.isLoggedIn){
+    if(!token){
       this.$router.push(this.$store.getters.getMainPageLink);
     }
     else{
 
         // pobieranie tokena
-        const token = localStorage.getItem('JWT_TOKEN');
 
         // pobieranie listy głosowań
-        axios.get('https://dev.api.up.kornel.dev/api/v1/public/vote/vote/'+this.voteIdVar, { 
+        axios.get(process.env.VUE_APP_PUBLIC_VOTES+this.voteIdVar+"/", { 
           headers: {
             'Authorization': `Token ${token}`
           }
         })
         .then(resp => {
-          this.loaded= true;
+          //this.loaded= true;
           this.vote = resp.data; 
           console.log(this.vote); //todo delete
+        })
+        .catch(err =>{
+          if(err.response.status == 404){
+            this.$router.push("/404");
+          } else{
+            
+            // wylogowywanie
+            this.$func.logoutUser();
+
+            if(this.$store.getters.is_IRSS)
+              this.$router.push('/');
+            else
+              this.$router.push('/Home');
+              
+          }
+        })
+        .then(() => {
+          this.loaded = true;
         })
 
     }

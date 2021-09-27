@@ -1,27 +1,40 @@
 <template>
+
+  <div>
+
+    <Header />
+
   <div id="noVotes">
+    
     <div class="imgNoVotes">
-      <img src="../assets/images/no_poll.svg" />
+      <img src="../assets/images/404.svg" />
     </div>
     <div class="komunikat">
       <h3>
-        {{this.$store.state.msg.noVotes.ups}}<br />
-        {{this.$store.state.msg.noVotes.komunikat1}}
+        {{this.$store.state.msg.site_404.ups}}<br />
+        {{this.$store.state.msg.site_404.komunikat1}} 
       </h3>
-      <h2>{{this.$store.state.msg.noVotes.komunikat2}}</h2>
+
+      <router-link class="button" to="/">
+        {{this.$store.state.msg.site_404.komunikat2}}
+      </router-link>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
+
 export default {
-  name: "NoVotes",
-  components: {},
+  name: "page404",
+  components: {
+    Header,
+  },
 };
 </script>
 <style lang="scss" scoped>
 #noVotes {
-  height: 65vh;
   // background-color: blue;
   display: flex;
   justify-content: center;
@@ -38,23 +51,48 @@ export default {
   //max-width:100%;
   height: 40vh;
 }
-.komunikat {
-  padding: 20px;
+
+.komunikat{
+  margin: 20px;
+}
+h1{
   color: black;
   font-family: Roboto;
-  font-weight: 600;
-  width: 70%;
-  font-size: 1.6rem;
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.komunikat h2,
+h2,
 h3,
 h4 {
   padding: 20px;
   color: black;
   font-family: Roboto;
-  font-weight: bold;
-  line-height: 1, 5;
-  margin: none;
+}
+
+.button{
+    display: inline-block;
+    font-weight:bold;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: var(--my_magenda);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 2px 5px 5px #999;
+    font-family: Roboto;
+    text-decoration: none;
+
+    padding: 15px 25px;
+    margin: 0px 20px;
+    font-size: 1.5rem;
+}
+
+.button:hover {background-color: var(--my_magenda_dark);}
+
+.button:active {
+  background-color: var(--my_magenda_dark);
+  box-shadow: 1px 5px 1px #666;
+  transform: translateY(4px);
 }
 
 @media only screen and (max-width: 767px) {
@@ -74,16 +112,32 @@ h4 {
     align-items: center;
     flex-direction: column;
     width: 90%;
+    margin-top: 0;
+  }
+  .button{
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+
   }
 }
 @media only screen and (max-width: 767px) and (orientation: landscape) {
   #noVotes {
     height: 50vh;
     flex-wrap: nowrap;
-    width: 80%;
+    width: 60%;
   }
-  .komunikat {
+ .komunikat {
     font-size: 0.8rem;
+ }
+  h3{
+    padding: 0;
+  }
+  .button{
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+
   }
 }
 
@@ -92,15 +146,22 @@ h4 {
     width: 90%;
   }
   .komunikat {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
     flex-direction: column;
   }
+
+  .button{
+    font-size: 1.1rem;
+  }
 }
 @media only screen and (min-width: 1350px) {
   .komunikat {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
+      display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 }
 
@@ -113,5 +174,9 @@ h4 {
   .komunikat {
     font-size: 0.8rem;
   }
+  .button{
+    font-size: 0.8rem;
+
+  } 
 }
 </style>
