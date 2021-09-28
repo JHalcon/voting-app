@@ -8,7 +8,7 @@
                         </div>
                     
                   
-                        <div v-if="this.only_irss" class="text_header"> 
+                        <div v-if="this.only_irss || this.only_irss_2" class="text_header " :class="{newCandidateHeader : this.only_irss_2}"> 
                             <span id="linijka_1" class="textMontserrat my_blue wybory_do">{{this.$store.state.msg.header.irss_1}}<br></span>
                             <span id="linijka_2" class="textMontserrat my_magenda">{{this.$store.state.msg.header.irss_2}}<br></span>
                             <span id="linijka_3" class="textMontserrat my_orange">{{this.$store.state.msg.header.irss_3}}</span>
@@ -45,7 +45,10 @@ export default {
   name: "Header",
   components: {},
 
-  props: {'only_irss': Boolean},
+  props: {
+      only_irss: Boolean,
+      only_irss_2: Boolean,
+      },
   
 };
 </script>
@@ -131,7 +134,7 @@ export default {
         position: absolute;
     }
     #header_default .text_header {
-        margin-left: calc((100% - 800px)/2);;
+        margin-left: calc((100% - 800px)/2);
     }
     #header_default .icon{
         width: 60px;
@@ -144,7 +147,7 @@ export default {
         position: relative;
         float: left;
     }
-    #header_default .text_header {
+    .text_header {
         margin-left: 0;
     }
 
@@ -175,6 +178,11 @@ export default {
 }
 @media only screen and (min-width: 860px) {
   
+
+    .newCandidateHeader{
+        margin-left: 60px;
+    }
+
     #header_default {
         height: 13vw;
         margin-bottom: 20px;

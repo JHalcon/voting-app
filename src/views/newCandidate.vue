@@ -5,7 +5,7 @@
       <HeaderForLogged/>
       </div>
     <div v-else>
-      <Header />
+      <Header only_irss_2 />
     </div>
 
       <div v-if="this.loaded1 && this.loaded2">

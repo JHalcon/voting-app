@@ -159,7 +159,7 @@ export default {
 
         firstname_from_props: "",
 
-        liczbaOs: 1,
+        liczbaOs: 5,
         sending1: false,
         sent1: false,
         error: false,

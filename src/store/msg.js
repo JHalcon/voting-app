@@ -5,8 +5,8 @@ export default {
             login_frame_1_text_3: "(na podany adres wyślemy " ,
             login_frame_1_text_4: "jednorazowy kod dostępu)" ,
             login_frame_1_button_1: "Wyślij kod",
-            login_frame_1_email: "bartlomiej.pietras@student.up.krakow.pl",
-            login_frame_1_placeholder_1: "np. bartlomiej.pietras@student.up.krakow.pl",
+            login_frame_1_email: "adam.mickiewicz@student.up.krakow.pl",
+            login_frame_1_placeholder_1: "np. adam.mickiewicz@student.up.krakow.pl",
             login_frame_1_text_2_edit: "podaj (swój) uczelniany adres email",
 
             //login_frame_1_text_1a: "Wprowadź poniżej kod, ",
