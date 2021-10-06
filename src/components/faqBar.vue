@@ -124,8 +124,6 @@ p{
     padding: 0 28px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
-  //  background-color: #f1f1f1;
     margin: 0px 10px 0px;
     border-radius: 0 0 10px 10px;
   }
@@ -155,9 +153,12 @@ p{
   .c3 div.content{
     background-color: var(--my_blue_light);}
 
+
     
 @media only screen and (min-width: 768px) {
-  
+    .content {
+        transition: max-height 0.2s ease-out;
+    }
 
     .faq .collapsible {
         font-size: 2.3vw;

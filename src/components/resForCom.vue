@@ -19,9 +19,10 @@
             
 
             <h3 class="suma">Suma oddanych głosów: {{this.allRes}}</h3>
+            <div v-if="this.allRes > 0">
             <h4 class="suma">Głosów ważnych: {{this.allResFiltered}} ({{this.procentValidVote}}%)</h4>
             <h4 class="suma">Głosów nieważnych: {{this.allRes-this.allResFiltered}} ({{100-this.procentValidVote}}%)</h4>
-
+            </div>
         </div>
         </div>
 </template>

@@ -107,7 +107,7 @@ label{
 .inputV2{
     display: inline-block;
     height:100%;
-    width:277px;
+    width:275px;
     margin-left:3px;
 
     font-family: Roboto;
@@ -152,6 +152,10 @@ option{
 
 h2,h3,h4{
     color: #345;
+}
+
+select{
+    background-color: white;
 }
 
 @media only screen and (min-width:1200px){

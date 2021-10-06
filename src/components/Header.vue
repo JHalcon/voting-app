@@ -115,10 +115,6 @@ export default {
   border-color: transparent transparent black transparent;
 }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity:0.7;
-}
 
 @media only screen and (min-width: 1320px) {
     
@@ -178,6 +174,11 @@ export default {
 }
 @media only screen and (min-width: 860px) {
   
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity:0.7;
+    }
 
     .newCandidateHeader{
         margin-left: 60px;

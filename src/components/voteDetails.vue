@@ -4,39 +4,41 @@
 
 
       <div class="smallNavbar headerRob" v-if="!onlyOneVote">
-      <router-link to="/UserPage">Strona główna</router-link> / <router-link to="">Głosowanie</router-link>
-    </div>
+        <router-link style="text-decoration: none" to="/UserPage">&larr; <span class="routerlink">Strona główna</span></router-link>
+      </div>
     <div class="VoteDetails2">
       <div class="left">
          <h3 class="textMontserrat my_magenda h3Header" aria-label="nazwa głosowania">{{ vote.name }}</h3>
          
         <div v-show="this.canVotenow" class="infoInner">
-          <div class="text">
-           
-            <p>
-              <ul class="infoList" aria-label="Opis głosowania">
-                <li class="infoItem" v-if="this.isMultichoice==false"><span class="robBold">{{this.$store.state.msg.voteDetail.glos_1_opcja}}</span><br></li>
-                    <li  class="infoItem" v-if="this.isMultichoice==true">  <span class="robBold" v-show="this.limitAns>0">{{this.$store.state.msg.voteDetail.glos_limit_opcji_1}}
-                    {{this.limitAns}} {{this.$store.state.msg.voteDetail.glos_limit_opcji_2}}</span><span class="robBold" v-show="this.limitAns==0">{{this.$store.state.msg.voteDetail.glos_wiele_opcji}}</span></li>
-                <li  class="infoItem" v-if="this.isAnons==true"> <span class="robBold">{{this.$store.state.msg.voteDetail.glos_anonimowe}}</span></li>
-                <li  class="infoItem" v-show="ddescr"> <span class="robBold">{{ this.description }}</span></li>
-              </ul>
-            </p>
-          </div>
-          <button class="blueBTN1 button_click" v-on:click="showCard()" v-show="actAnsBTN">
-            {{this.$store.state.msg.voteDetail.wyswietl_karte}}
-          </button>
+            <div class="text">
+            
+              <p>
+                <ul class="infoList" aria-label="Opis głosowania">
+                  <li class="infoItem" v-if="this.isMultichoice==false"><span class="robBold">{{this.$store.state.msg.voteDetail.glos_1_opcja}}</span><br></li>
+                      <li  class="infoItem" v-if="this.isMultichoice==true">  <span class="robBold" v-show="this.limitAns>0">{{this.$store.state.msg.voteDetail.glos_limit_opcji_1}}
+                      {{this.limitAns}} {{this.$store.state.msg.voteDetail.glos_limit_opcji_2}}</span><span class="robBold" v-show="this.limitAns==0">{{this.$store.state.msg.voteDetail.glos_wiele_opcji}}</span></li>
+                  <li  class="infoItem" v-if="this.isAnons==true"> <span class="robBold">{{this.$store.state.msg.voteDetail.glos_anonimowe}}</span></li>
+                  <li  class="infoItem" v-show="ddescr"> <span class="robBold">{{ this.description }}</span></li>
+                </ul>
+              </p>
+            </div>
+            <button class="blueBTN1 button_click" v-on:click="showCard()" v-show="actAnsBTN">
+              {{this.$store.state.msg.voteDetail.wyswietl_karte}}
+            </button>
         </div>
         <div id="voteCardMaster" v-show="activeAns">
           <h3 v-if="this.voteType==='BOSS'" class="headerRob">{{this.$store.state.msg.voteDetail.karta_tytul_boss}}</h3>
           <h3 v-if="this.voteType!='BOSS'" class="headerRob">{{this.$store.state.msg.voteDetail.karta_tytul_nieboss}}</h3>
           <form>
-            <div v-for="o in this.activeA" :key="o.id" 
-            class="answers"
-             :id="o.id+'Did'" :name="o.name"
-              style:hover=" color: red"
-              v-on:click="selectAns(o.id)" :value="o.name">
-              <input type="checkbox" :value="o.name" v-on:change="lol()" :id="o.id+'id'">
+            <div v-for="o in this.activeA" 
+                :key="o.id" 
+                class="answers"
+                :id="o.id+'Did'" 
+                :name="o.name"
+                v-on:click="selectAns(o.id)" 
+                :value="o.name">
+              <input type="checkbox" :value="o.name" v-on:click="selectAns(o.id)"  :id="o.id+'id'">
               <label :for="o.id" class="Alabel">{{o.name}}</label>
             </div>
           </form>
@@ -61,7 +63,7 @@
         </div>
         <div id="communicatForUser" v-show="!this.canVotenow">
           <h3 class="textMontserrat communicat">
-            {{this.communicatN()}}
+            {{this.communicatN}}
           </h3>
         </div>
         <div id="alert2" v-show="isAlert">
@@ -209,6 +211,7 @@
         loading3:false,
         dayIndex: 0,
         isClockImgLoaded: false,
+        voteIsToday: false,
       };
     },
     components: {
@@ -228,6 +231,9 @@
       },
       dateEE(){
         return this.vote.date_end;
+      },
+      dateStartJson(){
+        return this.vote.date_start;
       },
       dateEnd() {
 
@@ -263,9 +269,9 @@
       },
       ddescr(){
         if(this.description!=""){
-        return true;
-        }else{
-        return false;
+          return true;
+        } else {
+          return false;
         }
       },
        isClosed() {
@@ -281,35 +287,81 @@
       userId() {
         return this.$func.getLoggedUserId(); //localStorage.getItem('USER_ID');
       },
-     activeA(){
+      activeA(){
        return this.options.filter(function(u) {
          return u.is_valid;
-     })
-   } ,
-   FalseA(){
-       return this.options.filter(function(u) {
-         return !u.is_valid;
-     })
-   },
-   VotingID(){
-     return this.vote.id;
-   }
+        })
+      },
+      FalseA(){
+          return this.options.filter(function(u) {
+            return !u.is_valid;
+        })
+      },
+      VotingID(){
+        return this.vote.id;
+      },
+      communicatN() {
+          if (this.isStarted){
+            if (this.voteGiven) {
+              return this.$store.state.msg.voteDetail.glos_juz_oddany;
+            } else if(this.isClosed){
+              return this.$store.state.msg.voteDetail.glos_juz_zakonczone;//"GŁOSOWANIE JUŻ SIĘ ZAKONCZYLO"
+            } else if(this.isCanceled){
+              return this.$store.state.msg.voteDetail.glos_anulowane;
+            }
+          } 
+            
+          if ((this.notStarted==false)) {
+            var time;
+            if(this.voteIsToday)
+              time = "o\xa0" + this.vote.date_start.substr(11, 5)+"!";
+            else
+              time = this.vote.date_start.substr(8, 2) + "." + this.vote.date_start.substr(5, 2)+"!"
+
+            return this.$store.state.msg.voteDetail.glos_nierozpoczete + time;//"GŁOSOWANIE JESZCZE SIĘ NIE ZACZĘŁO, ZAPRASZAMY WKÓTCE";
+          } 
+          return this.$store.state.msg.voteDetail.glos_zakonczone;//"GŁOSOWANIE ZAKONCZONE"
+            
+          
+      },
  },
 
  mounted(){
     this.isClockImgLoaded = true;
  },
     created: function () {
-      var dzisiaj = new Date();
-      var hg = new Date(this.dateEE);
+      var tmp = new Date();
+      var dzisiaj = new Date(tmp.getTime() - 60000); // jest to obiekt z dzisiejsza data, ale przesuniety o minutę wstecz. Robię tak, ponieważ
+        // serwer przez kilka sekund PO wybranej godzinie startu obsługuje automatyczne uruchamianie głosowania
+        // W związku z tym przez kilka sekund warunek dzisiaj < dateOfStart zwracałby false -> wtedy, gdy system akurat uruchamiał głosowanie.
+        // Dlatego "dzisiaj" jest zmienną cofniętą o minutę, przez co dajemy czas serwerowi na uruchomienie głosowania i wyświetlamy poprawny komunikat 
+      var endDate = new Date(this.dateEE);
       var bpDay = new Date(this.vote.date_start);     //dodałem ~Bart
       this.dayIndex = bpDay.getDay();                 //dodałem ~Bart
      // console.log("Data zakończenia "+hg);
-      if(hg<dzisiaj){
+
+      var dateOfStart = new Date(this.dateStartJson);
+
+
+      // minal czas glosowania (niezaleznie od faktycznego stanu glosowania na backendzie), zatem zapisujemy ze glosowanie minelo
+      if(endDate < dzisiaj){
         this.notStarted = true;
-      //  console.log("ZAKONCZENIE TRUE");
+      } else{
+        // sprawdzamy czy glosowanie jeszcze sie nie rozpoczęło
+        if(dzisiaj < dateOfStart){
+
+          // jeśli głosowanie jest dzisiaj to zapisujemy to aby wyświetlić odpowiedni komunikat (godzine)
+          if(dzisiaj.getDate() == dateOfStart.getDate() && dzisiaj.getMonth() == dateOfStart.getMonth() && dzisiaj.getFullYear() == dateOfStart.getFullYear())
+            this.voteIsToday = true;
+          // w przeciwnym razie wyswietlimy date
+          else
+            this.voteIsToday = false;
+
+        //  console.log("ZAKONCZENIE TRUE");
+        } 
       }
-        this.options.forEach((n)=>{
+
+      this.options.forEach((n)=>{
           let b = {};
           b.name = n.name;
           b.id=n.id;
@@ -317,10 +369,10 @@
           b.is_valid = n.is_valid;
         this.allAns.push(b);
       });
-      console.log("ID USER: " + this.userId);
+      //console.log("ID USER: " + this.userId);
       let bb;
       bb = this.commision.find(element => element.member == this.userId);
-      console.log("SZUKANIE"+bb);
+      //console.log("SZUKANIE"+bb);
     
       if(bb){
           this.recVisible = true;
@@ -328,7 +380,7 @@
       }
       else{
         if(this.isClosed){
-        console.log("prelacznik");
+        //console.log("prelacznik");
           this.userIS = true;
         }
       }
@@ -349,32 +401,14 @@
       showAlert() {
         this.isAlert = true;
       },
-      communicatN() {
-          if (this.isStarted){
-              if (this.voteGiven) {
-          return this.$store.state.msg.voteDetail.glos_juz_oddany;
-        }else if(this.isClosed){
-           return this.$store.state.msg.voteDetail.glos_juz_zakonczone;//"GŁOSOWANIE JUŻ SIĘ ZAKONCZYLO"
-        }
-        else if(this.isCanceled){
-           return this.$store.state.msg.voteDetail.glos_anulowane;
-        }
-        }
-            else{
-              if ((this.notStarted==false)) {
-            return this.$store.state.msg.voteDetail.glos_nierozpoczete;//"GŁOSOWANIE JESZCZE SIĘ NIE ZACZĘŁO, ZAPRASZAMY WKÓTCE";
-          }else{
-            return this.$store.state.msg.voteDetail.glos_zakonczone;//"GŁOSOWANIE ZAKONCZONE"
-          }
-            }
-      },
+      
 
 
       canFV(){
         let chb =  document.getElementById("FVchb");
         let btn = document.getElementById("FVbtn");
         if(chb.checked){
-          console.log("checked");
+          //console.log("checked");
           //btn.style.filter = "none";
           btn.style.backgroundColor = "var(--my_blue)";
           btn.style.pointerEvents = 'auto';
@@ -383,7 +417,7 @@
           this.falseAID.push(this.FalseA[0].id);
         }
         else{
-          console.log("nonchecked");
+          //console.log("nonchecked");
           btn.style.pointerEvents = 'none';
           btn.style.backgroundColor = "gray";
         }
@@ -393,7 +427,7 @@
 
         this.blockCard();
 
-        console.log("DWA");
+        //console.log("DWA");
           
           if ((this.isMultichoice === false) ) {
             if(n==1){
@@ -414,7 +448,7 @@
             }
           }
             else{
-              console.log("nie multi");
+              //console.log("nie multi");
               if(n==0){
                   if(this.limitAns!=0){
                  this.alertCOM = this.$store.state.msg.voteDetail.alert_limit_odp_1 + this.limitAns + this.$store.state.msg.voteDetail.alert_limit_odp_2;//"Prosze zaznacz do " + this.limitAns + " wybranych odpowiedzi. W innym wypadku oddajesz głos nieważny";
@@ -436,29 +470,29 @@
               }
               else{
                   if((this.limitAns == 0)){
-                        this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
-              this.AcceptAns = true,
-                this.isAlert = true;
-              this.canFinish = true;
-               this.falseVAlert = false;
-               this.loading2 = false;
+                      this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
+                      this.AcceptAns = true,
+                      this.isAlert = true;
+                      this.canFinish = true;
+                      this.falseVAlert = false;
+                      this.loading2 = false;
 
-                  }else if(n<=this.limitAns){
-                       this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
-              this.AcceptAns = true,
-                this.isAlert = true;
-              this.canFinish = true;
-               this.falseVAlert = false;
-               this.loading2 = false;   
+                  } else if(n<=this.limitAns){
+                      this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
+                      this.AcceptAns = true,
+                      this.isAlert = true;
+                      this.canFinish = true;
+                      this.falseVAlert = false;
+                      this.loading2 = false;   
 
                   }
                   else{
-              this.alertCOM = this.$store.state.msg.voteDetail.alert_limit2_odp_1 + this.limitAns + this.$store.state.msg.voteDetail.alert_limit2_odp_2;// "Prosze zaznacz maksymalnie "+this.limitAns+" opowiedzi. W innym wypadku oddajesz głos nieważny";
-                this.falseVAlert = true;
-                this.isAlert = true;
-                this.canFinish = false;
-                this.AcceptAns = false;
-                this.loading2 = false;
+                      this.alertCOM = this.$store.state.msg.voteDetail.alert_limit2_odp_1 + this.limitAns + this.$store.state.msg.voteDetail.alert_limit2_odp_2;// "Prosze zaznacz maksymalnie "+this.limitAns+" opowiedzi. W innym wypadku oddajesz głos nieważny";
+                      this.falseVAlert = true;
+                      this.isAlert = true;
+                      this.canFinish = false;
+                      this.AcceptAns = false;
+                      this.loading2 = false;
 
                   }
 
@@ -466,59 +500,6 @@
 
             }
 
-
-
-
-
-
-
-
-//////////////
-/*
-          if ((this.isMultichoice === false) && (n == 1)) {
-          this.alertCOM = "Potwierdź swój wybór";
-          this.isAlert = true;
-          this.canFinish = true;
-          this.AcceptAns = true;
-           this.falseVAlert = false;
-           this.loading2 = false;
-        } else {
-          if (n == 0) {
-            this.alertCOM = "Proszę najpierw zaznaczyć odpowiedź. W innym wypadku potwierdź, że oddajesz głos nieważny";
-            this.isAlert = true; ///okno z alertem
-            this.falseVAlert = true; // glos nieważny
-            this.canFinish = false; //blokada guzika
-            this.AcceptAns = false;
-            this.loading2 = false;
-           // this.falseVAlert = true;
-          } else {
-            if ((this.isMultichoice === true) && (this.limitAns <= n)) {
-              this.alertCOM = "Potwierdź swój wybór";
-              this.AcceptAns = true,
-                this.isAlert = true;
-              this.canFinish = true;
-               this.falseVAlert = false;
-               this.loading2 = false;
-            } else {
-              if ((this.limitAns == 0) && (n > 1)) {
-                this.alertCOM = "Proszę zaznaczyć tylko jedną odpowiedź. W innym wypadku oddajesz głos nieważny";
-                this.falseVAlert = true;
-                this.isAlert = true;
-                this.canFinish = false;
-               this. AcceptAns = false;
-               this.loading2 = false;
-              } else {
-                this.alertCOM = "Prosze zaznacz " + this.limitAns + " odpowiedzi. W innym wypadku oddajesz głos nieważny";
-                this.falseVAlert = true;
-                this.isAlert = true;
-                this.canFinish = false;
-                this.AcceptAns = false;
-                this.loading2 = false;
-              }
-            }
-          }
-        }
-*/
 
       },
 
@@ -529,11 +510,11 @@
 
       vote1() {
         let n = this.myAnswer.length;
-        console.log(this.isMultichoice);
-        console.log("ilosc" + n)
+        //console.log(this.isMultichoice);
+        //console.log("ilosc" + n)
         //this.blockCard();
         this.loading2 = true;
-        console.log("jeden");
+        //console.log("jeden");
         setTimeout(()=>{this.vote2(n)
         }, 500);
         
@@ -580,21 +561,20 @@
       },
       answerDone2(){
 
- if (this.canFinish == true) {
-          this.closeAlert();
-          this.doneVote = true;
-          this.activeAns = false;
-          this.actAnsBTN = false;
-          this.sendAns()
-         // this.$root.$refs.A.getAgain();
-         // this.$root.$refs.A.dupa();
-         this.loading = false;
-        
-          
-        } else {
-          this.vote1();
-          this.loading = false;
-        }
+          if (this.canFinish == true) {
+            this.closeAlert();
+            this.doneVote = true;
+            this.activeAns = false;
+            this.actAnsBTN = false;
+            this.sendAns()
+            // this.$root.$refs.A.getAgain();
+            // this.$root.$refs.A.dupa();
+            this.loading = false;
+            
+          } else {
+            this.vote1();
+            this.loading = false;
+          }
       },
       answerDone() {
         this.loading = true;
@@ -602,16 +582,13 @@
         }, 500);
 
       },
-      lol() {
-        event.target.parentElement.classList.add("focused");
-      },
         massageForUser(s) {
         this.comFromServ = s;
       },
       sendAns() {
         const token = this.$func.getLoggedToken(); //localStorage.getItem('JWT_TOKEN');
-        console.log(token);
-        console.log("wysylam"+this.myAnswer);
+        //console.log(token);
+        //console.log("wysylam"+this.myAnswer);
         var that = this;
         axios.post(process.env.VUE_APP_PUBLIC_VOTES+this.VotingID+"/vote/", {
          
@@ -620,10 +597,10 @@
           headers: {
             'Authorization': `Token ${token}`
           }
-        }).then(function(response) {
-          console.log(response+"poszlo1");
+        }).then(function() {
+          //console.log(response+"poszlo1");
           that.doneVoteSucces = true;
-          console.log(typeof(response.status));
+          //console.log(typeof(response.status));
          /* if(((response.status) == 200)||((response.status) == 201)){
             console.log(response.vote[0]);
             that.doneVoteSucces = true;
@@ -635,7 +612,7 @@
         }).catch(function (error) {
          
           if (error.response) {
-            console.log(typeof(error.status))
+            //console.log(typeof(error.status))
             if (error.response.status >= 200) {
              that.failSend = true;
 
@@ -647,10 +624,10 @@
             that.massageForUser(error.response.data.vote[0]);
               //alert("BŁĄD"+error.response.data.vote[0]);
             }
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            console.log(error.response.data.vote[0]);
+            //console.log(error.response.data);
+            //console.log(error.response.status);
+            //console.log(error.response.headers);
+            //console.log(error.response.data.vote[0]);
           }
         }).then(function(){
           that.$root.$refs.A.getAgain();
@@ -662,7 +639,7 @@
       sendFAns() {
         this.loading3 = true;
         const token = this.$func.getLoggedToken(); //localStorage.getItem('JWT_TOKEN');
-        console.log(token);
+        //console.log(token);
          this.closeAlert();
           this.doneVote = true;
           this.activeAns = false;
@@ -676,8 +653,8 @@
             'Authorization': `Token ${token}`
           }
         })//.then(response => function(response){
-          .then(function(response){
-          console.log(response);
+          .then(function(){
+          //console.log(response);
           that.doneVoteSucces = true;
           /*
           if((response.status === 200)||(response.status === 201)) {
@@ -701,42 +678,42 @@
             that.massageForUser(error.response.data.vote[0]);
               //alert("BŁĄD"+error.response.data.vote[0]);
             }
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            console.log(error.response.data.vote[0]);
+            //console.log(error.response.data);
+            //console.log(error.response.status);
+            //console.log(error.response.headers);
+            //console.log(error.response.data.vote[0]);
           }
         }).then(function(){
           that.$root.$refs.A.getAgain();
         })
       },
       show() {
-        console.log(this.vote)
+        //console.log(this.vote)
       },
     
       selectAns(s) {
         let divS = document.getElementById(s + "Did");
         let h = document.getElementById(s + "id");
         let v = document.getElementById(s + "id").value;
-        console.log(v);
+        //console.log(v);
         if (h.checked === false) {
-          console.log("zaznaczam");
-          console.log("spoko" + s);
+          //console.log("zaznaczam");
+          //console.log("spoko" + s);
           this.myAnswer.push(s);
           this.myAnswertxt.push(v);
           h.checked = true;
-          let pos = this.myAnswer.indexOf(s);
-          console.log(pos + "Wpadło");
+          //let pos = this.myAnswer.indexOf(s);
+          //console.log(pos + "Wpadło");
           // event.target.style.backgroundColor  = "var(--my_orange)";
           divS.style.backgroundColor = "var(--my_orange)";
         } else {
-          console.log("odznaczam");
+          //console.log("odznaczam");
           let pos = this.myAnswer.indexOf(s);
           h.checked = false;
           this.myAnswer.splice(pos, 1);
           this.myAnswertxt.splice(pos, 1);
-          console.log("odzwnaczam" + pos);
-          console.log("zostaje" + this.myAnswer.length);
+          //console.log("odzwnaczam" + pos);
+          //console.log("zostaje" + this.myAnswer.length);
           divS.style ='';
           ///divS.onMouseover = "this.style.backgroundColor = 'var(--my_orange)'"
         //  divS.mouseOn.style.backgroundColor = "var(--my_orange)";
@@ -817,11 +794,11 @@ button#FVbtn{
     font-weight: 1000;
     font-family: Roboto;
   }
-div.infoInner{
-  justify-content: center;
-display: flex;
-flex-direction: column;
-}
+  div.infoInner{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
   div.clockIcon {
     display: flex;
     align-items: center;
@@ -831,6 +808,7 @@ flex-direction: column;
   }
   .headerRob{
     font-family: Roboto;
+    font-weight: bold;
   }
   .dDiv {
     display: flex;
@@ -875,12 +853,16 @@ flex-direction: column;
     color: green;
     font-size: 1.5rem;
     margin-top: 10px;
+    text-align: center;
   }
 #comForUser{
   margin-top:5%;
+  text-align: center;
+
 }
 #comForUserH{
   color:red; 
+
 }
   select {
     margin-right: 5px;
@@ -910,17 +892,18 @@ flex-direction: column;
     font-family: Roboto;
     font-weight: bold;
     border-radius: 2px;
-    height: 2rem;
+    _height: 2rem;
+    min-height: 50px;
 
   }
 
   .answers input {
+    margin-left: 10px;
     margin-right: 5px;
+
   }
 
-  .answers:hover {
-    background-color: var(--my_orange);
-  }
+  
   .answersC{
     background-color: white;
   }
@@ -983,9 +966,9 @@ flex-direction: column;
 
   button.blueBTN {
     margin: 20px;
-    width:220px;
+    _width:220px;
     background-color: var(--my_blue);
-    padding: 10px;
+    padding: 15px;
     font-family: "Montserrat";
     color: white;
     font-size: 1.3rem;
@@ -1038,6 +1021,12 @@ flex-direction: column;
   form{
     width:100%;
   }
+
+  .routerlink{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   /*
 @media (min-width:1000px)  and (max-width:1030px){
 .VoteDetails2{
@@ -1048,6 +1037,12 @@ flex-direction: column;
   height:50%;
 }
 }*/
+@media only screen and (min-width: 768px){
+  .answers:hover {
+    background-color: var(--my_orange);
+  }
+}
+
   @media (max-width: 770px) {
     .VoteDetails2 {
       display: flex;

@@ -19,29 +19,7 @@
 
                                 <select class="textMontserrat" id="instytut_select" v-on:change="hg">
                                     <option hidden selected>(wybierz)</option>
-                                    <option value="0">Biologii</option>
-                                    <option value="1">Filologii Angielskiej</option>
-                                    <option value="2">Filologii Polskiej</option>
-                                    <option value="3">Filozofii i Socjologii</option>
-                                    <option value="4">Fizyki</option>
-                                    <option value="5">Geografii</option>
-                                    <option value="6">Grafiki i Wzornictwa</option>
-                                    <option value="7">Historii i Archiwistyki</option>
-                                    <option value="8">Informatyki</option>
-                                    <option value="9">Malarstwa i Edukacji Artystycznej</option>
-                                    <option value="10">Matematyki</option>
-                                    <option value="11">Nauk o Bezpieczeństwie</option>
-                                    <option value="12">Nauk o Informacjii</option>
-                                    <option value="13">Nauk o Polityce i Administracjii</option>
-                                    <option value="14">Nauk o Wychowaniu</option>
-                                    <option value="15">Nauk Technicznych</option>
-                                    <option value="16">Neofilologii</option>
-                                    <option value="17">Pedagogiki Przedszkolnej i Szkolnej</option>
-                                    <option value="18">Pedagogiki Specjalnej</option>
-                                    <option value="19">Prawa i Ekonomii</option>
-                                    <option value="20">Psychologii</option>
-                                    <option value="21">Spraw Społecznych</option>
-                                    <option value="22">Sztuki Mediów</option>
+                                    <option v-for="i in this.$store.state.instytuty" v-bind:key="i.id" :value="i.wartosc">{{i.nazwa}}</option>
                                   </select>
 
                                 </div>
@@ -127,9 +105,7 @@ export default {
       if(this.loaded)
         this.calendarHeight = this.$refs.calendarFrame.clientHeight;
 
-      //console.log("2 start");
 
-      //console.log(this.days);
       this.loaded = false;
   
 
@@ -140,11 +116,7 @@ export default {
       //console.log(day_start + " koniec " + day_end);
 
       var all = document.getElementsByClassName("calendar_day");
-      //console.log("dlugoc tab" + all.length);
-      //console.log("poczatek" + day_start + "koniec " + day_end);
 
-
-    
 
       //  czyszczenie po poprzednim wyświetlaniu:
 
@@ -154,34 +126,33 @@ export default {
         all[i].classList.remove("today");
       }
 
+      // wyświetlanie nowego kalendarza (odpowiedniego miesiaca):
 
-      // wyświetlanie nowego kalendarza:
-
+      const dateNow = new Date();
       var selected_value = document.getElementById("instytut_select").value;
       this.selectInstytut(parseInt(selected_value));
       var selected_instytut = this.getInstytutById;
-
-      var day = selected_instytut.day;
-      this.monthIndex = selected_instytut.month - 1;
-      var firstDay = new Date(2021, this.monthIndex, 1);
+      var day = selected_instytut.wybory.dzien;
+      this.monthIndex = selected_instytut.wybory.miesiac - 1;
+      var rok = selected_instytut.wybory.rok;
+      var firstDay = new Date(rok, this.monthIndex, 1);
       this.blankDays = firstDay.getDay() - 1;
-      this.numberOfDays = new Date(2021, this.monthIndex+1, 0).getDate();
+      this.numberOfDays = new Date(rok, this.monthIndex+1, 0).getDate();
       this.monthName = this.$store.state.miesiace[this.monthIndex];
-
 
       var all_days = document.getElementsByClassName("calendar_day");
       all_days[day-1].classList.add("active_cal");
       all_days[day-1].classList.add("active_cal_only");
 
 
-      if(this.monthIndex == this.monthToday){
+      if(this.monthIndex == this.monthToday && rok==dateNow.getFullYear()){
         all_days[this.dayToday-1].classList.add("today");
       }
 
       // obliczanie za ile dni będą wybory:
 
-      const date1 = new Date(2021, this.monthToday, this.dayToday);
-      const date2 = new Date(2021, this.monthIndex, day);
+      const date1 = new Date(dateNow.getFullYear(), this.monthToday, this.dayToday);
+      const date2 = new Date(rok, this.monthIndex, day);
       const oneDay = 1000 * 60 * 60 * 24; // jeden dzien w milisekundach
       var diffInTime = date2.getTime() - date1.getTime();
       const diffInDays = Math.round(diffInTime / oneDay);

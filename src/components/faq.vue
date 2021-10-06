@@ -19,11 +19,6 @@
         
       </div>
 
-      <img
-        src="../assets/images/faq.svg"
-        alt="Element dekoracyjny"
-        class="faq_img"
-      />
       <a href="#home_section" v-show="$route.name !== 'faq'"
         ><img
           src="../assets/images/arrow.svg"
@@ -54,7 +49,7 @@ export default {
     background-color: var(--my_blue); /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
     color: white;
-    _color: var(--my_blue);
+    //_color: var(--my_blue);
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -62,9 +57,9 @@ export default {
 }
 
 .background_bar_fullsite{
-    _background-color: var(--my_blue); /* For browsers that do not support gradients */
-    _background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
-    _color: white;
+    //_background-color: var(--my_blue); /* For browsers that do not support gradients */
+    //__background-image: linear-gradient(to right, var(--my_blue) ,  var(--my_blue_light2));
+    //_color: white;
     color: var(--my_blue);
     text-align: center;
     margin-top: 30px;
@@ -100,16 +95,7 @@ export default {
     .background_bar{
         font-size: 4vw;
     }
-    .faq_img{
-        position: absolute;
-        width: 400px;
-        right: 0px;
-        bottom: 0px;
-        padding: 40px;
-        transform: rotate(5deg);
-        z-index: 0;
-        opacity: 20%;
-    }
+
     .faq{
         position: relative;
         width: 70%;
@@ -130,16 +116,7 @@ export default {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .faq_img{
-        position: absolute;
-        width: 400px;
-        right: 0px;
-        bottom: 0px;
-        padding: 40px;
-        transform: rotate(5deg);
-        z-index: 0;
-        opacity: 5%;
-    }
+
     .faq{
         position: relative;
         width: 90%;

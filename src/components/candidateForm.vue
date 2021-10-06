@@ -347,7 +347,7 @@ label{
 .inputV2{
     display: inline-block;
     height:100%;
-    width:277px;
+    width:275px;
     margin-left:3px;
 
     font-family: Roboto;
@@ -442,6 +442,10 @@ label{
     margin-bottom: 20px;
 }
 
+select{
+    background-color: white;
+}
+
 @media only screen and (min-width:1200px){
     .selectC, .inputC, .inputDiv{
         width: 350px;
@@ -485,7 +489,7 @@ label{
     .selectC, .inputC, .inputDiv{
         margin-left: 0;
     }
-
+   
     .inputCheckBox{
         margin:0px;
         max-width: 320px;

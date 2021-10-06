@@ -185,10 +185,7 @@ export default {
   border-color: transparent transparent black transparent;
 }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity:0.7;
-}
+
 
 
 
@@ -324,6 +321,11 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity:0.7;
+    }
+
     #header_for_logged #linijka_telefon{
         display: none;
     }
