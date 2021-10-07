@@ -3,8 +3,8 @@
     <h3 class="textMontserrat my_blue headerVotes">{{this.$store.state.msg.userPage.title}}</h3>
     <div class="voteList">
       <ul>
-        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem">
-          <voteItem :voteText="v.name"></voteItem>
+        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem" :class="{'votingListItemColor' : !v.vote_given}">
+          <voteItem :voteGiven="v.vote_given" :voteText="v.name"></voteItem>
         </li>
       </ul>
     </div>
@@ -39,22 +39,22 @@ export default {
 li {
   list-style-type: none;
 }
-li.votingListItem:nth-child(3n+1) > div { //zamiast 3n, to 3n+1
+li.votingListItemColor:nth-child(3n+1) > div { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda);
 }
-li.votingListItem:nth-child(3n) > div { //zamiast 2n, to 3n
+li.votingListItemColor:nth-child(3n) > div { //zamiast 2n, to 3n
   background-color: var(--my_blue);
 }
-li.votingListItem:nth-child(3n - 1) > div { //3n-1
+li.votingListItemColor:nth-child(3n - 1) > div { //3n-1
   background-color: var(--my_orange);
 }
-li.votingListItem:nth-child(3n+1) > div:hover { //zamiast 3n, to 3n+1
+li.votingListItemColor:nth-child(3n+1) > div:hover { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda_dark);
 }
-li.votingListItem:nth-child(3n) > div:hover { //zamiast 2n, to 3n
+li.votingListItemColor:nth-child(3n) > div:hover { //zamiast 2n, to 3n
   background-color: var(--my_blue_dark);
 }
-li.votingListItem:nth-child(3n-1) > div:hover { //to 3n-1 dodałem, bo nie było
+li.votingListItemColor:nth-child(3n-1) > div:hover { //to 3n-1 dodałem, bo nie było
   background-color: var(--my_orange_dark);
 }
 li::marker {

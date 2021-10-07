@@ -6,7 +6,6 @@
       <router-view />
 
     </div>                      
-    <!-- <modal-direction v-model="modalOpen"></modal-direction> -->
 
 
     <Footer />
@@ -16,30 +15,15 @@
 
 <script>
 import Footer from '@/components/Footer.vue';
-//import ModalDirection from '@/components/ModalSendEmail.vue';
 
 export default {
   components: {
     Footer,
-    //ModalDirection,
   },
   created() {
     console.log("App.vue, created " + this.$store.getters.localStorageSupport)
-    //this.$store.localStorageSupport();
   }
-  /*
-  data(){
-    return {
-        modalOpen: false,
-    }
-  },
-  methods: {
-    openModal() {
-      console.log("aa")
-      this.modalOpen = !this.modalOpen;
-    },   
-  }
-  */
+
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="Vitem">
-    <p class="textMontserrat voteTxt">{{ voteText }}</p>
+  <div class="Vitem" :class="{'voteGivenClass' : voteGiven}">
+    <div class="textMontserrat voteTxt"><div class="tick" v-if="this.voteGiven">&#x2714;</div> <div :class="{'voteGivenText' : voteGiven}">{{ voteText }}</div></div>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 
 export default {
   name: "voteItem",
-  props: ["voteText"],
+  props: ["voteText", "voteGiven"],
   data() {
     return {};
   },
@@ -22,7 +22,13 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-div .Vitem {
+.voteGivenClass{
+  background-color: #ccc;
+}
+.voteGivenText{
+  //text-decoration: line-through;
+}
+div.Vitem {
   cursor: pointer;
   padding: 13px;
   width: 100%;
@@ -40,7 +46,7 @@ div .Vitem {
   background-color: pink;
 }
 
-div:before {
+.Vitem:before {
   content: "\25BA";
   font-weight: bold;
   float: right;
@@ -53,7 +59,7 @@ div:before {
 .voteItemGreen {
   background-color: green;
 }
-p.voteTxt {
+.voteTxt {
   margin: none !important;
   cursor: pointer;
   font-weight: bold;
@@ -61,11 +67,17 @@ p.voteTxt {
   display: flex;
   align-items: center;
 }
+
+.tick{
+  font-size: 120%;
+  margin-right: 10px;
+}
+
 @media only screen and (max-width: 767px) {
-  p.textMontserrat.voteTxt {
+  .textMontserrat.voteTxt {
     font-size: 1.5rem;
   }
-  div:before {
+  div.Vitem:before {
     font-size: 1.2rem;
   }
 }
@@ -75,12 +87,12 @@ p.voteTxt {
     flex-wrap: nowrap;
     width: 100%;
   }
-  div {
+  .Vitem {
     width: 100%;
     height: 50px;
     margin: 10px;
   }
-  p.textMontserrat.voteTxt {
+  .textMontserrat.voteTxt {
     font-size: 1.2rem;
   }
 }
@@ -94,7 +106,7 @@ p.voteTxt {
 }
 
 @media only screen and (max-width: 640px) {
-  div {
+  .Vitem {
     cursor: pointer;
     padding: 5px;
     width: 100%;
@@ -102,10 +114,10 @@ p.voteTxt {
     text-align: left;
     margin-bottom: 10px;
   }
-  p.textMontserrat.voteTxt {
+  .textMontserrat.voteTxt {
     font-size: 1rem;
   }
-  div:before {
+  .Vitem:before {
     font-size: 20px;
   }
 }

@@ -38,8 +38,8 @@
                 :name="o.name"
                 v-on:click="selectAns(o.id)" 
                 :value="o.name">
-              <input type="checkbox" :value="o.name" v-on:click="selectAns(o.id)"  :id="o.id+'id'">
-              <label :for="o.id" class="Alabel">{{o.name}}</label>
+              <input type="checkbox" :value="o.name" v-on:click="selectAnsBOX(o.id)"  :id="o.id+'id'">
+              <label :for="o.id" v-on:click="selectAns(o.id)" class="Alabel">{{o.name}}</label>
             </div>
           </form>
           <button class="blueBTN button_click" v-on:click="vote1()" v-show="!isAlert">
@@ -509,6 +509,9 @@
 
 
       vote1() {
+
+        //console.log(this.myAnswer)
+
         let n = this.myAnswer.length;
         //console.log(this.isMultichoice);
         //console.log("ilosc" + n)
@@ -692,31 +695,57 @@
       },
     
       selectAns(s) {
-        let divS = document.getElementById(s + "Did");
-        let h = document.getElementById(s + "id");
-        let v = document.getElementById(s + "id").value;
-        //console.log(v);
-        if (h.checked === false) {
-          //console.log("zaznaczam");
-          //console.log("spoko" + s);
-          this.myAnswer.push(s);
-          this.myAnswertxt.push(v);
-          h.checked = true;
-          //let pos = this.myAnswer.indexOf(s);
-          //console.log(pos + "Wpadło");
-          // event.target.style.backgroundColor  = "var(--my_orange)";
-          divS.style.backgroundColor = "var(--my_orange)";
-        } else {
-          //console.log("odznaczam");
-          let pos = this.myAnswer.indexOf(s);
-          h.checked = false;
-          this.myAnswer.splice(pos, 1);
-          this.myAnswertxt.splice(pos, 1);
-          //console.log("odzwnaczam" + pos);
-          //console.log("zostaje" + this.myAnswer.length);
-          divS.style ='';
-          ///divS.onMouseover = "this.style.backgroundColor = 'var(--my_orange)'"
-        //  divS.mouseOn.style.backgroundColor = "var(--my_orange)";
+        // funkcja dla diva oraz labela
+        // obsługa samego checkboxa poniżej
+        if(event.target == event.currentTarget){
+
+          let divS = document.getElementById(s + "Did");
+          let h = document.getElementById(s + "id");
+          let v = document.getElementById(s + "id").value;
+          
+          
+          if (h.checked === false) {
+
+            this.myAnswer.push(s);
+            this.myAnswertxt.push(v);
+            h.checked = true;
+
+            divS.style.backgroundColor = "var(--my_orange)";
+          } else {
+            let pos = this.myAnswer.indexOf(s);
+            h.checked = false;
+            this.myAnswer.splice(pos, 1);
+            this.myAnswertxt.splice(pos, 1);
+
+            divS.style ='';
+
+          }
+        }
+      },
+      selectAnsBOX(s) {
+        // tylko dla samego przycisku input type checkbox
+        if(event.target == event.currentTarget){
+
+          let divS = document.getElementById(s + "Did");
+          let h = document.getElementById(s + "id");
+          let v = document.getElementById(s + "id").value;
+          
+          // selectAnsBox zanim się wykona, to checkbox zmieni status, dlatego w tym przypadku if === true
+          if (h.checked === true) {
+
+            this.myAnswer.push(s);
+            this.myAnswertxt.push(v);
+            //h.checked = true; // nie potrzebujemy rowniez ustalac wartosci checked, bo juz sie ustawilo
+
+            divS.style.backgroundColor = "var(--my_orange)";
+          } else {
+            let pos = this.myAnswer.indexOf(s);
+            //h.checked = false; // nie potrzebujemy rowniez ustalac wartosci checked, bo juz sie ustawilo
+            this.myAnswer.splice(pos, 1);
+            this.myAnswertxt.splice(pos, 1);
+
+            divS.style ='';
+          }
         }
       },
   }}
