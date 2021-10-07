@@ -242,7 +242,10 @@ export default {
                 let json = err.response.data;
 
                 for (const x in json) {   
-                    this.error_message += json[x]+"\n";
+                    if(json[x]=="The phone number entered is not valid.")
+                        this.error_message += "Wprowadzony numer telefonu jest niepoprawny.\n";
+                    else
+                        this.error_message += json[x]+"\n";
                 }
 
                 this.error=true;
