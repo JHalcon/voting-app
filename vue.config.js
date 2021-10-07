@@ -6,7 +6,7 @@ module.exports = {
         start_url: ".",
         display: "standalone",
         theme_color: "#160066",
-        background_color:"#000000",
+        background_color:"#ffffff",
         icons: [
             {
                "src":"./img/icons/android-chrome-192x192.png",
