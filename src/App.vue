@@ -164,6 +164,7 @@ hr.solid {
 .button_click{
     border-radius: 10px;
     transition: transform 0.05s;
+    cursor: pointer;
 }
 .button_click:hover{
   box-shadow: 2px 2px 2px gray;

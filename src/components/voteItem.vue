@@ -1,6 +1,9 @@
 <template>
-  <div class="Vitem" :class="{'voteGivenClass' : voteGiven}">
-    <div class="textMontserrat voteTxt"><div class="tick" v-if="this.voteGiven">&#x2714;</div> <div :class="{'voteGivenText' : voteGiven}">{{ voteText }}</div></div>
+  <div class="Vitem" :class="{'voteGrayColor' : (voteGiven || closed)}">
+    <div class="textMontserrat voteTxt">
+      <div class="tick" v-if="this.voteGiven">&#x2714;</div> 
+      <div :class="{'voteGivenText' : voteGiven}">{{ voteText }}</div>
+    </div>
   </div>
 </template>
 
@@ -9,7 +12,7 @@
 
 export default {
   name: "voteItem",
-  props: ["voteText", "voteGiven"],
+  props: ["voteText", "voteGiven", "closed"],
   data() {
     return {};
   },
@@ -22,7 +25,7 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.voteGivenClass{
+.voteGrayColor{
   background-color: #ccc;
 }
 .voteGivenText{

@@ -3,8 +3,8 @@
     <h3 class="textMontserrat my_blue headerVotes">{{this.$store.state.msg.userPage.title}}</h3>
     <div class="voteList">
       <ul>
-        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem" :class="{'votingListItemColor' : !v.vote_given}">
-          <voteItem :voteGiven="v.vote_given" :voteText="v.name"></voteItem>
+        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem" :class="{'votingListItemColor' : (!v.vote_given && !v.is_closed)}">
+          <voteItem :voteGiven="v.vote_given" :closed="v.is_closed" :voteText="v.name"></voteItem>
         </li>
       </ul>
     </div>

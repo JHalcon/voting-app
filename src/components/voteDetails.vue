@@ -83,7 +83,7 @@
             </div>
               
               </button>
-            <button class='blueBTN2 button_click'  v-on:click="sendFAns()" id="FVbtn" v-show="this.falseVAlert">
+            <button class='blueBTN2 button_click'  v-on:click="sendFAns()" id="FVbtn" disabled v-show="this.falseVAlert">
                  <div v-if="this.loading3">
               <loadingItem small />
             </div>
@@ -160,7 +160,7 @@
       <button class="orangeBTN2 button_click" v-on:click="closeAlert()">ANULUJ</button>
     </div>
 -->
-    <resFC :voteID="this.vote.id" :info="this.allAns" :gg="this.updatingProps" :userIS="this.userIS" :comIS="recVisible"/>
+    <resFC :voteID="this.vote.id" :info="this.allAns" :gg="this.updatingProps" :userIS="this.userIS && !this.isCanceled" :comIS="this.recVisible"/>
 
     </div>
     <div v-else>
@@ -304,11 +304,11 @@
           if (this.isStarted){
             if (this.voteGiven) {
               return this.$store.state.msg.voteDetail.glos_juz_oddany;
-            } else if(this.isClosed){
-              return this.$store.state.msg.voteDetail.glos_juz_zakonczone;//"GŁOSOWANIE JUŻ SIĘ ZAKONCZYLO"
             } else if(this.isCanceled){
               return this.$store.state.msg.voteDetail.glos_anulowane;
-            }
+            } else if(this.isClosed){
+              return this.$store.state.msg.voteDetail.glos_juz_zakonczone;//"GŁOSOWANIE JUŻ SIĘ ZAKONCZYLO"
+            } 
           } 
             
           if ((this.notStarted==false)) {
@@ -376,14 +376,14 @@
     
       if(bb){
           this.recVisible = true;
-          this.userIS = false;
+ //         this.userIS = false;
       }
-      else{
+  //    else{
         if(this.isClosed){
         //console.log("prelacznik");
           this.userIS = true;
         }
-      }
+   //   }
 
       if ((this.isStarted && (!this.voteGiven)&&(this.isClosed!=true))) {
        // console.log("shhagf");
@@ -412,14 +412,18 @@
           //btn.style.filter = "none";
           btn.style.backgroundColor = "var(--my_blue)";
           btn.style.pointerEvents = 'auto';
+          btn.disabled = false;
+
            //this.falseAID.push();
-           console.log(this.FalseA[0].id)
+           //console.log(this.FalseA[0].id)
           this.falseAID.push(this.FalseA[0].id);
         }
         else{
           //console.log("nonchecked");
           btn.style.pointerEvents = 'none';
           btn.style.backgroundColor = "gray";
+          btn.disabled = true;
+
         }
       },
 
@@ -431,40 +435,40 @@
           
           if ((this.isMultichoice === false) ) {
             if(n==1){
-               this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
-          this.isAlert = true;
-          this.canFinish = true;
-          this.AcceptAns = true;
-           this.falseVAlert = false;
-           this.loading2 = false;
+              this.alertCOM = this.$store.state.msg.voteDetail.alert_potwierdz_wybor;//"Potwierdź swój wybór";
+              this.isAlert = true;
+              this.canFinish = true;
+              this.AcceptAns = true;
+              this.falseVAlert = false;
+              this.loading2 = false;
             }
             else{
-            this.alertCOM = this.$store.state.msg.voteDetail.alert_tylko_1_odp;//"Zaznacz tylko jedną odpowiedź. W innym wypadku potwierdź, że oddajesz głos nieważny";
-            this.isAlert = true; ///okno z alertem
-            this.falseVAlert = true; // glos nieważny
-            this.canFinish = false; //blokada guzika
-            this.AcceptAns = false;
-            this.loading2 = false;
+              this.alertCOM = this.$store.state.msg.voteDetail.alert_tylko_1_odp;//"Zaznacz tylko jedną odpowiedź. W innym wypadku potwierdź, że oddajesz głos nieważny";
+              this.isAlert = true; ///okno z alertem
+              this.falseVAlert = true; // glos nieważny
+              this.canFinish = false; //blokada guzika
+              this.AcceptAns = false;
+              this.loading2 = false;
             }
           }
             else{
               //console.log("nie multi");
               if(n==0){
                   if(this.limitAns!=0){
-                 this.alertCOM = this.$store.state.msg.voteDetail.alert_limit_odp_1 + this.limitAns + this.$store.state.msg.voteDetail.alert_limit_odp_2;//"Prosze zaznacz do " + this.limitAns + " wybranych odpowiedzi. W innym wypadku oddajesz głos nieważny";
-                this.falseVAlert = true;
-                this.isAlert = true;
-                this.canFinish = false;
-                this.AcceptAns = false;
-                this.loading2 = false;
+                    this.alertCOM = this.$store.state.msg.voteDetail.alert_limit_odp_1 + this.limitAns + this.$store.state.msg.voteDetail.alert_limit_odp_2;//"Prosze zaznacz do " + this.limitAns + " wybranych odpowiedzi. W innym wypadku oddajesz głos nieważny";
+                    this.falseVAlert = true;
+                    this.isAlert = true;
+                    this.canFinish = false;
+                    this.AcceptAns = false;
+                    this.loading2 = false;
                   }
                   else{
-                this.alertCOM = this.$store.state.msg.voteDetail.alert_brak_odp;//"Prosze zaznacz odpowiedź/opowiedzi. W innym wypadku oddajesz głos nieważny";
-                this.falseVAlert = true;
-                this.isAlert = true;
-                this.canFinish = false;
-                this.AcceptAns = false;
-                this.loading2 = false;
+                    this.alertCOM = this.$store.state.msg.voteDetail.alert_brak_odp;//"Prosze zaznacz odpowiedź/opowiedzi. W innym wypadku oddajesz głos nieważny";
+                    this.falseVAlert = true;
+                    this.isAlert = true;
+                    this.canFinish = false;
+                    this.AcceptAns = false;
+                    this.loading2 = false;
                   }
 
               }
@@ -510,14 +514,9 @@
 
       vote1() {
 
-        //console.log(this.myAnswer)
-
         let n = this.myAnswer.length;
-        //console.log(this.isMultichoice);
-        //console.log("ilosc" + n)
-        //this.blockCard();
         this.loading2 = true;
-        //console.log("jeden");
+
         setTimeout(()=>{this.vote2(n)
         }, 500);
         
@@ -536,6 +535,8 @@
           chb.checked=0;
           btn.style.pointerEvents = 'none';           // dodałem Bart
           btn.style.backgroundColor = "gray";         // dodałem Bart
+          btn.disabled = true;
+
         }
 
       },
@@ -552,11 +553,25 @@
         let cardV = document.getElementById("voteCardMaster");
         cardV.style.pointerEvents = 'none';
         cardV.style.filter = "blur(2px)";
+
+        let cardAnswers = document.getElementsByClassName("answers");
+        cardAnswers.forEach(function(item) {
+          let input = item.getElementsByTagName('input')[0];
+          input.tabIndex = -1;
+        });
+        
       },
       unblockCard() {
         let cardV = document.getElementById("voteCardMaster");
         cardV.style.pointerEvents = 'auto';
         cardV.style.filter = "none";
+
+        let cardAnswers = document.getElementsByClassName("answers");
+        cardAnswers.forEach(function(item) {
+          let input = item.getElementsByTagName('input')[0];
+          input.removeAttribute('tabIndex');
+        });
+
       },
       closeAlert() {
         this.isAlert = false;
@@ -977,6 +992,8 @@ button#FVbtn{
     display: flex;
     align-items: center;
     padding: 5px;
+    cursor: pointer;
+
   }
 
   .h3Header {

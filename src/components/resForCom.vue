@@ -155,9 +155,9 @@ export default {
             //return n;
 */        
 
-getAgain(){
-var zapytanie = "";
-console.log("ponawiam");
+      getAgain(){
+        var zapytanie = "";
+        //console.log("ponawiam");
        this.$root.$refs.A = this;
         if(this.userIS||this.comIS){
           this.visibility = true;
@@ -294,33 +294,33 @@ console.log("ponawiam");
         const token = this.$func.getLoggedToken(); //localStorage.getItem('JWT_TOKEN');
        
         if(this.comIS){
-          console.log("commision");
+          //console.log("commision");
            //zapytanie = 'https://dev.api.up.kornel.dev/api/v1/commission-member/vote/vote-results/:id/'.format({id:this.voteID});
            zapytanie = process.env.VUE_APP_COMMISION_RESULTS;
         }
-        else if(this.userIS)
-        {
-          console.log("user");
+        else if(this.userIS){
+          //console.log("user");
           // zapytanie = 'https://dev.api.up.kornel.dev/api/v1/public/vote/vote-results/:id/'.format({id:this.voteID});
           zapytanie = process.env.VUE_APP_PUBLIC_RESULTS;
         }
-     axios.get(zapytanie+this.voteID+"/",{ 
-       //axios.get(zapytanie,{ 
+
+        axios.get(zapytanie+this.voteID+"/",{ 
+        //axios.get(zapytanie,{ 
           headers: {
             'Authorization': `Token ${token}`
           }
         })
         .then(resp => {
-            console.log("VOTE PRESENt"+resp.data.votes_answer)
+            //console.log("VOTE PRESENt"+resp.data.votes_answer)
           //this.loaded= true;
          // this.vote = resp.data; 
-          console.log(resp.data.votes_answer); 
+          //console.log(resp.data.votes_answer); 
           this.dataV = resp.data.votes_answer;//todo delete
           this.addData();
         }).catch(function (error) {
          
           if (error.response) {
-            console.log(typeof(error.status))
+            //console.log(typeof(error.status))
             if (error.response.status >= 200) {
              this.failSend = true;
 
@@ -332,10 +332,10 @@ console.log("ponawiam");
             this.massageForUser(error.response.data.vote[0]);
               //alert("BŁĄD"+error.response.data.vote[0]);
             }
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            console.log(error.response.data.vote[0]);
+            //console.log(error.response.data);
+            //console.log(error.response.status);
+            //console.log(error.response.headers);
+            //console.log(error.response.data.vote[0]);
           }
         })
 
