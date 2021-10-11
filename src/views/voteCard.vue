@@ -35,6 +35,9 @@ export default {
     voteDetails,
     LoadingItem,
   },
+  mounted () {
+    //window.scrollTo(0, 0);
+  },
 
 
   created: function () {
@@ -44,6 +47,7 @@ export default {
       this.$router.push(this.$store.getters.getMainPageLink);
     }
     else{
+    document.body.scrollTo = document.documentElement.scrollTop = 0;
 
         // pobieranie tokena
 

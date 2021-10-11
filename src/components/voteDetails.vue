@@ -1217,6 +1217,7 @@ button#FVbtn{
       }
       h3.h3Header{
         font-size:1.3rem ;
+        text-align: center;
       }
       .right{
         padding:20px;

@@ -20,9 +20,10 @@ export default {
   components: {
     Footer,
   },
-  created() {
-    console.log("App.vue, created " + this.$store.getters.localStorageSupport)
-  }
+  //created() {
+    //console.log("App.vue, created " + this.$store.getters.localStorageSupport)
+  //}
+  
 
 };
 </script>
