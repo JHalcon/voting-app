@@ -55,8 +55,8 @@ export default {
             }
         })
         .then(resp => {
-          console.log("UserPage")
-          console.log(resp.data);
+          //console.log("UserPage")
+          //console.log(resp.data);
 
             if(resp.data.count>1){
               // jest dostępnych więcej niż 1 głosowanie, wyświetlamy listę i zapisujemy ją do zmiennej
@@ -75,8 +75,8 @@ export default {
 
             
         })
-        .catch(err => {
-          console.error(err);
+        .catch(() => {
+          //console.error(err);
           
             // wylogowywanie
             this.$func.logoutUser();

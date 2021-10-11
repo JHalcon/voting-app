@@ -61,7 +61,7 @@ export default {
                   data: qs.stringify(data),
               })
               .then(resp => {
-                  console.log(resp.data);
+                  //console.log(resp.data);
                   
                   if(resp.data.length>0)
                     this.kandydaci = resp.data;
@@ -71,7 +71,7 @@ export default {
 
               })
               .catch(err => {
-                  console.error(err);
+                  //console.error(err);
               })
               
             } else{
@@ -81,7 +81,7 @@ export default {
 
         .catch(err =>{
 
-            console.log(err)
+            //console.log(err)
 
             // wylogowywanie
             this.$func.logoutUser();

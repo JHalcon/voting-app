@@ -68,9 +68,9 @@ export default {
         allResFiltered(){
           let sum = 0;
           this.infoFiltered.forEach((d) => {
-          console.log(d.votesNumber);
+          //console.log(d.votesNumber);
               sum+= parseInt(d.votesNumber);
-              console.log(sum);
+              //console.log(sum);
           });
           return  sum;
         },
@@ -78,9 +78,9 @@ export default {
         allRes(){
           let sum = 0;
           this.info.forEach((d) => {
-          console.log(d.votesNumber);
+          //console.log(d.votesNumber);
               sum+= parseInt(d.votesNumber);
-              console.log(sum);
+              //console.log(sum);
           });
           return  sum;
         },
@@ -103,9 +103,9 @@ export default {
     methods:{
             addData(){
               this.info.forEach((n)=>{
-                console.log("leci "+n);
+                //console.log("leci "+n);
                 this.dataV.forEach((number)=>{
-                  console.log("iss"+number.vote_option+"and"+n.id)
+                  //console.log("iss"+number.vote_option+"and"+n.id)
                   if(number.vote_option == n.id ){
                     n.votesNumber =parseInt(number.vote_option__count);
                   }
@@ -168,12 +168,12 @@ export default {
         const token = this.$func.getLoggedToken();
 
         if(this.comIS){
-          console.log("commision");
+          //console.log("commision");
            zapytanie = process.env.VUE_APP_COMMISION_RESULTS;
         }
         else if(this.userIS)
         {
-          console.log("user");
+          //console.log("user");
            zapytanie = process.env.VUE_APP_PUBLIC_RESULTS;
         }
       axios.get(zapytanie+this.voteID+"/",{ 
@@ -182,16 +182,16 @@ export default {
           }
         })
         .then(resp => {
-            console.log("VOTE PRESENt"+resp.data.votes_answer)
+            //console.log("VOTE PRESENt"+resp.data.votes_answer)
           //this.loaded= true;
          // this.vote = resp.data; 
-          console.log(resp.data.votes_answer); 
+          //console.log(resp.data.votes_answer); 
           this.dataV = resp.data.votes_answer;//todo delete
           this.addData();
         }).catch(function (error) {
          
           if (error.response) {
-            console.log(typeof(error.status))
+            //console.log(typeof(error.status))
             if (error.response.status >= 200) {
              this.failSend = true;
 
@@ -203,10 +203,10 @@ export default {
             this.massageForUser(error.response.data.vote[0]);
               //alert("BŁĄD"+error.response.data.vote[0]);
             }
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            console.log(error.response.data.vote[0]);
+            //console.log(error.response.data);
+            //console.log(error.response.status);
+            //console.log(error.response.headers);
+            //console.log(error.response.data.vote[0]);
           }
         })
 },

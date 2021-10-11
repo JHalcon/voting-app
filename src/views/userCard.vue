@@ -53,8 +53,8 @@ export default {
           }
         })
         .then(resp => {
-          console.log("UserCard")
-          console.log(resp)
+          //console.log("UserCard")
+          //console.log(resp)
           this.firstname = resp.data.first_name;
           this.lastname = resp.data.last_name;
           this.email = resp.data.email;

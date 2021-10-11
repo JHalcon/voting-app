@@ -60,7 +60,7 @@ export default {
         .then(resp => {
           //this.loaded= true;
           this.vote = resp.data; 
-          console.log(this.vote); //todo delete
+          //console.log(this.vote); //todo delete
         })
         .catch(err =>{
           if(err.response.status == 404){

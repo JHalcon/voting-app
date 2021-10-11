@@ -1,16 +1,16 @@
 export const func = {
 
      loginUser: (payload) => {
-        console.log("setcurrentuser")
+        //console.log("setcurrentuser")
 
         if(func.localStorageSupport()){
-            console.log("to localstorage")
+            //console.log("to localstorage")
 
             window.localStorage.setItem('JWT_TOKEN', payload.token)
             window.localStorage.setItem('USER_ID', payload.user_id)
   
         } else{
-          console.log("to cookies")
+          //console.log("to cookies")
 
           let expire_days = 7;
 
@@ -28,12 +28,12 @@ export const func = {
 
      logoutUser: () => {
         if(func.localStorageSupport()){
-            console.log("from localstorage")
+            //console.log("from localstorage")
 
             window.localStorage.removeItem('JWT_TOKEN');  
             window.localStorage.removeItem('USER_ID');  
           } else{
-            console.log("from cookies")
+            //console.log("from cookies")
 
             document.cookie = "TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";// USER_ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             document.cookie = "USER_ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -42,7 +42,7 @@ export const func = {
      },
 
      localStorageSupport: () => {
-        console.log("localstoragesupport")
+        //console.log("localstoragesupport")
         var testKey = 'test';
         try
         {
@@ -52,7 +52,7 @@ export const func = {
         }
         catch (error)
         {
-            console.log(error)
+            //console.log(error)
             return false;
         }
       },
@@ -60,10 +60,10 @@ export const func = {
     
       getLoggedToken: () => {
         if(func.localStorageSupport()){
-          console.log("pobieram token z localstorage: "+window.localStorage.getItem('JWT_TOKEN'))
+          //console.log("pobieram token z localstorage: "+window.localStorage.getItem('JWT_TOKEN'))
           return window.localStorage.getItem('JWT_TOKEN');
         } else{
-          console.log("pobieram token z cookies")
+          //console.log("pobieram token z cookies")
 
           let name = "TOKEN" + "=";
           let decodedCookie = decodeURIComponent(document.cookie);
@@ -84,10 +84,10 @@ export const func = {
 
       getLoggedUserId: () => {
         if(func.localStorageSupport()){
-          console.log("pobieram userId z localstorage")
+          //console.log("pobieram userId z localstorage")
           return window.localStorage.getItem('USER_ID');
         } else{
-          console.log("pobieram userId z cookies")
+          //console.log("pobieram userId z cookies")
 
           let name = "USER_ID" + "=";
           let decodedCookie = decodeURIComponent(document.cookie);
