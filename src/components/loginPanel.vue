@@ -7,7 +7,7 @@
           {{this.text1}}<br class="main_text_br1" />{{this.text2}}
         </div>
         <div class="main_frame_text2 textRoboto"> 
-          {{this.text3}}<br class="main_text_br1" /><span class="link" v-if="email_sent" @click="sendAgain">{{this.text_alert_link}}</span><span v-else>{{this.text4}}</span>
+          {{this.text3}}<br class="main_text_br1" /><button class="link textRoboto" v-if="email_sent" @click="sendAgain">{{this.text_alert_link}}</button><span v-else>{{this.text4}}</span>
         </div>
       </div>
       <form  @submit.prevent="login">
@@ -354,7 +354,9 @@ export default {
 
 .link {
   font-style: italic;
-    text-decoration: underline;
+  text-decoration: underline;
+  background-color: white;
+  font-size: 20px;
 
 }
 
@@ -454,6 +456,10 @@ export default {
       font-size: 22px;
     }
     .main_frame_text2{
+      font-size: 18px;
+    }
+    
+    .link{
       font-size: 18px;
     }
 

@@ -1,9 +1,9 @@
 <template>
-  <div :class="class3">
-    <div tabindex=0 v-bind="$attrs" v-on:click="showAnswer" @keyup.enter="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
+  <div :class="class3" class="margin_bottom">
+    <button aria-expanded="false" class="textMontserrat" v-bind="$attrs" v-on:click="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
       {{ question }}
-    </div>
-    <div class="content">
+    </button>
+    <div class="content" style="display: none;">
       <ul v-if="answers" id="answers_list" style="font-weight: bold" class="textRoboto">
         {{this.$store.state.msg.faqBar.lista}}
         <li style="font-weight: bold" v-for="(person) in this.answers" :key="person.id">
@@ -57,15 +57,19 @@ export default {
 
             if (c.style.maxHeight){
                 // zwijanie odpowiedzi
+                event.target.setAttribute("aria-expanded", "false");
 
                 c.style.maxHeight = null;
-                
                 this.class2 = this.class1;
+                setTimeout(() => {
+                  c.style.display = "none";
+                }, 200);
 
 
             } else {
                 // wyświetlanie odpowiedzi
-
+                event.target.setAttribute("aria-expanded", "true");
+                c.style.display = "block";
                 this.class2 += " active";
                 c.style.maxHeight = c.scrollHeight + "px";
             } 
@@ -74,6 +78,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+button{
+  background-color: white;
+}
+.margin_bottom {
+    margin-bottom: 1.2rem;
+}
 
 p{
     margin-top: 0;
@@ -140,17 +151,17 @@ p{
   .c1.active {
     background-color: var(--my_magenda);
     border-color: var(--my_magenda); }
-  .c1 div.content{
+  .c1 .content{
     background-color: var(--my_magenda_light);}
   .c2.active {
     background-color: var(--my_orange);
     border-color: var(--my_orange); }
-  .c2 div.content{
+  .c2 .content{
     background-color: var(--my_orange_light);}
   .c3.active {
     background-color: var(--my_blue);
     border-color: var(--my_blue); }
-  .c3 div.content{
+  .c3 .content{
     background-color: var(--my_blue_light);}
 
 

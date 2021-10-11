@@ -25,7 +25,7 @@
                             </div>
                             
                             <div class="formSection">
-                            <label :for="'nr_albumu'+n">Nr albumu:</label>
+                            <label :for="'nr_albumu_'+n">Nr albumu:</label>
                             <div class="inputDiv" v-bind:class="{ invalidCheckboxClass: isButtonSendClicked && album_changed!=true }">s<input :id="'nr_albumu_'+n" type="number" v-model="album" class="inputV2" v-bind:class="{ invalidInputClass: isButtonSendClicked && album_changed!=true }" required min="100000" max="999999" /></div>
                             <!-- <input :id="'nr_albumu_'+n" type="number" placeholder="Nr albumu" class="inputC" v-bind:class="{ invalidInputClass: isButtonSendClicked }" required/> -->
                             </div>                        

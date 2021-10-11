@@ -1,12 +1,12 @@
 <template>
   <div class="main_page_images">
-        <img src="../assets/images/orange.svg" alt="Grafika dekoracyjna" class="orange_img bottom_0">
-        <img src="../assets/images/orange2.svg"  alt="Grafika dekoracyjna" class="orange2_img bottom_0">
-        <img src="../assets/images/blue.svg" alt="Grafika dekoracyjna" class="blue_img bottom_0">
-        <img src="../assets/images/3students_1.svg" alt="Grafika dekoracyjna" class="students_1_img bottom_0">
-        <img src="../assets/images/3students_2.svg" alt="Grafika dekoracyjna" class="students_2_img bottom_0">
-        <img src="../assets/images/studentlaptop.svg" alt="Grafika dekoracyjna" class="studentlaptop_img bottom_1">
-        <img src="../assets/images/studentlaptop2.svg" alt="Grafika dekoracyjna" class="studentlaptop2_img bottom_1">
+        <img src="../assets/images/orange.svg" alt="" class="orange_img bottom_0">
+        <img src="../assets/images/orange2.svg"  alt="" class="orange2_img bottom_0">
+        <img src="../assets/images/blue.svg" alt="" class="blue_img bottom_0">
+        <img src="../assets/images/3students_1.svg" alt="" class="students_1_img bottom_0">
+        <img src="../assets/images/3students_2.svg" alt="" class="students_2_img bottom_0">
+        <img src="../assets/images/studentlaptop.svg" alt="" class="studentlaptop_img bottom_1">
+        <img src="../assets/images/studentlaptop2.svg" alt="" class="studentlaptop2_img bottom_1">
   </div>
 </template>
 

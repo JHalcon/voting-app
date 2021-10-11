@@ -60,7 +60,7 @@
                     <div class="">
 
                         <div class="formSection">
-                            <label for="nr_albumu">Rok studiów:</label>
+                            <label for="rok_studiow">Rok studiów:</label>
 
                             <select id="rok_studiow" class="selectC" v-bind:class="{ invalidInputClass: isButtonSendClicked }" required>
                                 <option value="" disabled selected hidden></option>

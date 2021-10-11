@@ -22,12 +22,12 @@
 
                     <ul v-if="this.only_irss" id="icons_navbar">
                         <li class="tooltip"><a href="#calendar">
-                            <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
+                            <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Terminarz głosowań" >
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
                             </li>
                         <li class="tooltip"><a href="#faq">
-                            <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
+                            <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Najczęściej zadawane pytania" >
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
                             </li>

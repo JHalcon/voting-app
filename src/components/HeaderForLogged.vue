@@ -17,7 +17,7 @@
                     <ul id="icons_navbar">
                         <li class="tooltip">
                             <a href="/userpage">
-                            <img id="icon_home" class="icon cursor_pointer" src="../assets/images/icon_home.svg" alt="Przycisk strony głównej" >
+                            <img id="icon_home" class="icon cursor_pointer" src="../assets/images/icon_home.svg" alt="Strona główna" >
                                 <div v-if="this.onlyOneVote">
                                     <div v-if="this.$route.name == 'voteCard'" class="icon_underline"></div>
                                 </div>
@@ -28,26 +28,26 @@
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.home}}</span>
                             </li>
                         <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/calendar">
-                            <img id="icon_calendar" class="icon cursor_pointer" src="../assets/images/date_range_icon.svg" alt="Przycisk przejścia do terminarza głosowań" >
+                            <img id="icon_calendar" class="icon cursor_pointer" src="../assets/images/date_range_icon.svg" alt="Terminarz głosowań" >
                             <div v-if="this.$route.name == 'calendar'" class="icon_underline"></div>
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
                             </li>
                         <li v-if="this.$store.state.is_irss" class="tooltip"><a href="/faq">
-                            <img id="icon_why" class="icon cursor_pointer" src="../assets/images/questionmark.svg" alt="Przycisk przejścia na stronę z najczęściej zadawanymi pytaniami" >
+                            <img id="icon_why" class="icon cursor_pointer" src="../assets/images/questionmark.svg" alt="Najczęściej zadawane pytania" >
                             <div v-if="this.$route.name == 'faq'" class="icon_underline"></div>
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
                             </li>
                         <li class="tooltip"><a href="/profile">
-                            <img id="icon_profile" class="icon cursor_pointer" src="../assets/images/icon_profile.svg" alt="Przycisk przejścia na stronę dotyczącą profilu" >
+                            <img id="icon_profile" class="icon cursor_pointer" src="../assets/images/icon_profile.svg" alt="Profil" >
                             <div v-if="this.$route.name == 'profile'" class="icon_underline"></div>
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.profil}}</span>
                             </li>
-                        <li class="tooltip"><div tabindex=0 @click="logout" @keyup.enter="logout">
-                            <img id="icon_logout" class="icon cursor_pointer" src="../assets/images/icon_logout.svg" alt="Przycisk wyloguj" >
-                            </div>
+                        <li class="tooltip"><a href="" @click="logout" @keyup.enter="logout">
+                            <img id="icon_logout" class="icon cursor_pointer" src="../assets/images/icon_logout.svg" alt="Wyloguj" >
+                            </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.wyloguj}}</span>
                             </li>
 

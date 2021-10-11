@@ -15,7 +15,7 @@
                             <span id="page_describtion" :class="{ 'my_magenda' : fullsite, 'my_orange' : !fullsite }">SPRAWDŹ, KIEDY ODBYWAJĄ SIĘ WYBORY W&nbsp;TWOIM INSTYTUCIE!</span>
 
                               <div class="ramka_select">
-                                <span id="instytut_word" class="my_orange">Instytut </span>
+                                <label for="instytut_select" id="instytut_word" class="my_orange">Instytut </label>
 
                                 <select class="textMontserrat" id="instytut_select" v-on:change="hg">
                                     <option hidden selected>(wybierz)</option>
@@ -30,7 +30,7 @@
                                 {{date_countdown_text}}
                             </span>
                           
-                          <div class="calendar_column">
+                          <div class="calendar_column" aria-hidden="true">
                             <div v-show="!this.loaded" :style="loadingHeight">
                               <LoadingItem medium />
                             </div>
@@ -160,13 +160,13 @@ export default {
       const str = "W wybranym Instytucie wybory ";
 
       if(diffInDays == 1){
-        this.date_countdown_text = str + "odbywają się jutro, "+day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        this.date_countdown_text = str + "odbywają się jutro, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " + day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
       } else if (diffInDays > 1){
-        this.date_countdown_text = str + "odbywają się za "+diffInDays+" dni, "+day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        this.date_countdown_text = str + "odbywają się za "+diffInDays+" dni, " +this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
       } else if (diffInDays == 0){
-        this.date_countdown_text = str + "odbywają się dzisiaj, "+day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        this.date_countdown_text = str + "odbywają się dzisiaj, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
       } else {
-        this.date_countdown_text = str + "odbyły się "+day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        this.date_countdown_text = str + "odbyły się "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
       }
 
 

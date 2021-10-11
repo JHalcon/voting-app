@@ -39,7 +39,7 @@
                 v-on:click="selectAns(o.id)" 
                 :value="o.name">
               <input type="checkbox" :value="o.name" v-on:click="selectAnsBOX(o.id)"  :id="o.id+'id'">
-              <label :for="o.id" v-on:click="selectAns(o.id)" class="Alabel">{{o.name}}</label>
+              <label :for="o.id+'id'"  class="Alabel">{{o.name}}</label>
             </div>
           </form>
           <button class="blueBTN button_click" v-on:click="vote1()" v-show="!isAlert">
@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="right">
-        <div class="clockIcon"><img src="../assets/images/clock.svg" id="clockImg">
+        <div class="clockIcon"><img src="../assets/images/clock.svg" id="clockImg" alt="">
         </div>
         <div class="rightTxt">
           <h3 class="textMontserrat my_orange h3Header">

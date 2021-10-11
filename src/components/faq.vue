@@ -22,7 +22,7 @@
       <a href="#home_section" v-show="$route.name !== 'faq'"
         ><img
           src="../assets/images/arrow.svg"
-          alt="Przycisk powrotu na stronę startową"
+          alt="Powrót na stronę startową"
           class="arrow_img"
       /></a>
     </div>

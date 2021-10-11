@@ -4,8 +4,8 @@
     <Header />
     <LoginPanelPassword/>
 
-    <img src="../assets/images/1student.svg" alt="Grafika dekoracyjna" class="student_img">
-    <img src="../assets/images/1student_2.svg" alt="Grafika dekoracyjna" class="student2_img">
+    <img src="../assets/images/1student.svg" alt="" class="student_img">
+    <img src="../assets/images/1student_2.svg" alt="" class="student2_img">
 
 </div>
 

@@ -7,7 +7,7 @@
   <div id="noVotes">
     
     <div class="imgNoVotes">
-      <img src="../assets/images/404.svg" />
+      <img src="../assets/images/404.svg" alt="" />
     </div>
     <div class="komunikat">
       <h3>

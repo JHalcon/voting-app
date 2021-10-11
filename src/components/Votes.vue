@@ -3,8 +3,10 @@
     <h3 class="textMontserrat my_blue headerVotes">{{this.$store.state.msg.userPage.title}}</h3>
     <div class="voteList">
       <ul>
-        <li tabindex=0 v-for="(v, index) in voteList" :key="index" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)" class="votingListItem" :class="{'votingListItemColor' : (!v.vote_given && !v.is_closed)}">
-          <voteItem :voteGiven="v.vote_given" :closed="v.is_closed" :voteText="v.name"></voteItem>
+        <li v-for="(v, index) in voteList" :key="index"  class="votingListItem" :class="{'votingListItemColor' : (!v.vote_given && !v.is_closed)}">
+          <a href="" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)">
+            <voteItem :voteGiven="v.vote_given" :closed="v.is_closed" :voteText="v.name"></voteItem>
+          </a>
         </li>
       </ul>
     </div>
@@ -39,27 +41,31 @@ export default {
 li {
   list-style-type: none;
 }
-li.votingListItemColor:nth-child(3n+1) > div { //zamiast 3n, to 3n+1
+a{
+  text-decoration: none;
+}
+li.votingListItemColor:nth-child(3n+1) > a > div { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda);
 }
-li.votingListItemColor:nth-child(3n) > div { //zamiast 2n, to 3n
+li.votingListItemColor:nth-child(3n) > a > div { //zamiast 2n, to 3n
   background-color: var(--my_blue);
 }
-li.votingListItemColor:nth-child(3n - 1) > div { //3n-1
+li.votingListItemColor:nth-child(3n - 1) > a > div { //3n-1
   background-color: var(--my_orange);
 }
-li.votingListItemColor:nth-child(3n+1) > div:hover { //zamiast 3n, to 3n+1
+li.votingListItemColor:nth-child(3n+1) > a:hover > div { //zamiast 3n, to 3n+1
   background-color: var(--my_magenda_dark);
 }
-li.votingListItemColor:nth-child(3n) > div:hover { //zamiast 2n, to 3n
+li.votingListItemColor:nth-child(3n) > a:hover > div { //zamiast 2n, to 3n
   background-color: var(--my_blue_dark);
 }
-li.votingListItemColor:nth-child(3n-1) > div:hover { //to 3n-1 dodałem, bo nie było
+li.votingListItemColor:nth-child(3n-1) > a:hover > div { //to 3n-1 dodałem, bo nie było
   background-color: var(--my_orange_dark);
 }
 li::marker {
   display: none;
 }
+
 #Votes {
   display: flex;
   align-items: center;
@@ -133,14 +139,14 @@ h3.textMontserrat.my_blue.headerVotes {
  .votingListItem{
     padding-left: 20px;
     padding-right: 20px;
-          transition: padding 0.2s;
+    transition: padding 0.2s;
 
   }
 
   .votingListItem:hover {
     padding-left: 0px;
     padding-right: 0px;
-      transition: padding 0.2s;
+    transition: padding 0.2s;
 
   }
 }

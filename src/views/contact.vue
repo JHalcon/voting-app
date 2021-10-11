@@ -12,7 +12,7 @@
         <div class="cards">
             <div class="two_cards">
                 <div class="contactCard FB" @mouseover="colorLink()" @mouseleave="decolorLink">
-                    <img src="../assets/images/website.svg" class="imgcc" id="fbimg">
+                    <img src="../assets/images/website.svg" class="imgcc" id="fbimg" alt="">
                     <h3 class="contH mH" id="fblink">
                         <span class="littleIcon">
                             <img class="littleIcon" src="../assets/images/fb.svg" alt="ikona strony facebook"> 

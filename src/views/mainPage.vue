@@ -7,7 +7,7 @@
       <a href="#faq" class="arrow_link"
         ><img
           src="../assets/images/arrow.svg"
-          alt="Przycisk służący do przewinięcia strony w dół"
+          alt="Przewiń na dół strony"
           class="arrow_img"
       /></a>
 
