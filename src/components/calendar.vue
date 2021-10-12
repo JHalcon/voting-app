@@ -34,7 +34,7 @@
                             <div v-show="!this.loaded" :style="loadingHeight">
                               <LoadingItem medium />
                             </div>
-                            <div v-show="this.loaded" ref="calendarFrame">                     
+                            <div v-show="this.loaded && !this.noVoteDate" ref="calendarFrame">                     
                               <calendarPart  :name="this.monthName" v-bind:id="this.monthIndex" v-bind:numberOfDays="this.numberOfDays" v-bind:blankDays="this.blankDays"/>
                             </div>
                           </div>
@@ -69,6 +69,7 @@ export default {
       dayToday: Number,
       calendarHeight: Number,
       date_countdown_text: String,
+      noVoteDate: false,
 
     };
   },
@@ -132,43 +133,51 @@ export default {
       var selected_value = document.getElementById("instytut_select").value;
       this.selectInstytut(parseInt(selected_value));
       var selected_instytut = this.getInstytutById;
-      var day = selected_instytut.wybory.dzien;
-      this.monthIndex = selected_instytut.wybory.miesiac - 1;
-      var rok = selected_instytut.wybory.rok;
-      var firstDay = new Date(rok, this.monthIndex, 1);
-      this.blankDays = firstDay.getDay() - 1;
-      this.numberOfDays = new Date(rok, this.monthIndex+1, 0).getDate();
-      this.monthName = this.$store.state.miesiace[this.monthIndex];
 
-      var all_days = document.getElementsByClassName("calendar_day");
-      all_days[day-1].classList.add("active_cal");
-      all_days[day-1].classList.add("active_cal_only");
+      if(selected_instytut.wybory.dzien == null || selected_instytut.wybory.miesiac == null || selected_instytut.wybory.rok == null){
+        this.noVoteDate = true;
+        this.date_countdown_text = "Data głosowania w wybranym Instytucie nie została jeszcze ustalona."
+      } else{
+        this.noVoteDate = false;
+        
+        var day = selected_instytut.wybory.dzien;
+        this.monthIndex = selected_instytut.wybory.miesiac - 1;
+        var rok = selected_instytut.wybory.rok;
+        var firstDay = new Date(rok, this.monthIndex, 1);
+        this.blankDays = firstDay.getDay() - 1;
+        this.numberOfDays = new Date(rok, this.monthIndex+1, 0).getDate();
+        this.monthName = this.$store.state.miesiace[this.monthIndex];
+
+        var all_days = document.getElementsByClassName("calendar_day");
+        all_days[day-1].classList.add("active_cal");
+        all_days[day-1].classList.add("active_cal_only");
 
 
-      if(this.monthIndex == this.monthToday && rok==dateNow.getFullYear()){
-        all_days[this.dayToday-1].classList.add("today");
+        if(this.monthIndex == this.monthToday && rok==dateNow.getFullYear()){
+          all_days[this.dayToday-1].classList.add("today");
+        }
+
+        // obliczanie za ile dni będą wybory:
+
+        const date1 = new Date(dateNow.getFullYear(), this.monthToday, this.dayToday);
+        const date2 = new Date(rok, this.monthIndex, day);
+        const oneDay = 1000 * 60 * 60 * 24; // jeden dzien w milisekundach
+        var diffInTime = date2.getTime() - date1.getTime();
+        const diffInDays = Math.round(diffInTime / oneDay);
+
+        const str = "W wybranym Instytucie wybory ";
+
+        if(diffInDays == 1){
+          this.date_countdown_text = str + "odbywają się jutro, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " + day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        } else if (diffInDays > 1){
+          this.date_countdown_text = str + "odbywają się za "+diffInDays+" dni, " +this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        } else if (diffInDays == 0){
+          this.date_countdown_text = str + "odbywają się dzisiaj, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        } else {
+          this.date_countdown_text = str + "odbyły się "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
+        }
+
       }
-
-      // obliczanie za ile dni będą wybory:
-
-      const date1 = new Date(dateNow.getFullYear(), this.monthToday, this.dayToday);
-      const date2 = new Date(rok, this.monthIndex, day);
-      const oneDay = 1000 * 60 * 60 * 24; // jeden dzien w milisekundach
-      var diffInTime = date2.getTime() - date1.getTime();
-      const diffInDays = Math.round(diffInTime / oneDay);
-
-      const str = "W wybranym Instytucie wybory ";
-
-      if(diffInDays == 1){
-        this.date_countdown_text = str + "odbywają się jutro, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " + day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
-      } else if (diffInDays > 1){
-        this.date_countdown_text = str + "odbywają się za "+diffInDays+" dni, " +this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
-      } else if (diffInDays == 0){
-        this.date_countdown_text = str + "odbywają się dzisiaj, tj. "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
-      } else {
-        this.date_countdown_text = str + "odbyły się "+this.$store.state.dni_tygodnia_daty[date2.getDay()]+" " +day+" "+this.$store.state.miesiace_dopelniacz[this.monthIndex]+".";
-      }
-
 
       // sztuczne wydłużenie komponentu ładowania o ćwierć sekundy
       setTimeout(() => {

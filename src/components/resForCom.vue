@@ -2,7 +2,7 @@
     <div v-show="this.visibility" id="res_container">
         <button class="magentaBTN button_click" id="btn1" v-on:click="changeVis">{{this.txtbtn}}</button>
         <div id="redDetail" v-show="resV">
-        <h3 class="textMontserrat my_orange">Wyniki</h3>
+        <h3 class="textMontserrat my_orange">Nieoficjalne wyniki</h3>
         
         <div v-for="k in infoFiltered" :key="k.id" class="wyniki" :name="k.name" :voteNumbers="k.votesNumber" :sts="60">
            <div><div class="yellowSpan textMontserrat">{{k.name}}:</div> 
@@ -50,7 +50,7 @@ export default {
             ] ,
             results : [],
             resV:false,
-            txtbtn: "Wyświetl wyniki",
+            txtbtn: "Wyświetl nieoficjalne wyniki",
             dataV:[],
             bordering:true,
             visibility:false,
@@ -214,13 +214,13 @@ export default {
             if(this.resV == true)
             {
                 this.resV = false;
-                this.txtbtn = "Pokaż wyniki";
+                this.txtbtn = "Wyświetl nieoficjalne wyniki";
                 this.addData();
 
             }
             else{
                      this.resV= true;
-                     this.txtbtn = "Ukryj wyniki";
+                     this.txtbtn = "Ukryj nieoficjalne wyniki";
             }
            
         }

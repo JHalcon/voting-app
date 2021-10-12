@@ -21,9 +21,9 @@ export default [
         },
         {wartosc: 3, nazwa: "Filozofii i Socjologii",
             wybory:{
-                dzien: 6,
-                miesiac: 10,
-                rok: 2021,
+                dzien: null,
+                miesiac: null,
+                rok: null,
             }
         },
         {wartosc: 4, nazwa: "Fizyki",
