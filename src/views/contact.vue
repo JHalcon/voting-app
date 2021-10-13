@@ -26,7 +26,7 @@
                     </h3>
                 </div>
                 <div class="contactCard orangeCard">
-                    <img src="../assets/images/gmail.svg" alt="ikona koperty - symbol poczty elektrnicznej" class="imgcc">
+                    <img src="../assets/images/gmail.svg" alt="ikona koperty - symbol poczty elektronicznej" class="imgcc">
                     <h3 class="oH">{{this.$store.state.msg.contact.email}}</h3>
                 </div>
             </div>

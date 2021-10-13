@@ -136,8 +136,8 @@ export default {
 
       noVotes:{
             ups: "Ups...",
-            komunikat1: "Obecnie nie ma dostępnego żadnego glosowania",
-            komunikat2: "Zapraszamy później",
+            komunikat1: "Obecnie żadne głosowanie nie jest dostępne.",
+            komunikat2: "Zapraszamy później!",
       },
 
       site_404:{

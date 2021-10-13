@@ -1,7 +1,8 @@
 <template>
   <div :class="class3" class="margin_bottom">
-    <button aria-expanded="false" class="textMontserrat" v-bind="$attrs" v-on:click="showAnswer" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
+    <button aria-expanded="false" class="textMontserrat collapsible" v-bind="$attrs" v-on:click="showAnswer(1)" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
       {{ question }}
+      <span aria-hidden="true" v-on:click="showAnswer(2)" :class="class_arrow"></span>
     </button>
     <div class="content" style="display: none;">
       <ul v-if="answers" id="answers_list" style="font-weight: bold" class="textRoboto">
@@ -12,7 +13,6 @@
       </ul>
       <p v-else>{{ answer }}</p>
     </div>
-    <br />
   </div>
 </template>
 <script>
@@ -31,47 +31,59 @@ export default {
             isActive:false,
             class2: String,
             class3: String,
+            class_arrow: "collapsible_arrow",
         }
     },
     created(){
       if(this.index % 3 == 0){
-        this.class1 = "collapsible c1 my_magenda"
+        this.class1 = "c1 my_magenda"
         this.class3 = "c1"
       }  else 
       if (this.index % 3 == 1){
-        this.class1 = "collapsible c2 my_orange"
+        this.class1 = "c2 my_orange"
         this.class3 = "c2"
       } else 
       if( this.index % 3 == 2){
-        this.class1 = "collapsible c3 my_blue"
+        this.class1 = "c3 my_blue"
         this.class3 = "c3"
       }
 
       this.class2 = this.class1
     },
     methods:{
-        showAnswer(){
+        showAnswer(version){
             
-            let c = event.target.nextElementSibling;
-            //c.style.height = "100px";
+            let elementButton, elementContent;
+            
+            if(version==1){
+              elementButton = event.target;
+              elementContent = event.target.nextElementSibling;
+            } else{
+              elementButton = event.target.parentNode;
+              elementContent = event.target.parentNode.nextElementSibling;
+            }
 
-            if (c.style.maxHeight){
+
+            if (elementContent.style.maxHeight){
                 // zwijanie odpowiedzi
-                event.target.setAttribute("aria-expanded", "false");
+                elementButton.setAttribute("aria-expanded", "false");
 
-                c.style.maxHeight = null;
+                elementContent.style.maxHeight = null;
                 this.class2 = this.class1;
+                this.class_arrow = "collapsible_arrow";
                 setTimeout(() => {
-                  c.style.display = "none";
+                  elementContent.style.display = "none";
                 }, 200);
 
 
             } else {
                 // wyświetlanie odpowiedzi
-                event.target.setAttribute("aria-expanded", "true");
-                c.style.display = "block";
+                elementButton.setAttribute("aria-expanded", "true");
+                elementContent.style.display = "block";
                 this.class2 += " active";
-                c.style.maxHeight = c.scrollHeight + "px";
+                elementContent.style.maxHeight = elementContent.scrollHeight + "px";
+                this.class_arrow = "active_arrow";
+
             } 
         }
     }
@@ -119,15 +131,22 @@ p{
   text-decoration: underline;
 }
 
-.collapsible:before {
+.collapsible_arrow:before {
     content: '\25BC';
     font-weight: bold;
     float: right;
     margin-left: 5px;
+
+    cursor: pointer;
   }
   
-  .active:before {
+  .active_arrow:before {
     content: "\25B2";
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+
+    cursor: pointer;
 
   }
 

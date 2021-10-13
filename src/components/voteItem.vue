@@ -1,7 +1,7 @@
 <template>
   <div class="Vitem" :class="{'voteGrayColor' : (voteGiven || closed)}" >
     <div class="textMontserrat voteTxt" >
-      <div class="tick" v-if="this.voteGiven" aria-label="zagłosowano">&#x2714;</div> 
+      <div class="tick" v-if="this.voteGiven" aria-label="zagłosowano"><span aria-hidden="true">&#x2714;</span></div> 
       <div :class="{'voteGivenText' : voteGiven}">{{ voteText }}</div>
     </div>
   </div>
