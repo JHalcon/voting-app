@@ -766,6 +766,11 @@
   }}
 </script>
 <style scoped>
+
+input[type=checkbox], label{
+  cursor: pointer;
+}
+
   h3,
   h4.p10 {
     padding: 10px;
