@@ -52,38 +52,39 @@ export default {
     },
     methods:{
         showAnswer(version){
-            
-            let elementButton, elementContent;
-            
-            if(version==1){
-              elementButton = event.target;
-              elementContent = event.target.nextElementSibling;
-            } else{
-              elementButton = event.target.parentNode;
-              elementContent = event.target.parentNode.nextElementSibling;
-            }
+            if(event.target == event.currentTarget){
+              let elementButton, elementContent;
+              
+              if(version==1){
+                elementButton = event.target;
+                elementContent = event.target.nextElementSibling;
+              } else{
+                elementButton = event.target.parentNode;
+                elementContent = event.target.parentNode.nextElementSibling;
+              }
 
 
-            if (elementContent.style.maxHeight){
-                // zwijanie odpowiedzi
-                elementButton.setAttribute("aria-expanded", "false");
+              if (elementContent.style.maxHeight){
+                  // zwijanie odpowiedzi
+                  elementButton.setAttribute("aria-expanded", "false");
 
-                elementContent.style.maxHeight = null;
-                this.class2 = this.class1;
-                this.class_arrow = "collapsible_arrow";
-                setTimeout(() => {
-                  elementContent.style.display = "none";
-                }, 200);
+                  elementContent.style.maxHeight = null;
+                  this.class2 = this.class1;
+                  this.class_arrow = "collapsible_arrow";
+                  setTimeout(() => {
+                    elementContent.style.display = "none";
+                  }, 200);
 
 
-            } else {
-                // wyświetlanie odpowiedzi
-                elementButton.setAttribute("aria-expanded", "true");
-                elementContent.style.display = "block";
-                this.class2 += " active";
-                elementContent.style.maxHeight = elementContent.scrollHeight + "px";
-                this.class_arrow = "active_arrow";
+              } else {
+                  // wyświetlanie odpowiedzi
+                  elementButton.setAttribute("aria-expanded", "true");
+                  elementContent.style.display = "block";
+                  this.class2 += " active";
+                  elementContent.style.maxHeight = elementContent.scrollHeight + "px";
+                  this.class_arrow = "active_arrow";
 
+              }
             } 
         }
     }
