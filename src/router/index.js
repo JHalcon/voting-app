@@ -11,6 +11,7 @@ import contact from "../views/contact.vue";
 import newCandidate from "../views/newCandidate.vue";
 //import candidates from "../views/candidates.vue";
 import page404 from "../views/404.vue";
+import faqForCandidates from "../views/faqForCandidates.vue";
 
 Vue.use(VueRouter);
 
@@ -56,10 +57,20 @@ const routes = [
     name: "newCandidate",
     component: newCandidate,
   },
+  { 
+    path: "/kandydatura",
+    name: "newCandidate",
+    component: newCandidate,
+  },
   {
     path: "/contact",
     name: "contact",
     component: contact,
+  },
+  {
+    path: "/faqForCandidates",
+    name: "faqForCandidates",
+    component: faqForCandidates,
   },
   /*
   {

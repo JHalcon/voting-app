@@ -16,10 +16,17 @@
           v-bind:fullsite=fullsite
         />
         
-        
+        <faqBar
+          :index=this.faqList.length
+          question="Gdzie znajdują się wszystkie zapisy dotyczące wyborów?"
+          v-bind:fullsite=fullsite
+          ordynacja
+        />
+        <button v-if="this.$store.state.is_new_candidate_turn_on" @click="new_candidate" class="blueBTN button_click">{{this.$store.state.msg.userPanel.btn_zglos_sie}}</button>
+
       </div>
 
-      <a href="#home_section" v-show="$route.name !== 'faq'"
+      <a href="#home_section" v-show="$route.name !== 'faq' && $route.name !== 'faqForCandidates'"
         ><img
           src="../assets/images/arrow.svg"
           alt="Powrót na stronę startową"
@@ -40,6 +47,11 @@ export default {
     return{
       faqList: this.$store.state.msg.faq,
     }
+  },
+  methods:{
+      new_candidate(){
+        this.$router.push('/newCandidate');
+      },
   }
 };
 </script>
@@ -72,6 +84,8 @@ export default {
     width: 100%; 
     height: 100%;
     min-height: 400px;
+    margin-bottom: 30px;
+
 }
 .arrow_img{
     position: relative;
@@ -81,10 +95,19 @@ export default {
     margin-left: auto; 
     margin-right: auto; 
     margin-top:30px;
-    margin-bottom: 30px;
     width: 60px; 
     left: 50%;
     transform: translateX(-50%);
+}
+
+button{
+  display: flex;
+  margin: auto;
+  font-family: "Montserrat"; 
+  color:white;
+  font-size: 1.3rem;
+  padding: 15px;
+
 }
     
 @media only screen and (min-width: 860px) {

@@ -5,14 +5,14 @@
       <HeaderForLogged/>
       </div>
     <div v-else>
-      <Header only_irss_2 />
+      <Header only_irss_2 only_irss only_faq/>
     </div>
 
       <div v-if="this.loaded1 && this.loaded2">
 
 
         <div v-if="this.is_new_candidate_turn_on">
-          <candidateForm :communities="this.communities" :firstname="this.firstname" :lastname="this.lastname" :email="this.email" /> -->
+          <candidateForm :communities="this.communities" :firstname="this.firstname" :lastname="this.lastname" :email="this.email" />
         </div>
         <div v-else>
           <h2 class="textMontserrat komunikat">{{this.$store.state.msg.newcandidate.komunikat}}</h2>

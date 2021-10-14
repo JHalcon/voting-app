@@ -1,16 +1,11 @@
 <template>
   <div :class="class3" class="margin_bottom">
     <button aria-expanded="false" class="textMontserrat collapsible" v-bind="$attrs" v-on:click="showAnswer(1)" v-bind:class="[class2,  {'collapsible_fullsite' : fullsite}]">
-      {{ question }}
+      <div style="display: inline-block; width: 90%;" v-on:click="showAnswer(2)">{{ question }}</div>
       <span aria-hidden="true" v-on:click="showAnswer(2)" :class="class_arrow"></span>
     </button>
     <div class="content" style="display: none;">
-      <ul v-if="answers" id="answers_list" style="font-weight: bold" class="textRoboto">
-        {{this.$store.state.msg.faqBar.lista}}
-        <li style="font-weight: bold" v-for="(person) in this.answers" :key="person.id">
-          {{person.imie}} {{person.nazwisko}} {{person.nr_albumu}} {{person.rok}}
-        </li>
-      </ul>
+      <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
       <p v-else>{{ answer }}</p>
     </div>
   </div>
@@ -24,6 +19,7 @@ export default {
     answers: Array,
     fullsite: Boolean,
     index: Number,
+    ordynacja: Boolean,
   },
     inheritAttrs:false,
     data(){
@@ -128,9 +124,9 @@ p{
 
 }
 
-.collapsible_fullsite{
-  text-decoration: underline;
-}
+//.collapsible_fullsite{
+  //text-decoration: underline;
+//}
 
 .collapsible_arrow:before {
     content: '\25BC';
@@ -192,7 +188,7 @@ p{
     }
 
     .faq .collapsible {
-        font-size: 2.3vw;
+        font-size: 2vw;
     }
     .faq .content{
         font-size: 1.5vw;
