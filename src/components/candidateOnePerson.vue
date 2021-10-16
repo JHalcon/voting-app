@@ -17,7 +17,7 @@
                             <label :for="'rok_studiow_'+n">Rok studiów:</label>
                             <select :id="'rok_studiow_'+n" class="selectC" v-bind:class="{ invalidInputClass: isButtonSendClicked }" required>
                                 <option value="" disabled selected hidden></option>
-                                <option v-for="k in lata_studiow" :key="k.id" :value="k.wartosc">
+                                <option v-for="k in lata_studiow" :key="k.id" :value="k.nazwa">
                                 {{k.nazwa}}
                                 </option>
 
