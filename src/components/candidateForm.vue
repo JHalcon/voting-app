@@ -1,6 +1,6 @@
 <template>
     <div class="formDiv margin-top" >
-        <h2 class="textMontserrat">{{this.$store.state.msg.newcandidate.tytul}}</h2>
+        <h2 class="textMontserrat form_title">{{this.$store.state.msg.newcandidate.tytul}}</h2>
         <div class="formDiv" v-show="!this.sent1">
             <form @submit.prevent="send_form" id="newCandidateForm">
                 <div class="candidat">
@@ -271,6 +271,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
+.form_title{
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .komunikat{
   text-align: center;
   margin-top: 80px;
