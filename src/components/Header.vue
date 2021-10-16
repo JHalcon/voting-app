@@ -21,24 +21,47 @@
                   
 
                     <ul v-if="this.only_irss" id="icons_navbar">
-                        <li v-if="!this.only_faq" class="tooltip"><a href="#calendar">
+                        <li v-if="this.calendar_for_candidates" class="tooltip" :class="{icon_to_hide : !this.main_page}"><a href="/calendarForCandidates">
                             <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Terminarz głosowań" >
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
                             </li>
-                        <li v-if="this.only_faq" class="tooltip"><a href="/faqForCandidates">
+                        <li v-else class="tooltip" :class="{icon_to_hide : !this.main_page}"><a href="#calendar">
+                            <img id="icon_calendar" class="icon" src="../assets/images/date_range_icon.svg" alt="Terminarz głosowań" >
+                            </a>
+                            <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.terminarz}}</span>
+                            </li>
+                        <li v-if="this.faq_for_candidates" class="tooltip" :class="{icon_to_hide : !this.main_page}"><a href="/faqForCandidates">
                             <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Najczęściej zadawane pytania" >
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
                             </li>
-                        <li v-else class="tooltip"><a href="#faq">
+                        <li v-else class="tooltip" :class="{icon_to_hide : !this.main_page}"><a href="#faq">
                             <img id="icon_why" class="icon" src="../assets/images/questionmark.svg" alt="Najczęściej zadawane pytania" >
                             </a>
                             <span class="tooltiptext textRoboto">{{this.$store.state.msg.header.faq}}</span>
+                            </li>
+                        <li class="tooltip" id="menu_button" v-if="!this.main_page"><a href="javascript:void(0);">
+                            <img id="icon_hamburger" class="icon" @click="showMenu" src="../assets/images/icon_menu.svg" alt="Menu" >
+                            </a>
                             </li>
                     </ul>
 
-                            
+                    <!-- mobile navbar -->
+                    <div id="mobile_navbar">
+                        
+                        <li v-if="this.calendar_for_candidates"><a href="/calendarForCandidates">
+                            <span class="textMontserrat">{{this.$store.state.msg.header.terminarz}}</span>
+                            </a>
+                            </li>
+                        <li v-if="this.faq_for_candidates"><a href="/faqForCandidates">
+                            <span class="textMontserrat">{{this.$store.state.msg.header.faq}}</span>
+                            </a>
+                            </li>
+                        <hr class="thin">
+
+                    </div>
+                  
                     
 
                     
@@ -49,16 +72,48 @@
 export default {
   name: "Header",
   components: {},
-
+  data(){
+      return{
+          mobile_navbar_show: false,
+      }
+  },
   props: {
       only_irss: Boolean,
       only_irss_2: Boolean,
-      only_faq: Boolean,
+      faq_for_candidates: Boolean,
+      calendar_for_candidates: Boolean,
+      main_page: Boolean,
+  },
+  methods:{
+      showMenu(){
+          this.mobile_navbar_show = !this.mobile_navbar_show;
+
+          let c = document.getElementById("mobile_navbar");
+
+          if(this.mobile_navbar_show){
+                c.style.display = "block";
+                c.style.maxHeight = c.scrollHeight + "px";
+
+          } else{
+                c.style.maxHeight = null;//"0px";
+                setTimeout(() => {
+                    c.style.display = "none";
+                  }, 200);
+          }
+
       },
+ 
+  },
+    
   
 };
 </script>
 <style lang="scss" scoped>
+hr.thin {
+    border-top: 1px solid lightgrey;
+    margin:10px;
+}
+
 #header_default{
     position: relative;
     _background-color: white;
@@ -85,8 +140,16 @@ export default {
 #header_default .icon:hover{
     filter: brightness(60%);
 }
+#menu_button{
+    display: none;
+}
+#mobile_navbar{
+    display: none;
+        overflow: hidden;
 
-
+    max-height: 0px;
+    transition: max-height 0.2s ease-out;
+}
 .tooltip{
     position: relative;
     display: inline-block;
@@ -255,6 +318,10 @@ export default {
         height: 90px;
     }  
 
+
+
+
+
     #header_default #icons_navbar{
         list-style-type: none;
         margin-right: 25px;
@@ -275,6 +342,37 @@ export default {
 }
 
 @media only screen and (max-width: 439px) {
+    #mobile_navbar{
+        _display: block;
+        list-style-type: none;
+        width: 100%;
+        margin-top: 20px;
+        _margin-bottom:10px;
+        float: left;
+        position: relative;
+        font-weight: bold;
+         
+         
+        text-align: center;
+    }
+    #mobile_navbar li{
+        _text-decoration: none;
+        _margin-left: 20px;
+        font-size: 18px;
+        padding-bottom: 5px;
+       
+    }
+    
+
+
+    #menu_button{
+        display: block;
+    }
+    
+    .icon_to_hide{
+        display:none;
+    }
+
     #header_default #icon_calendar{
         display: none;
     }
@@ -282,17 +380,20 @@ export default {
 
 @media only screen and (max-width: 399px){
     #header_default #icon_why{
-        display: none;
+        //display: none;
     }
 }
 
-@media only screen and (max-width: 410px){
+
+@media only screen and (max-width: 399px) {//max-width: 330pX
     #header_default .text_header > #linijka_4{
         font-size: 12px;
     }
-}
+     
+    #mobile_navbar li a{
+        font-size: 15px;
+    }
 
-@media only screen and (max-width: 330px) {
     #header_default .logo_img{
         padding-top: 23px;
         width:  35px;
@@ -304,17 +405,30 @@ export default {
     #header_default .text_header > #linijka_4{
         font-size: 10px;
     }
+    #header_default #icons_navbar{
+        margin-top:25px;
+    }
 }
 
-@media only screen and (max-width: 330px) {
+@media only screen and (max-width: 310px) {
     #header_default .logo_img{
-        display:none;
+        //display:none;
     }
     #header_default .text_header{
-        margin: auto;
-        width: 100%;
-        text-align: center;
+        //margin-left: 30px;
+    }
+    #header_default #icon_why{
+        display: none;
     }
 }
 
+@media only screen and (max-width: 285px) {
+    #header_default .text_header{
+        //margin-left: 0px;
+    }
+
+    #header_default #logo {
+        padding-right: 10px;
+    }
+}
 </style>

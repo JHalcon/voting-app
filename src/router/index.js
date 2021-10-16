@@ -12,6 +12,7 @@ import newCandidate from "../views/newCandidate.vue";
 //import candidates from "../views/candidates.vue";
 import page404 from "../views/404.vue";
 import faqForCandidates from "../views/faqForCandidates.vue";
+import calendarForCandidates from "../views/calendarForCandidates.vue";
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
     path: "/faqForCandidates",
     name: "faqForCandidates",
     component: faqForCandidates,
+  },
+  {
+    path: "/calendarForCandidates",
+    name: "calendarForCandidates",
+    component: calendarForCandidates,
   },
   /*
   {

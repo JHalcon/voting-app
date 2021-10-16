@@ -134,8 +134,8 @@ export default {
       this.height_of_main_frame_on_small_phones = this.height_of_main_frame_on_phones;
     }
     
-    console.log("mounted height of main frame on phones:")
-    console.log(this.height_of_main_frame_on_phones)
+    //console.log("mounted height of main frame on phones:")
+    //console.log(this.height_of_main_frame_on_phones)
 
   },
   methods: {
@@ -287,6 +287,7 @@ export default {
   text-align: center;
   position: relative; 
   z-index: 4;
+  overflow: hidden;
 
   transition: height 0.3s;
 

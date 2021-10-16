@@ -5,7 +5,7 @@
       <span aria-hidden="true" v-on:click="showAnswer(2)" :class="class_arrow"></span>
     </button>
     <div class="content" style="display: none;">
-      <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
+      <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW-uchwalona13maja2021.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
       <p v-else>{{ answer }}</p>
     </div>
   </div>
@@ -64,6 +64,7 @@ export default {
                   // zwijanie odpowiedzi
                   elementButton.setAttribute("aria-expanded", "false");
 
+                  
                   elementContent.style.maxHeight = null;
                   this.class2 = this.class1;
                   this.class_arrow = "collapsible_arrow";
@@ -74,12 +75,12 @@ export default {
 
               } else {
                   // wyświetlanie odpowiedzi
+                  
                   elementButton.setAttribute("aria-expanded", "true");
                   elementContent.style.display = "block";
                   this.class2 += " active";
                   elementContent.style.maxHeight = elementContent.scrollHeight + "px";
                   this.class_arrow = "active_arrow";
-
               }
             } 
         }
@@ -118,7 +119,7 @@ p{
     text-align: left;
     border-radius: 15px;
 
-    backdrop-filter: brightness(115%);
+    //backdrop-filter: brightness(115%);
 
     border: 0px;//1px solid;
 
@@ -153,6 +154,8 @@ p{
     overflow: hidden;
     margin: 0px 10px 0px;
     border-radius: 0 0 10px 10px;
+            transition: max-height 0.2s ease-out;
+
   }
 
   .content > p {
@@ -181,10 +184,13 @@ p{
     background-color: var(--my_blue_light);}
 
 
+
     
 @media only screen and (min-width: 768px) {
+    p{
+      text-align: justify;
+    }
     .content {
-        transition: max-height 0.2s ease-out;
     }
 
     .faq .collapsible {

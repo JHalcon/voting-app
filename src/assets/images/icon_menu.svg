@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   fill="#000000"
+   viewBox="0 0 18 20"
+   width="18"
+   height="20"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="icon_menu.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="25.691546"
+     inkscape:cx="9.8670588"
+     inkscape:cy="15.199552"
+     inkscape:window-width="1841"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 0.59682036,4.0996575 v 1.578863 H 17.479184 v -1.578863 z m 0,4.7365891 V 10.41511 H 17.479184 V 8.8362466 Z m 0,4.7365894 v 1.578863 H 17.479184 v -1.578863 z"
+     id="path2"
+     style="fill:#2700b6;fill-opacity:1;stroke:#2700b6;stroke-width:0.816318;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers" />
+</svg>

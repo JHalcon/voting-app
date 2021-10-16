@@ -26,7 +26,7 @@
 
       </div>
 
-      <a href="#home_section" v-show="$route.name !== 'faq' && $route.name !== 'faqForCandidates'"
+      <a href="javascript:void(0);" id="top_arrow" @click="scrollToTop" v-show="$route.name !== 'faq' && $route.name !== 'faqForCandidates'"
         ><img
           src="../assets/images/arrow.svg"
           alt="Powrót na stronę startową"
@@ -52,6 +52,9 @@ export default {
       new_candidate(){
         this.$router.push('/newCandidate');
       },
+      scrollToTop(){
+        document.getElementById('home_section').scrollIntoView();
+      }
   }
 };
 </script>
@@ -125,7 +128,8 @@ button{
         margin:auto;
         z-index: 1;
     }
-      
+    
+    
 }
 @media only screen and (max-width: 859px) {
     .background_bar{
@@ -145,6 +149,9 @@ button{
         width: 90%;
         margin:auto;
         z-index: 1;
+    }
+    #top_arrow{
+      display:none;
     }
   /*  .faq .content{
         font-size: 16px;

@@ -2,7 +2,7 @@
   <div id="main" class="scroll-container">
     <section id="home_section">
       <!--<router-link to="/UserPage">User Page</router-link>-->
-      <Header only_irss />
+      <Header only_irss main_page />
       <login-panel />
       <a href="#faq" class="arrow_link"
         ><img

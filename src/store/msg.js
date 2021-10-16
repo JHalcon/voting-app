@@ -169,7 +169,7 @@ export default {
             {
                   q: "Kto może wziąć udział w wyborach?",
                   a: "Zarówno kandydować, jak i\xa0głosować może każdy student studiów stacjonarnych oraz niestacjonarnych. Nie liczy się wiek, staż na uczelni ani ulubiony smak czekolady. Jeśli tylko czujesz, że chcesz – serdecznie Cię zachęcamy.",
-            },
+            }, 
             {
                   q: "Jak wygląda proces zgłaszania się kandydatów?",
                   a: "Prosto. Pod pytaniami, które właśnie czytasz, dostępny jest specjalny formularz. Wejdź w niego, podaj swoje oraz 5\xa0popierających Cię studentów dane i\xa0wyślij go do nas za pomocą przycisku w dolnej części strony. Jeśli dane są poprawne, zostaniesz wpisany na listę kandydatów w\xa0Twoim Instytucie.",  
@@ -192,7 +192,7 @@ export default {
             },            
             {
                   q: "Kiedy odbędą się głosowania w moim instytucie?",
-                  a: "Każdy dzień wyborów w poszczególnych instytutach będzie przez nas ogłoszony oraz wpisany do kalendarza na tej stronie. Głosowanie trwa minimum 6\xa0godzin i\xa0nie może zostać wyznaczone na dzień wolny od zajęć dydaktycznych na studiach stacjonarnych oraz na dzień bezpośrednio go poprzedzający lub po nim następujący.",  
+                  a: "Każdy dzień wyborów w\xa0poszczególnych instytutach będzie przez nas ogłoszony oraz wpisany do kalendarza na tej stronie. Głosowanie trwa minimum 6\xa0godzin i\xa0nie może zostać wyznaczone na dzień wolny od zajęć dydaktycznych na studiach stacjonarnych oraz na dzień bezpośrednio go poprzedzający lub po nim następujący.",  
             },            
             {
                   q: "Na ilu kandydatów mogę oddać głos?",
