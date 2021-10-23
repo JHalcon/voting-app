@@ -3,8 +3,8 @@
     <h3 class="textMontserrat my_blue headerVotes">{{this.$store.state.msg.userPage.title}}</h3>
     <div class="voteList">
       <ul>
-        <li v-for="(v, index) in voteList" :key="index"  class="votingListItem" :class="{'votingListItemColor' : (!v.vote_given && !v.is_closed)}">
-          <a href="" @click="goToDeails(voteList[index].id)" @keyup.enter="goToDeails(voteList[index].id)">
+        <li v-for="(v, index) in voteListWithoutCancelled" :key="index"  class="votingListItem" :class="{'votingListItemColor' : (!v.vote_given && !v.is_closed)}">
+          <a href="" @click="goToDeails(voteListWithoutCancelled[index].id)" @keyup.enter="goToDeails(voteListWithoutCancelled[index].id)">
             <voteItem :voteGiven="v.vote_given" :closed="v.is_closed" :voteText="v.name"></voteItem>
           </a>
         </li>
@@ -17,23 +17,25 @@
 import voteItem from "@/components/voteItem.vue";
 export default {
   name: "NoVotes",
-  /*
+  
   data() {
     return {
-      a: process.env.VUE_APP_TITLE;
+      voteListWithoutCancelled: Array,
     };
-  },
-  */
-  methods:{
-    goToDeails(voteId){
-      this.$router.push({name: 'voteCard', params: {voteIdProps: voteId }});
-    }
   },
   components: {
     voteItem,
   },
   props: {
     voteList: Array,
+  },
+  methods:{
+    goToDeails(voteId){
+      this.$router.push({name: 'voteCard', params: {voteIdProps: voteId }});
+    }
+  },
+  created(){
+    this.voteListWithoutCancelled = this.voteList.filter(vote => !vote.is_canceled)
   }
 };
 </script>
