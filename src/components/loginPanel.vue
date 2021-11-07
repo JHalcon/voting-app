@@ -99,15 +99,12 @@ export default {
   },
   watch: {
     device_width() {
-      console.log("device_widht")
 
       if(this.device_width < 860){
         this.height_of_main_frame_on_phones = this.$refs.frame.clientHeight + 10;
         this.height_of_main_frame_on_small_phones = this.height_of_main_frame_on_phones;
       }
 
-      console.log("device_widht mounted height of main frame on phones:")
-      console.log(this.height_of_main_frame_on_phones)
 
     },
     pwd(){
@@ -134,14 +131,11 @@ export default {
       this.height_of_main_frame_on_small_phones = this.height_of_main_frame_on_phones;
     }
     
-    //console.log("mounted height of main frame on phones:")
-    //console.log(this.height_of_main_frame_on_phones)
 
   },
   methods: {
 
     onResize() {
-      console.log("onResize: "+window.innerWidth);
 
       this.device_width = window.innerWidth
       if(this.device_width >= 768)
@@ -153,7 +147,6 @@ export default {
 
     onOrientationChange(){
       this.orientation = window.screen.orientation.angle
-      console.log("onOrientationChange: "+this.orientation);
 
       this.isDynamicHeightOn = false; // po zmianie blokujemy dynamic Height, dzięki czemu wymiary są okej (ale podczas najbliższej zmiany nie animuje się height, ale już trudno)
 
@@ -180,7 +173,6 @@ export default {
           .then(()=>{})
           .catch(()=>{}) 
           .then(()=>{
-            console.log("ccc")
 
             this.text1 = this.$store.state.msg.mainPage.login_frame_1_text_1a,
             this.text2 = this.$store.state.msg.mainPage.login_frame_1_text_2a,
@@ -202,12 +194,14 @@ export default {
 
         // kliknieto wysylanie hasla
         
+        var passwd = this.pwd.replace(/\D/g,'');
+        
         this.loading2 = true;
         this.error = false;
 
         axios.post(process.env.VUE_APP_LOGIN, {
           email: this.email,
-          password: this.pwd,
+          password: passwd,
         })
         .then(resp => {
           this.token = resp.data.token;
@@ -253,7 +247,6 @@ export default {
   computed: {
     dynamicHeight(){
       if(this.isDynamicHeightOn){     
-        console.log("dynamicHeight");
         
         if(this.device_width >= 860){     
           return {

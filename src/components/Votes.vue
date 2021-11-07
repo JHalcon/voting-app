@@ -125,6 +125,9 @@ h3.textMontserrat.my_blue.headerVotes {
   #Votes {
     width: 90%;
   }
+  h3.textMontserrat.my_blue.headerVotes {
+    font-size: 1.7rem;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 1349px) and (orientation: landscape) {
   #Votes {

@@ -278,7 +278,7 @@ export default {
     
 }
     
-@media only screen and (min-width:768px) and (max-width: 1089px) {
+@media only screen and (min-width:768px) and (max-width: 1090px) {
 
     #header_for_logged .header_element{
         height: 100px;
@@ -414,7 +414,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 266px) {
+@media only screen and (max-width: 279px) {
     #header_for_logged #linijka_telefon{
         display: none;
     }

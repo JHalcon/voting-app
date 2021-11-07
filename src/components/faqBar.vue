@@ -5,7 +5,7 @@
       <span aria-hidden="true" v-on:click="showAnswer(2)" :class="class_arrow"></span>
     </button>
     <div class="content" style="display: none;">
-      <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW-uchwalona13maja2021.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
+      <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
       <p v-else>{{ answer }}</p>
     </div>
   </div>

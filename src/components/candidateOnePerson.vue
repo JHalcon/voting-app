@@ -107,7 +107,7 @@ label{
 .inputV2{
     display: inline-block;
     height:100%;
-    width:275px;
+    width:270px;
     margin-left:3px;
 
     font-family: Roboto;
@@ -170,7 +170,7 @@ select{
         font-size: 18px;
     }
     .inputV2{
-        width: 324px;
+        width: 319px;
     }
 }
 
@@ -188,7 +188,7 @@ select{
         width: 200px;
     }
     .inputV2{
-        width: 170px;
+        width: 165px;
     }
 }
 </style>

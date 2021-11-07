@@ -84,6 +84,7 @@ div.Vitem {
     font-size: 1.2rem;
   }
 }
+/*
 @media only screen and (max-width: 992px) and (orientation: landscape) {
   #Votes {
     //height: 50vh;
@@ -92,13 +93,14 @@ div.Vitem {
   }
   .Vitem {
     width: 100%;
-    height: 50px;
+    //height: 50px;
     margin: 10px;
   }
   .textMontserrat.voteTxt {
     font-size: 1.2rem;
   }
 }
+*/
 
 @media only screen and (min-width: 768px) and (max-width: 1349px) {
   #Votes {

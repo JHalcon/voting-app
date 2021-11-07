@@ -8,7 +8,7 @@
                     </div>
                     <div v-if="fullsite" id="margin_under_bar"></div>
 
-                    <div class="calendar_container">
+                    <div class="calendar_container" ref="calendar_container" :style="calendarHeightStyle">
                       
                           <div class="calendar_text">
                             <!--<span id="page_describtion" :class="{ 'my_magenda' : fullsite, 'my_orange' : !fullsite }">Sprawdź, kiedy odbywają się wybory w&nbsp;Twoim instytucie!</span>-->
@@ -26,17 +26,19 @@
                                 
                           </div>
 
-                            <span v-if="loaded && Instytut!=null" id="date_countdown" class="my_orange">
+                            <span v-if="loaded && Instytut!=null" id="date_countdown" class="my_orange" >
                                 {{date_countdown_text}}
                             </span>
                           
                           <div class="calendar_column" aria-hidden="true">
-                            <div v-show="!this.loaded" :style="loadingHeight">
+                            <div v-show="!this.loaded" >
                               <LoadingItem medium />
                             </div>
                             <div v-show="this.loaded && !this.noVoteDate" ref="calendarFrame">                     
                               <calendarPart  :name="this.monthName" v-bind:id="this.monthIndex" v-bind:numberOfDays="this.numberOfDays" v-bind:blankDays="this.blankDays"/>
                             </div>
+                            
+                            
                           </div>
 
                       </div>
@@ -93,7 +95,11 @@ export default {
       var all_days = document.getElementsByClassName("calendar_day");
       all_days[this.dayToday-1].classList.add("today");
       this.loaded = true;
-      this.calendarHeight = this.$refs.calendarFrame.clientHeight;
+
+      setTimeout(() => {
+        this.calendarHeight = this.$refs.calendar_container.clientHeight;
+      }, 100);
+      
 
   },
   methods:{
@@ -104,7 +110,7 @@ export default {
     },
     hg() {
       if(this.loaded)
-        this.calendarHeight = this.$refs.calendarFrame.clientHeight;
+        //this.calendarHeight = this.$refs.calendarFrame.clientHeight;
 
 
       this.loaded = false;
@@ -200,12 +206,18 @@ export default {
     getInstytutById() {
       return this.$store.getters.getInstytutById(this.Instytut);
     },
-
+/*
     loadingHeight(){
-        return {
-          height: this.calendarHeight-20+'px',
-        }
+      return {
+        height: this.calendarHeight-20+'px',
+      }
     },
+    */
+    calendarHeightStyle(){
+      return {
+        "min-height": this.calendarHeight+'px',
+      }
+    }
   },
 };
 </script>
@@ -363,12 +375,6 @@ export default {
   #instytut_select {
     width: 200px;
   }
-
- #date_countdown{
-    margin-bottom: 10px;
-  }
-
-
 }
 
 @media only screen and (min-width: 420px){

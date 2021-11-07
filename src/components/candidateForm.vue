@@ -35,7 +35,7 @@
                         
                                     <option value="" selected hidden disabled></option>
                                     
-                                    <option v-for="k in this.communities" :key="k.id" :value="k.id">
+                                    <option v-for="k in this.communities_filtered" :key="k.id" :value="k.id">
                                     {{k.name}}
                                     </option>
 
@@ -158,6 +158,7 @@ export default {
         checkbox_zgloszenie: this.$store.state.msg.newcandidate.checkbox,
 
         firstname_from_props: "",
+        communities_filtered: Array,
 
         liczbaOs: 5,
         sending1: false,
@@ -174,6 +175,15 @@ export default {
   components: {
       loadingItem,
       candidateOnePerson,
+  },
+  created: function(){
+      this.communities_filtered = this.communities.filter(function (community) {
+          var community_lower = community.name.toLowerCase();
+          if(community_lower.includes('instytut '))
+            return true;
+          return false;
+      })
+
   },
   mounted: function(){
         document.getElementById('imie').value = this.firstname;
@@ -333,9 +343,8 @@ label{
     font-weight: bold;
 }
 #checkbox_zgloszenie{
-    _margin: 10px;
     flex: 10%;
-    
+
 }
 
 .inputDiv{
@@ -355,7 +364,7 @@ label{
 .inputV2{
     display: inline-block;
     height:100%;
-    width:275px;
+    width:270px;
     margin-left:3px;
 
     font-family: Roboto;
@@ -404,10 +413,8 @@ button.BTN {
   font-family: "Montserrat";
   color: white;
   font-size: 1.3rem;
-  /*margin: auto;*/
 }
 .person_buttons{
-    _margin-bottom: 15px;
     margin-top: 15px;
     display: flex;
     flex-direction: column;
@@ -466,7 +473,7 @@ select{
         font-size: 18px;
     }
     .inputV2{
-        width: 324px;
+        width: 319px;
     }
     .inputCheckBox{
         margin:10px;
@@ -509,7 +516,7 @@ select{
         width: 200px;
     }
     .inputV2{
-        width: 170px;
+        width: 165px;
     }
 }
 </style>
