@@ -6,7 +6,32 @@
     </button>
     <div class="content" style="display: none;">
       <p v-if="ordynacja"><span>W naszej </span><a href="https://samorzad.up.krakow.pl/wp-content/uploads/ORDYNACJA-WYBORCZA-DO-ORGANOW-SAMORZADU-STUDENTOW.pdf" target="_blank">Ordynacji Wyborczej</a><span>. Jest to dokument przegłosowany przez Parlament Samorządu Studentów określający wszystkie regulacje dotyczące wyborów. Na jego podstawie organizujemy wszelakie wybory.</span></p>
-      <p v-else>{{ answer }}</p>
+      <div v-else>
+        <p v-if="zrodlo">
+
+            Jak najbardziej! W dodatku, aby zagwarantować pełną niezależność systemu, publikujemy kod źródłowy naszej aplikacji. Każdy może samemu sprawdzić jak wygląda aplikacja i jak liczone są głosy :)
+            <br><br>
+            <a href="https://github.com/JHalcon/voting-app" target="_blank">Pobierz front-end (wygląd strony)</a>
+            <br>
+            <a href="https://github.com/wuuuduu/up-vote-backend" target="_blank">Pobierz back-end (mechanizm liczenia głosów)</a>
+
+
+        </p>
+        <div v-else>
+
+          <p v-if="answers">
+            Wybory organizuje Komisja Wyborcza Samorządu Studentów UP w&nbsp;składzie:<br>
+            <span v-for="(kwss, index) in answers" :key="index" >
+              {{kwss.os}}<br>
+            </span><br>
+            <a href="https://samorzad.up.krakow.pl/samorzad/zarzad/" target="_blank">Adresy mailowe dostępne są na stronie Samorządu</a>
+          </p>
+          <p v-else>{{ answer }}</p>
+
+        </div>
+
+      </div>
+      
     </div>
   </div>
 </template>
@@ -20,6 +45,7 @@ export default {
     fullsite: Boolean,
     index: Number,
     ordynacja: Boolean,
+    zrodlo: Boolean,
   },
     inheritAttrs:false,
     data(){
@@ -158,7 +184,7 @@ p{
 
   }
 
-  .content > p {
+   p {
       padding: 20px;
       color: #345;
   }

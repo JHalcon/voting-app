@@ -213,6 +213,22 @@ export default {
   
       ],
 
-
+      kwss:[
+            {
+                  os: "Agnieszka Joniec",
+            },
+            {
+                  os: "Katarzyna Morawska",
+            },
+            {
+                  os: "Julia Nosarzewska",
+            },
+            {
+                  os: "Filip Cichor",
+            },          
+            {
+                  os: "Jakub St. Gajda",
+            }, 
+      ],
   };
 

@@ -22,6 +22,21 @@
           v-bind:fullsite=fullsite
           ordynacja
         />
+        
+        <faqBar
+          :index=this.faqList.length+1
+          question="Kto organizuje wybory?"
+          :answers=kwss
+          v-bind:fullsite=fullsite
+        />
+
+        <faqBar
+          :index=this.faqList.length+2
+          question="Czy system jest bezpieczny i niezależny?"
+          v-bind:fullsite=fullsite
+          zrodlo
+        />
+
         <button v-if="this.$store.state.is_new_candidate_turn_on" @click="new_candidate" class="blueBTN button_click">{{this.$store.state.msg.userPanel.btn_zglos_sie}}</button>
 
       </div>
@@ -46,6 +61,7 @@ export default {
   data(){
     return{
       faqList: this.$store.state.msg.faq,
+      kwss: this.$store.state.msg.kwss,
     }
   },
   methods:{
