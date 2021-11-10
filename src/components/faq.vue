@@ -32,7 +32,7 @@
 
         <faqBar
           :index=this.faqList.length+2
-          question="Czy system jest bezpieczny i niezależny?"
+          question="Czy system jest bezpieczny oraz niezależny?"
           v-bind:fullsite=fullsite
           zrodlo
         />

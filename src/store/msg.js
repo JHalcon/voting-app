@@ -167,7 +167,7 @@ export default {
 
       faq:[
             {
-                  q: "Kto może wziąć udział w wyborach?",
+                  q: "Kto może wziąć udział w\xa0wyborach?",
                   a: "Zarówno kandydować, jak i\xa0głosować może każdy student studiów stacjonarnych oraz niestacjonarnych. Nie liczy się wiek, staż na uczelni ani ulubiony smak czekolady. Jeśli tylko czujesz, że chcesz – serdecznie Cię zachęcamy.",
             }, 
             {
@@ -183,7 +183,7 @@ export default {
                   a: "Na początku Komisja Wyborcza Samorządu Studentów ogłasza kalendarz wyborczy, czyli daty, kiedy wydarzą się poszczególne etapy wyborów. Następnie jest okres na zgłaszanie się kandydatów. Kolejno, odbędą się wybory w\xa0poszczególnych instytutach, a\xa0następnie delegaci, czyli wybrani reprezentanci poszczególnych instytutów, wybiorą nowe organy i\xa0przewodniczącego Samorządu Studentów. Przypomina Ci to system w\xa0kraju z\xa0najstarszą konstytucją na świecie? Nie tylko Tobie! ;)",  
             },
             {
-                  q: "Głosowanie odbędzie się w sposób stacjonarny, online czy hybrydowy?",
+                  q: "Głosowanie odbędzie się w\xa0sposób stacjonarny, online czy hybrydowy?",
                   a: "Głosowanie przeprowadzamy online. Zdecydowaliśmy się na taką formę rok temu. Jest to związane z\xa0sytuacją pandemiczną w\xa0kraju oraz tym, że głosowanie online będzie bardziej dostępne dla wszystkich i\xa0wygodniejsze. Dodatkowo to nasz ukłon w kierunku studentów studiów niestacjonarnych. Co ważne, nasza strona została tak przygotowana, aby jej obsługa niezależnie od systemu (Windows, macOS, iOS, Linux, Android, Sailfish OS) była wygodna i\xa0możliwa. Do tego, nasi dzielni informatycy napracowali się, aby nawet w przypadku słabego internetu (prędkość poniżej 1 Mb/s) oddanie głosu przebiegało w sposób bezproblemowy.",  
             },
             {
@@ -191,7 +191,7 @@ export default {
                   a: "Oczywiście. Nawet nasz super majster-administrator nie ma wglądu do tego, kto i\xa0jak głosował.",  
             },            
             {
-                  q: "Kiedy odbędą się głosowania w moim instytucie?",
+                  q: "Kiedy odbędą się głosowania w\xa0moim instytucie?",
                   a: "Każdy dzień wyborów w\xa0poszczególnych instytutach będzie przez nas ogłoszony oraz wpisany do kalendarza na tej stronie. Głosowanie trwa minimum 6\xa0godzin i\xa0nie może zostać wyznaczone na dzień wolny od zajęć dydaktycznych na studiach stacjonarnych oraz na dzień bezpośrednio go poprzedzający lub po nim następujący.",  
             },            
             {
@@ -207,7 +207,7 @@ export default {
                   a: "Niestety, nie możesz. Jeśli wybierzesz swojego kandydata, kandydatów i\xa0potwierdzisz swój głos na stronie, nie będziesz mógł go edytować, ani usunąć.",  
             },            
             {
-                  q: "A co w sytuacji, gdy studiuję równocześnie w kilku instytutach?",
+                  q: "A co w\xa0sytuacji, gdy studiuję równocześnie w\xa0kilku instytutach?",
                   a: "W przypadku studiowania w\xa0dwóch (lub więcej) instytutach posiadasz po jednym głosie w\xa0każdym z\xa0nich, jednoczenie startować możesz tylko w\xa0jednym z\xa0instytutów. Decyzję o\xa0instytucie, z\xa0ramienia którego kandydujesz, podejmujesz samodzielnie podczas zgłaszania swojej kandydatury.",  
             },            
   
