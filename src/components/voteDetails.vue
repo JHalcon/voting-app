@@ -160,8 +160,10 @@
       <button class="orangeBTN2 button_click" v-on:click="closeAlert()">ANULUJ</button>
     </div>
 -->
-    <resFC :voteID="this.vote.id" :info="this.allAns" :gg="this.updatingProps" :userIS="this.userIS && !this.isCanceled" :comIS="this.recVisible"/>
 
+
+    <!-- <resFC :voteID="this.vote.id" :info="this.allAns" :gg="this.updatingProps" :userIS="this.userIS && !this.isCanceled" :comIS="this.recVisible"/> -->
+    
     </div>
     <div v-else>
       <LoadingItem medium /> 
@@ -171,7 +173,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import resFC from "@/components/resForCom.vue";
+  //import resFC from "@/components/resForCom.vue";
   import LoadingItem from "@/components/loadingItem.vue";
  //import moment from 'moment';
   export default {
@@ -215,7 +217,7 @@
       };
     },
     components: {
-      resFC,
+      //resFC,
       LoadingItem,
     },
     computed: {

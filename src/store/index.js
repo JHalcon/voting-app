@@ -96,8 +96,8 @@ export default new Vuex.Store({
 
     msg,
   //currentUser: "",
-  is_irss: true, 
-  is_new_candidate_turn_on: true,
+  is_irss: false, 
+  is_new_candidate_turn_on: false,
   login_route_history: '/',
 
   },

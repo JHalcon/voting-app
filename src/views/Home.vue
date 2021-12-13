@@ -2,7 +2,8 @@
 
 <div id="home">
     <Header />
-    <LoginPanelPassword/>
+    <!-- <LoginPanelPassword/> -->
+    <login-panel />
 
     <img src="../assets/images/1student.svg" alt="" class="student_img">
     <img src="../assets/images/1student_2.svg" alt="" class="student2_img">
@@ -14,7 +15,8 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import LoginPanelPassword from '../components/loginPanelPassword.vue';
+//import LoginPanelPassword from '../components/loginPanelPassword.vue';
+import LoginPanel from "../components/loginPanel.vue";
 
 
 export default {
@@ -22,7 +24,9 @@ export default {
   props:["haveVotes"],
   components: {
     Header,
-    LoginPanelPassword,
+    //LoginPanelPassword,
+    LoginPanel,
+
   },
   created: function () {
     if(this.$func.getLoggedToken()){

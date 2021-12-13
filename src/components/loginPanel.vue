@@ -19,7 +19,6 @@
           class="textRoboto"
           v-model="email"
           id="email"
-          pattern="[a-z,A-Z]+[.][a-z,A-Z]+[0-9]*@student.up.krakow.pl"
         />
           
           <input v-else
